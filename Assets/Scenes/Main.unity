@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Handling
       objectReference: {fileID: 0}
+    - target: {fileID: 7230587604800201805, guid: 9a95a697dbfd4814eab7e2877801a267, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8634900232851967554, guid: 9a95a697dbfd4814eab7e2877801a267, type: 3}
       propertyPath: m_RootOrder
       value: 1
