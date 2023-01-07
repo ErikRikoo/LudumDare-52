@@ -6,7 +6,7 @@ namespace AI.Patrol
     public class RandomPatrolEntity : PatrolEntity
     {
         [SerializeField] private FloatRange m_RadiusRange;
-        
+
         // TODO: Move to utility
         private Vector3 RandomOffset
         {
@@ -18,5 +18,17 @@ namespace AI.Patrol
         }
 
         protected override Vector3 NextPosition => transform.position + RandomOffset;
+
+        protected override void OnDrawGizmos()
+        {
+            base.OnDrawGizmos();
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+            
+            GizmosUilities.DrawWireDisc(transform.position, m_RadiusRange.Min);
+            GizmosUilities.DrawWireDisc(transform.position, m_RadiusRange.Max);
+        }
     }
 }
