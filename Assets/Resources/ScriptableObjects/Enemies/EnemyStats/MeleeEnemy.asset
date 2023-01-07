@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b850dba77624828a8701ded1d8c505b, type: 3}
   m_Name: MeleeEnemy
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
   range: 5
   visionRange: 10
   speed: 8

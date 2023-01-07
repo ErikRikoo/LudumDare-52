@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: WaveHolder
   m_EditorClassIdentifier: 
   waves:
-  - waveData:
-    - enemyPrefab: {fileID: 2692221244290817224, guid: 7614ef16c50014940a7672c4c8189fb6, type: 3}
-      numberOfSpaws: 1
-      delay: 0.5
+  - waveData: []
