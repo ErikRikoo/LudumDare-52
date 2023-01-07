@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utilties.Extensions;
 
@@ -10,7 +11,7 @@ namespace Inventory
         [SerializeField] private InventoryItem[] m_Pattern;
 
         private List<InventoryItem> m_AvailableItems;
-        private List<InventoryItem> m_AcquiredItems = new();
+        private Dictionary<InventoryItem, int> m_AcquiredItems = new();
 
         private void Awake()
         {
@@ -20,8 +21,20 @@ namespace Inventory
         public void GainRandomItem()
         {
             InventoryItem randomItem = m_AvailableItems.RandomItem();
-            m_AvailableItems.Remove(randomItem);
-            m_AcquiredItems.Add(randomItem);
+            if (m_AcquiredItems.TryAdd(randomItem, 1) && randomItem.MaxCount == 1)
+            {
+                m_AvailableItems.Remove(randomItem);
+            }
+            else
+            {
+                int newAmount = m_AcquiredItems[randomItem] + 1;
+                if (newAmount >= randomItem.MaxCount)
+                {
+                    m_AvailableItems.Remove(randomItem);
+                }
+
+                m_AcquiredItems[randomItem] = newAmount;
+            }
             GameEvents.OnPlayerGainedItem(randomItem, 1);
             if (HasAllItems)
             {
