@@ -1,0 +1,16 @@
+{
+    "name": "ld52.planttypes.impl",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ac0910616f0abd8418efcb9680ea05d3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
