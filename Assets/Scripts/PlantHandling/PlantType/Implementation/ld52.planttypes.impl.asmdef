@@ -1,8 +1,7 @@
 {
-    "name": "ld52.utilities.events",
+    "name": "ld52.planttypes.impl",
     "rootNamespace": "",
     "references": [
-        "GUID:8b2a4a4b80e679748919cf9f0876f401",
         "GUID:ac0910616f0abd8418efcb9680ea05d3"
     ],
     "includePlatforms": [],
