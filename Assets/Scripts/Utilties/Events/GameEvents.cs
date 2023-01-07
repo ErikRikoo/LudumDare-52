@@ -1,6 +1,7 @@
 ﻿using System;
 using Inventory;
 using PlantHandling.PlantType;
+using Player.PlayerActions.Weapons;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,4 +17,7 @@ public static class GameEvents
     public static Action<InventoryItem, int> OnPlayerGainedItem;
     public static Action OnPlayerGainedAllItems;
     public static Action<APlantType, Vector3> OnSeedPlanted;
+    public static Action<InventoryItem, bool> OnSeedGained;
+    public static Action<int> OnCurrentSeedChanged;
+    public static Action<AWeapon> OnWeaponChanged;
 }
