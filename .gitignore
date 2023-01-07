@@ -44,6 +44,10 @@
 # *.iml
 # *.ipr
 
+# VS Code
+.vscode/
+.vscode/*
+
 # CMake
 cmake-build-*/
 
