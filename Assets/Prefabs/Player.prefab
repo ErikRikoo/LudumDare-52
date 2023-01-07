@@ -109,6 +109,8 @@ GameObject:
   - component: {fileID: 186955126}
   - component: {fileID: 186955125}
   - component: {fileID: 186955127}
+  - component: {fileID: 2143342366}
+  - component: {fileID: 2143342365}
   m_Layer: 0
   m_Name: PlayerPawn
   m_TagString: Untagged
@@ -160,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f962c9e168c540cfbfb3f95926d480a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Stats: {fileID: 0}
   m_Speed: 10
   m_Damping: 8
 --- !u!136 &186955127
@@ -176,6 +179,30 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2143342366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186955123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddc18ea90d34cc5bfe5faac6fe325a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2143342365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186955123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728f0f8f04a44c50b442b45b15201882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3138564082291232130
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +246,7 @@ GameObject:
   - component: {fileID: 444373075602877537}
   - component: {fileID: 546650147}
   - component: {fileID: 546650148}
+  - component: {fileID: 405276241}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -308,4 +336,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dee6a84f39745b29b8d01a924f3b46e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PlayerStats: {fileID: 405276241}
+--- !u!114 &405276241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478815620569426876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57efe01c6ee44885b755294dd55840f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_PlayerMovement: {fileID: 186955125}
+  m_PlantingBehavior: {fileID: 2143342366}
+  m_CurrentWeapon: {fileID: 0}
+  m_Inventory: {fileID: 2143342365}
+  m_Animator: {fileID: 0}
