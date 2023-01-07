@@ -14,6 +14,10 @@ namespace Enemy
         [SerializeField] float range;
         public float Range { get => range; private set => range = value; }
 
+        
+            
+        [SerializeField] float visionRange;
+        public float VisionRange { get => visionRange; private set => visionRange = value; }
 
         [SerializeField] float speed;
         public float Speed { get => speed; private set => speed = value; }

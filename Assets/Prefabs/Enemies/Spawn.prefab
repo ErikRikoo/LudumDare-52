@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1330072561445210628}
   - component: {fileID: 8087746462783056115}
   - component: {fileID: -8036526089055191811}
+  - component: {fileID: -2144481682036839593}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -167,3 +168,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &-2144481682036839593
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2692221244290817224}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

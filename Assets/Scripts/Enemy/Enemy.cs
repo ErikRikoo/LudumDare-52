@@ -1,29 +1,73 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using General;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Enemy
 {
+    
+ 
+    
+    [RequireComponent(typeof(SphereCollider))]
+    public class EventBubbleComponent: MonoBehaviour
+    {
+        public Action<Collider> onTriggerEnterEvent;
+        public Action<Collider> onTriggerExitEvent;
+        public Color gizmoColor = Color.green;
+
+        private SphereCollider sphereCollider;
+
+
+        private void Awake()
+        {
+            sphereCollider = GetComponent<SphereCollider>();
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            onTriggerEnterEvent(other);
+
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            onTriggerExitEvent(other);
+
+        }
+        
+        protected void OnDrawGizmos()
+        {
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawWireSphere(transform.position, sphereCollider.radius);
+            
+        }
+        
+    }
+    
     public class Enemy : MonoBehaviour
     {
         [SerializeField] protected EnemyStatsHolder stats;
         [SerializeField] protected GameState gameState;
     
-        protected GameObject target;
+        public GameObject target;
         protected IDamageable targetIDamageaeble;
+
+        private Stack<GameObject> potentialTargets = new Stack<GameObject>();
 
         protected float currentMoveSpeed;
         protected float currentHealth;
         protected float currentDamage;
         protected float currentAttackSpeed;
         protected float currentAttackRange;
+        private float squareRange;
         
         [SerializeField] private float m_RefreshRate;
     
         private YieldInstruction m_RefreshInstruction;
         private NavMeshAgent m_Agent;
-        private SphereCollider m_AttackRangeCollider;
         
 
         private Coroutine attackLoop = null;
@@ -46,35 +90,129 @@ namespace Enemy
                 m_RefreshInstruction = new WaitForSeconds(m_RefreshRate);
             }
 
+
             m_Agent = GetComponent<NavMeshAgent>();
-            m_AttackRangeCollider = GetComponent<SphereCollider>();
             
-            m_AttackRangeCollider.radius = stats.Range;
+
+            var attackRange = new GameObject("AttackRangeGO")
+            {
+                transform =
+                {
+                    parent = transform,
+                    localPosition = Vector3.zero
+                }
+            };
+            var attackRangeCollider  = attackRange.AddComponent<SphereCollider>();
+            attackRangeCollider.isTrigger = true;
+            attackRangeCollider.radius = stats.Range;
+            var attackBubbleComponent = attackRange.AddComponent<EventBubbleComponent>();
+            attackBubbleComponent.onTriggerEnterEvent += OnAttackRangeEnter;
+            attackBubbleComponent.onTriggerExitEvent += OnAttackRangeExit;
+            attackBubbleComponent.gizmoColor = Color.red;
+            
+            
+            var visionRange = new GameObject("visionRangeGO")
+            {
+                transform =
+                {
+                    parent = transform,
+                    localPosition = Vector3.zero
+                }
+            };
+            var visionRangeCollider  = visionRange.AddComponent<SphereCollider>();
+            visionRangeCollider.isTrigger = true;
+            visionRangeCollider.radius = stats.VisionRange;
+            var visionBubbleComponent = visionRange.AddComponent<EventBubbleComponent>();
+            visionBubbleComponent.onTriggerEnterEvent += OnVisionRangeEnter;
+            visionBubbleComponent.onTriggerExitEvent += OnVisionRangeExit;
+            visionBubbleComponent.gizmoColor = Color.green;
+            
+
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnAttackRangeEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("EnemyAttackableObject"))
+            if (other.CompareTag("EnemyAttackableObject"))
             {
-                AttackTarget();
+                if (attackLoop == null)
+                {
+                    AttackTarget();
+                }
+                else if (other.gameObject != target)
+                {
+                    DetermineTarget();
+                    AttackTarget();
+                }
             }
 
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnAttackRangeExit(Collider other)
         {
-            if (attackLoop != null)
+            if (other.CompareTag("EnemyAttackableObject"))
             {
-                StopCoroutine(attackLoop);
+                if (attackLoop != null && other.gameObject != target)
+                {
+                    Debug.Log("Stopping attack");
+                    StopCoroutine(attackLoop);
+                }
+                 
+                DetermineTarget();
             }
         }
+
+
+        private void OnVisionRangeEnter(Collider other)
+        {
+            if (other.CompareTag("EnemyAttackableObject"))
+            {
+                GameObject go = other.gameObject;
+                if (go == target) return;
+                 potentialTargets.Push(go);
+                 DetermineTarget();
+                     
+            }
+        }
+
+        private void OnVisionRangeExit(Collider other)
+        {
+            if (other.CompareTag("EnemyAttackableObject")) Debug.Log("I am now out of vision range");
+        }
+        
+        
+        public void DetermineTarget()
+        {
+            GameObject checkTarget;
+            do
+            {
+                checkTarget = potentialTargets.Peek();
+                if (checkTarget.gameObject == null)
+                {
+                    if (potentialTargets.Count > 1) potentialTargets.Pop();
+                    continue;
+                }
+
+                if (target && !(Vector3.Distance(transform.position, checkTarget.transform.position) 
+                      < Vector3.Distance(transform.position, target.transform.position))) continue;
+                
+                m_Agent.destination = checkTarget.transform.position;
+                target = checkTarget;
+                targetIDamageaeble = checkTarget.GetComponent<IDamageable>();
+                targetIDamageaeble.InformAboutDeath += DetermineTarget;
+
+            } while (checkTarget == null);
+
+        }
+
 
 
         public void Spawn()
         {
             target = gameState.silo;
             targetIDamageaeble = gameState.silo.GetComponent<IDamageable>();
-            
+
+            potentialTargets.Push(target);
+
             m_Agent.destination = target.transform.position;
             m_Agent.speed = stats.Speed;
             m_Agent.stoppingDistance = stats.Range;
@@ -83,10 +221,9 @@ namespace Enemy
             currentHealth = stats.MaxHealth;
             currentAttackSpeed = stats.AttackSpeed;
             currentMoveSpeed = stats.Speed;
-        }
-
-        public void DetermineTarget()
-        {
+            squareRange = Mathf.Pow(stats.Range, 2);
+            
+            GameEvents.OnEnemySpawned.Invoke();
 
         }
 
@@ -116,7 +253,8 @@ namespace Enemy
 
         public void AttackTarget()
         {
-            attackLoop ??= StartCoroutine(AttackLoop());
+            if (attackLoop != null) StopCoroutine(attackLoop);
+            attackLoop = StartCoroutine(AttackLoop());
         }
 
 
@@ -126,6 +264,9 @@ namespace Enemy
             {
                 StopCoroutine(attackLoop);
             }
+            GameEvents.OnEnemyKilled.Invoke();
+            Destroy(gameObject);
         }
+        
     }
 }
