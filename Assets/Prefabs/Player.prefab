@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f962c9e168c540cfbfb3f95926d480a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Stats: {fileID: 0}
+  m_Stats: {fileID: 405276241}
   m_Speed: 10
   m_Damping: 8
 --- !u!136 &186955127
