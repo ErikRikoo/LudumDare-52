@@ -45,7 +45,6 @@ namespace AI.Patrol
                 transform.position + Quaternion.Euler(0, -m_AngleRange , 0) * matchRangeForward);
             Gizmos.DrawLine(transform.position, 
                 transform.position + Quaternion.Euler(0, m_AngleRange , 0) * matchRangeForward);
-
         }
     }
 }
