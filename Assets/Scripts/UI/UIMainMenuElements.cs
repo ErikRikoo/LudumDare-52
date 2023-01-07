@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 namespace UI
 {
 	[RequireComponent(typeof(UIDocument))]
-	public class MainMenuElements : MonoBehaviour
+	public class UIMainMenuElements : MonoBehaviour
 	{
 		[SerializeField] private UIDocument uiDocument;
 
