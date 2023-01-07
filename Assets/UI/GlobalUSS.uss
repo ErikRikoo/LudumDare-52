@@ -1,0 +1,17 @@
+:root {
+    --color-1: rgb(83, 189, 129);
+    --color-2: rgb(189, 116, 74);
+    --color-3: rgb(242, 215, 165);
+    --color-4: rgb(64, 124, 189);
+    --color-5: rgb(165, 85, 56);
+    --color-6: rgb(189, 74, 64);
+    -unity-font: url('project://database/Assets/UI/Fonts/Play-Bold.ttf?fileID=12800000&guid=589a664edaa55a74eb79333641b288f8&type=3#Play-Bold');
+    -unity-font-definition: none;
+}
+
+.scene-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+}
