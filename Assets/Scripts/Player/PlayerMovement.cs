@@ -1,6 +1,4 @@
-﻿using System;
-using NaughtyAttributes;
-using Player.PlayerActions;
+﻿using Player.PlayerActions;
 using UnityEngine;
 using Utilities;
 
