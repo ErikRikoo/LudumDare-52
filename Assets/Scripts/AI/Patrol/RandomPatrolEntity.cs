@@ -41,10 +41,12 @@ namespace AI.Patrol
         {
             Vector3 matchRangeForward = transform.forward * m_RadiusRange.Max;
 
-            Gizmos.DrawLine(transform.position, 
-                transform.position + Quaternion.Euler(0, -m_AngleRange , 0) * matchRangeForward);
-            Gizmos.DrawLine(transform.position, 
-                transform.position + Quaternion.Euler(0, m_AngleRange , 0) * matchRangeForward);
+            Vector3 position = transform.position;
+            Vector3 leftDirection = Quaternion.Euler(0, -m_AngleRange , 0) * matchRangeForward;
+            Vector3 rightDirection = Quaternion.Euler(0, m_AngleRange , 0) * matchRangeForward;
+            
+            Gizmos.DrawLine(position, position + leftDirection);
+            Gizmos.DrawLine(position, position + rightDirection);
         }
     }
 }
