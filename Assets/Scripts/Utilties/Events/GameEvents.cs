@@ -1,5 +1,6 @@
 ﻿using System;
 using Inventory;
+using PlantHandling.PlantType;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,4 +15,5 @@ public static class GameEvents
     // TODO use a named tuple
     public static Action<InventoryItem, int> OnPlayerGainedItem;
     public static Action OnPlayerGainedAllItems;
+    public static Action<APlantType, Vector3> OnSeedPlanted;
 }
