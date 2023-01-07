@@ -1,4 +1,6 @@
 ﻿using System;
+using NaughtyAttributes;
+using Player.PlayerActions;
 using UnityEngine;
 using Utilities;
 
@@ -7,6 +9,8 @@ namespace Player
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour
     {
+        [SerializeField] private PlayerStats m_Stats;
+
         [Header("Movement Settings")]
         [SerializeField] private float m_Speed;
         [Min(0)]
@@ -34,7 +38,8 @@ namespace Player
             // TODO: Use slerp?
             m_CurrentMovement = Vector2.LerpUnclamped(m_CurrentMovement, m_WantedMovement, m_Damping * Time.deltaTime);
             m_Rigidbody.velocity = Velocity;
-            transform.MakeZLookAtDirection(m_CurrentMovement);
+            // TODO: Use int key (AnimatorParam from Naughty Attribute)
+            m_Stats.Animator?.SetFloat("Speed", Velocity.magnitude);
         }
 
         private Vector3 Velocity => m_CurrentMovement.X0Y() * m_Speed;
