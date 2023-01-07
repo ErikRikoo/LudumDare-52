@@ -1,0 +1,16 @@
+{
+    "name": "ld52.utilities.events",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8b2a4a4b80e679748919cf9f0876f401"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
