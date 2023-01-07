@@ -1,0 +1,16 @@
+{
+    "name": "ld52.ai",
+    "rootNamespace": "",
+    "references": [
+        "GUID:91b9059f570ff7546a21a7bb7b0565b6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
