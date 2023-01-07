@@ -4,11 +4,6 @@ using Enemy;
 using UnityEngine;
 
 
-public interface IDamageable
-{
-    public void TakeDamage();
-}
-
 public abstract class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected EnemyStatsHolder stats;

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Enemy
 {
@@ -13,6 +15,11 @@ namespace Enemy
     
         [SerializeField] private int currentWave = 0;
 
+        private void Start()
+        {
+            SpawnWave();
+        }
+
         private Vector3 RandomPointOnCircleEdge(float minRadius, float maxRadius)
         {
             var radius = Random.Range(minRadius, maxRadius);
@@ -24,13 +31,10 @@ namespace Enemy
         private IEnumerator SpawnEnemyPod(SpawnTypeData pod)
         {
             yield return new WaitForSeconds(pod.delay);
-            Vector3 siloPosition = silo.transform.position;
             for (var i = 0; i < pod.numberOfSpaws; i++)
             {
                 Vector3 spawnPoint = RandomPointOnCircleEdge(spawnRadius - spawnArea / 2, spawnRadius + spawnArea / 2);
-                Debug.Log(spawnPoint);
-                float angle = Vector3.Angle(spawnPoint, siloPosition);
-                Instantiate(pod.enemyPrefab, spawnPoint, Quaternion.AngleAxis(angle, Vector3.up));
+                Instantiate(pod.enemyPrefab, spawnPoint, Quaternion.identity);
                 gameState.numberOfEnemiesAlive++;
             }
         }

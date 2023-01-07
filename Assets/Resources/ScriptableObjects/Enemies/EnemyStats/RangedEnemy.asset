@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RangedEnemy
   m_EditorClassIdentifier: 
   damage: 5
-  range: 5
-  speed: 10
-  attackSpeed: 5
-  maxHealth: 10
+  range: 15
+  speed: 6
+  attackSpeed: 1
+  maxHealth: 5
