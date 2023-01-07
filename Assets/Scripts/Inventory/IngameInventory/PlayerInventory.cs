@@ -6,7 +6,6 @@ namespace Inventory
    
     public class PlayerInventory : MonoBehaviour
     {
-        [SerializeField] protected int m_MaxCount;
         [SerializeField] private int m_MaxItemCount;
         
         private Dictionary<InventoryItem, int> m_Items = new();
@@ -31,7 +30,7 @@ namespace Inventory
         
         public int GainItem(InventoryItem _item, int _count = 1)
         {
-            _count = Mathf.Min(_count, m_MaxCount);
+            _count = Mathf.Min(_count, _item.MaxCount);
             int amountUsed = _count;
             if (!m_Items.TryAdd(_item, _count))
             {
@@ -42,10 +41,10 @@ namespace Inventory
                 
                 int currentCount = m_Items[_item];
                 int newAmount = currentCount + _count;
-                if (newAmount > m_MaxCount)
+                if (newAmount > _item.MaxCount)
                 {
-                    amountUsed -= newAmount - m_MaxCount;
-                    newAmount = m_MaxCount;
+                    amountUsed -= newAmount - _item.MaxCount;
+                    newAmount = _item.MaxCount;
                 }
 
                 m_Items[_item] = newAmount;

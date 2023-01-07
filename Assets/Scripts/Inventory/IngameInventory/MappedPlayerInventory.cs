@@ -23,10 +23,12 @@ namespace Inventory
             m_AvailableItems.Remove(randomItem);
             m_AcquiredItems.Add(randomItem);
             GameEvents.OnPlayerGainedItem(randomItem, 1);
-            if (m_AvailableItems.Count == 0)
+            if (HasAllItems)
             {
                 GameEvents.OnPlayerGainedAllItems?.Invoke();
             }
         }
+
+        private bool HasAllItems => m_AvailableItems.Count == 0;
     }
 }
