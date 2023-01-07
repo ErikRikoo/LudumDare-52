@@ -2,7 +2,8 @@
     "name": "ld52.ai",
     "rootNamespace": "",
     "references": [
-        "GUID:91b9059f570ff7546a21a7bb7b0565b6"
+        "GUID:91b9059f570ff7546a21a7bb7b0565b6",
+        "GUID:6a60b27337d20ba4fbb71835b646bb94"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

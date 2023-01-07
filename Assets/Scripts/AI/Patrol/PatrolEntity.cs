@@ -25,7 +25,7 @@ namespace AI.Patrol
         
         private Vector3 m_Target;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (m_RefreshRate <= 0)
             {
