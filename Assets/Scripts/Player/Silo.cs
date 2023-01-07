@@ -11,7 +11,7 @@ public class Silo : MonoBehaviour, IDamageable
     public void TakeDamage(float amount)
     {
         health -= amount;
-        GameEvents.OnSiloGotHit.Invoke();
+        GameEvents.OnSiloGotHit?.Invoke();
 
         if (health <= 0)
         {

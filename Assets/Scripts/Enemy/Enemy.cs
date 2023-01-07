@@ -223,7 +223,7 @@ namespace Enemy
             currentMoveSpeed = stats.Speed;
             squareRange = Mathf.Pow(stats.Range, 2);
             
-            GameEvents.OnEnemySpawned.Invoke();
+            GameEvents.OnEnemySpawned?.Invoke();
 
         }
 
@@ -264,7 +264,7 @@ namespace Enemy
             {
                 StopCoroutine(attackLoop);
             }
-            GameEvents.OnEnemyKilled.Invoke();
+            GameEvents.OnEnemyKilled?.Invoke();
             Destroy(gameObject);
         }
         
