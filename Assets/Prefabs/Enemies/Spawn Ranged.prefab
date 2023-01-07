@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8339849903443438982}
   - component: {fileID: 7869976409724591935}
   - component: {fileID: 5326067484906435472}
+  - component: {fileID: 1356085562201111105}
   m_Layer: 0
   m_Name: Spawn Ranged
   m_TagString: Untagged
@@ -120,3 +121,18 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1356085562201111105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2692221244290817224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5630449ed8fd6432bb5d5cfdb58b38b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: cdf0343f68ded4bf1863fea36d6139a3, type: 2}
+  gameState: {fileID: 11400000, guid: ed9d27f7c55af4b45a5cda05902ca3b1, type: 2}
+  m_RefreshRate: 0
