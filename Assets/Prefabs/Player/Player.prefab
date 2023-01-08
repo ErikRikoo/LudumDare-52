@@ -401,6 +401,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 18c940fb-e774-4c8d-b05d-a0329cdb0fb4
     m_ActionName: Gameplay/Shooting[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 546650148}
+        m_TargetAssemblyTypeName: Player.PlayerController, ld52.player
+        m_MethodName: OnSeedScroll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 94fd009b-6f37-492d-bdc8-6ff0036bdaf2
+    m_ActionName: Gameplay/SeedScroll[/Mouse/scroll/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 546650148}
+        m_TargetAssemblyTypeName: Player.PlayerController, ld52.player
+        m_MethodName: OnSeedChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d17f63df-4899-4f1a-9a02-6ea387c2c80d
+    m_ActionName: Gameplay/SeedChange[/Keyboard/1,/Keyboard/2,/Keyboard/4]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

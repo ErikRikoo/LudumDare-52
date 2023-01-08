@@ -55,7 +55,23 @@ namespace Player
 
         public void OnPlanting(InputAction.CallbackContext _context)
         {
-            m_PlayerStats.PlantingBehavior.PlantSeed();
+            if (_context.phase == InputActionPhase.Started)
+            {
+                m_PlayerStats.PlantingBehavior.PlantSeed();
+            }
+        }
+        
+        public void OnSeedScroll(InputAction.CallbackContext _context)
+        {
+            
+        }
+
+        public void OnSeedChange(InputAction.CallbackContext _context)
+        {
+            if (_context.phase == InputActionPhase.Started)
+            {
+                m_PlayerStats.Inventory.CurrentSeed = int.Parse(_context.control.name);
+            }
         }
     }
 }

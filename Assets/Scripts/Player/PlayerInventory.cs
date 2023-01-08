@@ -37,6 +37,7 @@ namespace Player
             set
             {
                 m_CurrentSeed = value;
+                m_CurrentSeed %= m_Seeds.Count;
                 GameEvents.OnCurrentSeedChanged?.Invoke(m_CurrentSeed);
             }
         }
@@ -91,6 +92,8 @@ namespace Player
         [SerializeField] private int m_MaxItemCount;
 
         private List<CountedItem> m_Items = new();
+
+        public int Count => m_Items.Count;
         
 
         public void AddItem(T _item, int _count, Action<T, bool> _event)
