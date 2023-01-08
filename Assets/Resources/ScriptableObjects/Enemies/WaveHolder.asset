@@ -17,9 +17,9 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 2692221244290817224, guid: 7614ef16c50014940a7672c4c8189fb6, type: 3}
       numberOfSpaws: 10
       delay: 0
-    - enemyPrefab: {fileID: 2692221244290817224, guid: 820cb774f65f84e94a9d7d9d50a2b15b, type: 3}
-      numberOfSpaws: 10
-      delay: 1
+    - enemyPrefab: {fileID: 0}
+      numberOfSpaws: 15
+      delay: 10
   - waveData:
     - enemyPrefab: {fileID: 0}
       numberOfSpaws: 1

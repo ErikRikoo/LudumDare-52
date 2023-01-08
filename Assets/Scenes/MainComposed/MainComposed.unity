@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645251, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366753, g: 0.48427093, b: 0.5645238, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -422,12 +422,24 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7200053909593374898, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
+      propertyPath: m_HitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e5da07eb54f724bc09e49a342147038d, type: 3}
+    - target: {fileID: 7200053909593374898, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: easingAttack
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7200053909593374898, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
+      propertyPath: m_AttackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2871cdbcd81a541df9600130720dad88, type: 3}
+    - target: {fileID: 7200053909593374898, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: attackDuration
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200053909593374901, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7200053911029579754, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalPosition.y

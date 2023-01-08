@@ -1,13 +1,19 @@
 ﻿using System;
 using General;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Player.PlayerActions.Weapons
 {
+    [RequireComponent(typeof(AudioSource))]
     public abstract class AWeapon : MonoBehaviour
     {
         [SerializeField] private float m_Rate;
         [SerializeField] private float m_Damage;
+        [SerializeField] private AudioClip m_AttackSound;
+        [SerializeField] private AudioClip m_HitSound;
+
+        private AudioSource _audioSource;
         
 
         private float m_LastAttackTime;
@@ -15,13 +21,20 @@ namespace Player.PlayerActions.Weapons
         private void Awake()
         {
             m_LastAttackTime = -m_Rate;
+
+            _audioSource = gameObject.AddComponent<AudioSource>();
         }
+        
+        
+        
 
         public void Attack()
         {
             if (Time.time - m_LastAttackTime > m_Rate)
             {
                 TriggerAttack();
+                _audioSource.pitch = Random.Range(0.6f, 1.1f);                
+                _audioSource.PlayOneShot(m_AttackSound);
                 m_LastAttackTime = Time.time;
             }
         }
@@ -30,6 +43,8 @@ namespace Player.PlayerActions.Weapons
 
         public void ApplyDamage(IDamageable _damageable)
         {
+            _audioSource.pitch = Random.Range(0.6f, 1.1f);
+            _audioSource.PlayOneShot(m_HitSound);
             _damageable.TakeDamage(m_Damage);
         }
     }

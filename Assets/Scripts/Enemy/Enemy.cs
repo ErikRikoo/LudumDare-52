@@ -5,6 +5,7 @@ using General;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Enemy
 {
@@ -48,10 +49,16 @@ namespace Enemy
         
     }
     
+    [RequireComponent(typeof(AudioSource))]
     public class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] protected EnemyStatsHolder stats;
         [SerializeField] protected GameState gameState;
+        [Header("Audio")] 
+        [SerializeField] private AudioClip m_GetHitSound;
+        [SerializeField] private AudioClip m_DeathSound;
+        [SerializeField] private AudioClip m_AttackSound;
+        [SerializeField] private AudioClip m_FootstepSound;
         public event InformAttackersAboutDeath InformAboutDeath;
 
         public GameObject target;
@@ -64,12 +71,13 @@ namespace Enemy
         protected float currentDamage;
         protected float currentAttackSpeed;
         protected float currentAttackRange;
-        private float squareRange;
         
         [SerializeField] private float m_RefreshRate;
     
         private YieldInstruction m_RefreshInstruction;
         private NavMeshAgent m_Agent;
+
+        private AudioSource _audioSource;
         
 
         private Coroutine attackLoop = null;
@@ -77,12 +85,14 @@ namespace Enemy
         void Start()
         {
             Spawn();
-            MoveToTarget();
         }
     
     
         protected virtual void Awake()
         {
+
+            _audioSource = GetComponent<AudioSource>();
+            
             if (m_RefreshRate <= 0)
             {
                 m_RefreshInstruction = new WaitForEndOfFrame();
@@ -224,15 +234,9 @@ namespace Enemy
             currentHealth = stats.MaxHealth;
             currentAttackSpeed = stats.AttackSpeed;
             currentMoveSpeed = stats.Speed;
-            squareRange = Mathf.Pow(stats.Range, 2);
             
             GameEvents.OnEnemySpawned?.Invoke();
 
-        }
-
-        public void MoveToTarget()
-        {
-        
         }
 
         IEnumerator AttackLoop()
@@ -243,6 +247,7 @@ namespace Enemy
                 if (target != null)
                 {
                     targetIDamageaeble?.TakeDamage(stats.Damage);
+                    
                     Debug.Log("Attacked!");
                     yield return new WaitForSeconds(10/currentAttackSpeed);
                 }
@@ -269,6 +274,8 @@ namespace Enemy
             }
             GameEvents.OnEnemyKilled?.Invoke();
             InformAboutDeath?.Invoke(gameObject);
+            
+            _audioSource.PlayOneShot(m_DeathSound);
             Destroy(gameObject);
         }
 
@@ -276,6 +283,9 @@ namespace Enemy
         {
             Debug.Log("Enemy taking damage");
             currentHealth -= amount;
+            
+            _audioSource.pitch = Random.Range(0.6f, 1.1f);
+            _audioSource.PlayOneShot(m_GetHitSound);
             
             if (currentHealth <= 0)
             {
