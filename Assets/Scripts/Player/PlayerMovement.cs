@@ -37,7 +37,10 @@ namespace Player
             m_CurrentMovement = Vector2.LerpUnclamped(m_CurrentMovement, m_WantedMovement, m_Damping * Time.deltaTime);
             m_Rigidbody.velocity = Velocity;
             // TODO: Use int key (AnimatorParam from Naughty Attribute)
-            m_Stats.Animator?.SetFloat("Speed", Velocity.magnitude);
+            if (m_Stats.Animator != null)
+            {
+                m_Stats.Animator.SetFloat("Speed", m_CurrentMovement.magnitude);
+            }
         }
 
         private Vector3 Velocity => m_CurrentMovement.X0Y() * m_Speed;

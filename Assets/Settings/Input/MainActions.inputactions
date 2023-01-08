@@ -43,9 +43,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Action",
+                    "name": "Planting",
                     "type": "Button",
                     "id": "d0be3c86-10bd-49df-8d72-f5d15e879ca4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shooting",
+                    "type": "Button",
+                    "id": "18c940fb-e774-4c8d-b05d-a0329cdb0fb4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -176,23 +185,23 @@
                 },
                 {
                     "name": "",
-                    "id": "10f2efd9-cb50-4376-9133-3fab1c13d469",
-                    "path": "<Mouse>/leftButton",
+                    "id": "41a2bf18-ef7a-405d-939b-67d58216e3e9",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action",
+                    "action": "Planting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "2c73e2b8-3a1a-4207-884d-f737222eac22",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "74a336c8-6a40-4097-80cb-147d2ff001dc",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action",
+                    "action": "Shooting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

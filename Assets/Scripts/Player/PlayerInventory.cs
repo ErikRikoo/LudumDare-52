@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Inventory;
+using PlantHandling.PlantType;
 using Player.PlayerActions;
 using Player.PlayerActions.Weapons;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Player
     {
         [SerializeField] private PlayerStats m_Stats;
         
-        [SerializeField] private Inventory<InventoryItem> m_Seeds;
+        [SerializeField] private Inventory<PlantType> m_Seeds;
         [SerializeField] private AWeapon m_Weapon;
 
         private int m_CurrentSeed;
@@ -26,10 +27,9 @@ namespace Player
             }
         }
 
-        public InventoryItem CurrentSeedItem => m_Seeds.Get(CurrentSeed);
+        public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed);
 
-        // TODO: Use seed item
-        public void AddSeed(InventoryItem _item, int _count)
+        public void AddSeed(PlantType _item, int _count)
         {
             m_Seeds.AddItem(_item, _count, GameEvents.OnSeedGained);
         }
@@ -46,57 +46,56 @@ namespace Player
     class Inventory<T>
     where T : InventoryItem
     {
-        [SerializeField] private int m_MaxItemCount;
+        class CountedItem
+        {
+            public T Item;
+            public int Count;
+        }
         
-        private Dictionary<T, int> m_Items = new();
+        [SerializeField] private int m_MaxItemCount;
+
+        private List<CountedItem> m_Items = new();
+        
 
         public void AddItem(T _item, int _count, Action<T, bool> _event)
         {
             _count = Mathf.Min(_count, _item.MaxCount);
-            if (!m_Items.TryAdd(_item, _count))
+            var value = GetItem(_item);
+            if (value == null)
             {
-                m_Items[_item] = Mathf.Min(_item.MaxCount, m_Items[_item] + _count);
-                _event?.Invoke(_item, false);
+                m_Items.Add(new CountedItem()
+                {
+                    Count = _count,
+                    Item = _item
+                });
+                _event?.Invoke(_item, true);
             }
             else
             {
-                _event?.Invoke(_item, true);
+                value.Count = Mathf.Min(_item.MaxCount, value.Count + _count);
+                _event?.Invoke(_item, false);
             }
         }
 
+        private CountedItem GetItem(T _item) => m_Items.Find(item => item.Item == _item);
+
         public bool ConsumeItem(T _item, int _count, Action<T, bool> _event)
         {
-            if (m_Items.TryGetValue(_item, out int current))
+            var value = GetItem(_item);
+            if (value == null || value.Count < _count)
             {
-                if (current < _count)
-                {
-                    return false;
-                }
-                // TODO: Extract method
-                int newValue = current + _count;
-                m_Items[_item] = newValue;
-                _event?.Invoke(_item, false);
-                
-                return true;
+                return false;
             }
-
-            return false;
+            
+            int newValue = value.Count + _count;
+            value.Count = newValue;
+            _event?.Invoke(_item, false);
+            return true;
         }
 
         public T Get(int currentSeed)
         {
-            int i = 0;
-            foreach (var (item, _) in m_Items)
-            {
-                if (i == currentSeed)
-                {
-                    return item;
-                }
-
-                ++i;
-            }
-
-            return null;
+            return m_Items[currentSeed].Item;
         }
     }
     
