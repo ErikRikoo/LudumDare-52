@@ -26,6 +26,7 @@ namespace UI
 		private Dictionary<PlantType, Label> _seedSlotLabels = new();
 		private Dictionary<PlantType, VisualElement> _seedSlotTooltips = new();
 		private Label _healthLabel;
+		private Label _enemiesLabel;
 
 		public VisualElement MainContainer => _mainContainer;
 		public Button MenuButton => _menuButton;
@@ -36,6 +37,7 @@ namespace UI
 		public Dictionary<PlantType, Label> SeedSlotLabels => _seedSlotLabels;
 		public Dictionary<PlantType, VisualElement> SeedSlotTooltips => _seedSlotTooltips;
 		public Label HealthLabel => _healthLabel;
+		public Label EnemiesLabel => _enemiesLabel;
 
 		private void OnEnable()
 		{
@@ -56,12 +58,13 @@ namespace UI
 			_inventory = root.Q<VisualElement>("HUD-Inventory");
 			_tooltips = root.Q<VisualElement>("HUD-Tooltips");
 
-			_weaponSlotIcon = root.Q<Button>("HUD-Weapon-Slot-Icon");
+			_weaponSlotIcon = root.Q<VisualElement>("HUD-Weapon-Slot-Icon");
 			_weaponSlotLabel = root.Q<Label>("HUD-Weapon-Slot-Label");
 			
 			InstantiateSeedSlots();
 			
 			_healthLabel = root.Q<Label>("HUD-Health-Label");
+			_enemiesLabel = root.Q<Label>("HUD-Enemies-Label");
 		}
 
 		private void InstantiateSeedSlots()

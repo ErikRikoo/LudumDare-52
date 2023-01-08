@@ -6,19 +6,21 @@ using UnityEngine;
 
 public class Silo : MonoBehaviour, IDamageable
 {
-    public float health = 100;
     public event InformAttackersAboutDeath InformAboutDeath;
     [SerializeField] private GameState gameState;
 
+    private float health;
+    
     private void Awake()
     {
         gameState.silo = gameObject;
+        health = gameState.defaultSiloHealth;
     }
 
     public void TakeDamage(float amount)
     {
         health -= amount;
-        GameEvents.OnSiloGotHit?.Invoke();
+        GameEvents.OnSiloGotHit?.Invoke(health);
 
         if (health <= 0)
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using General;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -59,6 +60,10 @@ namespace Enemy
         [SerializeField] private AudioClip m_DeathSound;
         [SerializeField] private AudioClip m_AttackSound;
         [SerializeField] private AudioClip m_FootstepSound;
+        [SerializeField] private ParticleSystem m_HitVFX;
+
+        [Header("Animations")] [SerializeField]
+        private Animator m_Animator;
         public event InformAttackersAboutDeath InformAboutDeath;
 
         public GameObject target;
@@ -78,7 +83,9 @@ namespace Enemy
         private NavMeshAgent m_Agent;
 
         private AudioSource _audioSource;
-        
+        private Rigidbody _rigidbody;
+        private BoxCollider _collider;
+        private SkinnedMeshRenderer _skinnedMeshRenderer;
 
         private Coroutine attackLoop = null;
 
@@ -86,12 +93,21 @@ namespace Enemy
         {
             Spawn();
         }
+        
+        private void FixedUpdate()
+        {
+            m_Animator.SetFloat("Speed", m_Agent.velocity.magnitude);
+           
+        }
     
     
         protected virtual void Awake()
         {
 
             _audioSource = GetComponent<AudioSource>();
+            m_Agent = GetComponent<NavMeshAgent>();
+            _rigidbody = GetComponent<Rigidbody>();
+            _collider = GetComponent<BoxCollider>();
             
             if (m_RefreshRate <= 0)
             {
@@ -101,9 +117,6 @@ namespace Enemy
             {
                 m_RefreshInstruction = new WaitForSeconds(m_RefreshRate);
             }
-
-
-            m_Agent = GetComponent<NavMeshAgent>();
             
 
             var attackRange = new GameObject("AttackRangeGO")
@@ -138,8 +151,8 @@ namespace Enemy
             visionBubbleComponent.onTriggerEnterEvent += OnVisionRangeEnter;
             visionBubbleComponent.onTriggerExitEvent += OnVisionRangeExit;
             visionBubbleComponent.gizmoColor = Color.green;
-            
 
+            _skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         }
 
         private void OnAttackRangeEnter(Collider other)
@@ -246,10 +259,9 @@ namespace Enemy
 
                 if (target != null)
                 {
+                    m_Animator.SetTrigger("Punch");
                     targetIDamageaeble?.TakeDamage(stats.Damage);
-                    
-                    Debug.Log("Attacked!");
-                    yield return new WaitForSeconds(10/currentAttackSpeed);
+                    yield return new WaitForSeconds(1/currentAttackSpeed);
                 }
                 else
                 {
@@ -275,21 +287,39 @@ namespace Enemy
             GameEvents.OnEnemyKilled?.Invoke();
             InformAboutDeath?.Invoke(gameObject);
             
-            _audioSource.PlayOneShot(m_DeathSound);
             Destroy(gameObject);
+        }
+
+        IEnumerator DeathVFX()
+        {
+            m_Agent.destination = transform.position;
+            m_Agent.stoppingDistance = 0;
+            _audioSource.pitch = Random.Range(0.6f, 1.1f);
+            _audioSource.PlayOneShot(m_DeathSound);
+            _rigidbody.isKinematic = true;
+            _collider.enabled = false;
+            m_Animator.SetTrigger("Death");
+            
+            yield return new WaitForSeconds(4);
+            Die();
         }
 
         public void TakeDamage(float amount)
         {
-            Debug.Log("Enemy taking damage");
             currentHealth -= amount;
-            
-            _audioSource.pitch = Random.Range(0.6f, 1.1f);
-            _audioSource.PlayOneShot(m_GetHitSound);
-            
+
+            _skinnedMeshRenderer.material.DOFloat(0, "_HitEffect", 0.2f).From(1);
+            m_HitVFX.Play();
+            DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1, 0.1f).From(0.1f);
+
             if (currentHealth <= 0)
             {
-                Die();
+                StartCoroutine(DeathVFX());
+            }
+            else
+            {
+                // _audioSource.pitch = Random.Range(0.6f, 1.1f);
+                // _audioSource.PlayOneShot(m_GetHitSound);
             }
         }
 
