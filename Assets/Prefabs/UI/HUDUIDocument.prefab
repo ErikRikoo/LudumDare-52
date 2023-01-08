@@ -77,4 +77,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elements: {fileID: -3869338009428327354}
+  gameState: {fileID: 11400000, guid: ed9d27f7c55af4b45a5cda05902ca3b1, type: 2}
   plantManager: {fileID: 11400000, guid: b6888fbabc180a44a9eda5113635519a, type: 2}

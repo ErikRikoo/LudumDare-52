@@ -14,6 +14,9 @@ namespace Player.PlayerActions.Weapons
         [SerializeField] private AudioClip m_AttackSound;
         [SerializeField] private AudioClip m_HitSound;
         [SerializeField] private bool m_Piercing;
+        
+        
+        public Sprite Icon => m_Icon;
         public bool Piercing => m_Piercing;
         
         private AudioSource _audioSource;

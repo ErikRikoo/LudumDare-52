@@ -20,7 +20,7 @@ public static class GameEvents
     public static Action<PlantType, bool> OnSeedGained;
     public static Action<int> OnCurrentSeedChanged;
     public static Action<AWeapon> OnWeaponChanged;
-    public static Action OnSiloGotHit;
+    public static Action<float> OnSiloGotHit;
     public static Action OnEnemyKilled;
     public static Action OnEnemySpawned;
 }
