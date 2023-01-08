@@ -215,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 275393932}
   m_LocalRotation: {x: 0.6532817, y: 0.2705976, z: -0.2705976, w: 0.6532817}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -272,7 +272,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 20
+  far clip plane: 50
   field of view: 40
   orthographic: 0
   orthographic size: 5
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 1133452084}
   - component: {fileID: 1133452085}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Planter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -383,6 +383,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78855225d345f874c83dd76c8f779a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlantManager: {fileID: 11400000, guid: b6888fbabc180a44a9eda5113635519a, type: 2}
+  landPlotPadding: 1
+  landPlotMaxCount: 20
+  landPlotGenerationRange: {x: 3, y: 15}
+  landPlotMinSize: {x: 4, y: 4}
+  landPlotMaxSize: {x: 7, y: 7}
 --- !u!1001 &1353043678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -397,15 +403,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2890bfaf222ccc548a022c586d3c69f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.11
+      value: 0.318
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2890bfaf222ccc548a022c586d3c69f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2890bfaf222ccc548a022c586d3c69f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.4
+      value: 0.347
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2890bfaf222ccc548a022c586d3c69f5, type: 3}
       propertyPath: m_LocalRotation.w
