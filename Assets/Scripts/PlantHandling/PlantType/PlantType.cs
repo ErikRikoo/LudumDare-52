@@ -10,7 +10,7 @@ namespace PlantHandling.PlantType
     // Would it be abstract for some strategy pattern?
     public class PlantType : InventoryItem
     {
-        public enum TypeEnum
+        public enum VarietyEnum
         {
             Melee,
             Pistol,
@@ -19,7 +19,7 @@ namespace PlantHandling.PlantType
             Sniper
         }
         
-        public PlantType Type;
+        public VarietyEnum Variety;
         
         [MinMaxSlider(0, 60)]
         public Vector2 GrowthTimeRange;
