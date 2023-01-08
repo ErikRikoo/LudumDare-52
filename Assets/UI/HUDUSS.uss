@@ -79,6 +79,7 @@
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    overflow: visible;
 }
 
 .hud-seed-slot-background {
@@ -168,7 +169,7 @@
 
 .hud-health-label {
     font-size: 35px;
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     -unity-text-outline-width: 1px;
     -unity-text-outline-color: rgba(0, 0, 0, 0.35);
     margin-left: 0;
@@ -187,4 +188,47 @@
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.hud-tooltips {
+    position: absolute;
+    bottom: 150px;
+    width: 830px;
+    left: 50%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.hud-tooltip {
+    width: 184px;
+    height: 135px;
+    background-image: url('project://database/Assets/UI/Textures/Tooltip-Background.png?fileID=2800000&guid=785c916670a0921429ca429f5ebfaeaa&type=3#Tooltip-Background');
+    opacity: 0;
+    transition-property: all, opacity;
+    transition-duration: 0s, 300ms;
+    transition-timing-function: ease, ease-out-circ;
+    transition-delay: 0s, 0s;
+}
+
+.hud-tooltip-label {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 18px;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgba(0, 0, 0, 0.35);
+    -unity-text-align: middle-center;
+    padding-right: 20px;
+    padding-left: 20px;
+    white-space: normal;
+    transition-property: all, opacity;
+    transition-duration: 0s, 300ms;
+    transition-timing-function: ease, ease-out-circ;
+    transition-delay: 0s, 0s;
 }

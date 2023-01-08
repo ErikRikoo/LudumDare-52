@@ -8,16 +8,15 @@
 .menu {
     width: 652px;
     height: 867px;
-    background-image: url('project://database/Assets/UI/Textures/Menu-Background.png?fileID=2800000&guid=bd4f73080d0025b46a87e997dd7fbc6f&type=3#Menu-Background');
     justify-content: center;
     align-items: center;
 }
 
 .menu-background {
     position: absolute;
-    width: 617px;
-    height: 820px;
-    background-image: url('project://database/Assets/UI/Textures/Menu-Container-Background.png?fileID=2800000&guid=4897634f7069d4a4daebc26ff7a4fc6c&type=3#Menu-Container-Background');
+    width: 100%;
+    height: 100%;
+    background-image: url('project://database/Assets/UI/Textures/Menu-Background.png?fileID=2800000&guid=bd4f73080d0025b46a87e997dd7fbc6f&type=3#Menu-Background');
 }
 
 .menu-logo {
@@ -52,7 +51,7 @@
     align-items: center;
     justify-content: center;
     font-size: 45px;
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     -unity-font: url('project://database/Assets/UI/Fonts/Play-Bold.ttf?fileID=12800000&guid=589a664edaa55a74eb79333641b288f8&type=3#Play-Bold');
     -unity-text-outline-width: 1px;
     -unity-text-outline-color: rgba(0, 0, 0, 0.35);
