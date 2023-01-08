@@ -30,8 +30,8 @@
 
 .hud-weapon-slot-icon {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
     -unity-background-scale-mode: scale-and-crop;
     bottom: 18px;
     left: 20px;
@@ -96,10 +96,10 @@
 
 .hud-seed-slot-icon {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
     -unity-background-scale-mode: scale-and-crop;
-    bottom: 40px;
+    bottom: 18px;
     left: 20px;
 }
 
