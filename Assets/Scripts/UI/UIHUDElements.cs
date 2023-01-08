@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using PlantHandling;
+using PlantHandling.PlantType;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
@@ -19,21 +21,23 @@ namespace UI
 		private VisualElement _tooltips;
 		private VisualElement _weaponSlotIcon;
 		private Label _weaponSlotLabel;
-		private Button[] _seedSlotButtons;
-		private VisualElement[] _seedSlotIcons;
-		private Label[] _seedSlotLabels;
-		private VisualElement[] _seedSlotTooltips;
+		private Dictionary<PlantType, Button> _seedSlotButtons = new();
+		private Dictionary<PlantType, VisualElement> _seedSlotIcons = new();
+		private Dictionary<PlantType, Label> _seedSlotLabels = new();
+		private Dictionary<PlantType, VisualElement> _seedSlotTooltips = new();
 		private Label _healthLabel;
+		private Label _enemiesLabel;
 
 		public VisualElement MainContainer => _mainContainer;
 		public Button MenuButton => _menuButton;
 		public VisualElement WeaponSlotIcon => _weaponSlotIcon;
 		public Label WeaponSlotLabel => _weaponSlotLabel;
-		public Button[] SeedSlotButtons => _seedSlotButtons;
-		public VisualElement[] SeedSlotIcons => _seedSlotIcons;
-		public Label[] SeedSlotLabels => _seedSlotLabels;
-		public VisualElement[] SeedSlotTooltips => _seedSlotTooltips;
+		public Dictionary<PlantType, Button> SeedSlotButtons => _seedSlotButtons;
+		public Dictionary<PlantType, VisualElement> SeedSlotIcons => _seedSlotIcons;
+		public Dictionary<PlantType, Label> SeedSlotLabels => _seedSlotLabels;
+		public Dictionary<PlantType, VisualElement> SeedSlotTooltips => _seedSlotTooltips;
 		public Label HealthLabel => _healthLabel;
+		public Label EnemiesLabel => _enemiesLabel;
 
 		private void OnEnable()
 		{
@@ -60,21 +64,13 @@ namespace UI
 			InstantiateSeedSlots();
 			
 			_healthLabel = root.Q<Label>("HUD-Health-Label");
+			_enemiesLabel = root.Q<Label>("HUD-Enemies-Label");
 		}
 
 		private void InstantiateSeedSlots()
 		{
-			var seedsCount = plantManager.plantTypes.Length;
-			
-			_seedSlotButtons = new Button[seedsCount];
-			_seedSlotIcons = new VisualElement[seedsCount];
-			_seedSlotLabels = new Label[seedsCount];
-			_seedSlotTooltips = new VisualElement[seedsCount];
-			
-			for (var index = 0; index < seedsCount; index++)
+			foreach (var plantType in plantManager.plantTypes)
 			{
-				var plantType = plantManager.plantTypes[index];
-				
 				var seedSlotInstance = _seedSlotTemplate.templateSource.Instantiate();
 				var tooltipInstance = _tooltipTemplate.templateSource.Instantiate();
 					
@@ -93,13 +89,12 @@ namespace UI
 				_inventory.Add(seedButton);
 				_tooltips.Add(tooltip);
 
-				_seedSlotButtons[index] = seedButton;
-				_seedSlotIcons[index] = seedIcon;
-				_seedSlotLabels[index] = seedLabel;
-				_seedSlotTooltips[index] = tooltip;
+				_seedSlotButtons.Add(plantType, seedButton);
+				_seedSlotIcons.Add(plantType, seedIcon);
+				_seedSlotLabels.Add(plantType, seedLabel);
+				_seedSlotTooltips.Add(plantType, tooltip);
 			}
 		}
-		
 		
 		private void Reset()
 		{

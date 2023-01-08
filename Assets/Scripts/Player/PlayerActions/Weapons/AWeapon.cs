@@ -8,6 +8,7 @@ namespace Player.PlayerActions.Weapons
     [RequireComponent(typeof(AudioSource))]
     public abstract class AWeapon : MonoBehaviour
     {
+        [SerializeField] private Sprite m_Icon;
         [SerializeField] private float m_Rate;
         [SerializeField] private float m_Damage;
         [SerializeField] private AudioClip m_AttackSound;
@@ -26,9 +27,8 @@ namespace Player.PlayerActions.Weapons
 
             _audioSource = gameObject.AddComponent<AudioSource>();
         }
-        
-        
-        
+
+        public virtual bool HasAmmo => false;
 
         public void Attack()
         {
