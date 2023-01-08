@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using PlantHandling;
 using PlantHandling.PlantType;
+using Player;
 using Player.PlayerActions.Weapons;
 using Player.PlayerActions.Weapons.Implementation.Shooting;
 using UnityEngine;
@@ -13,14 +14,8 @@ namespace UI
 		[SerializeField] private UIHUDElements elements;
 		[SerializeField] private GameState gameState;
 		[SerializeField] private PlantManager plantManager;
-
-		private readonly Dictionary<PlantType, int> _seedsCountByPlantTypes = new ();
-
-		private void Awake()
-		{
-			Initialize();
-		}
-
+		[SerializeField] private PlayerInventory playerInventory;
+		
 		private void Start()
 		{
 			UpdateEnemiesCount();
@@ -48,26 +43,14 @@ namespace UI
 			GameEvents.OnSiloGotHit -= OnSiloGotHit;
 			GameEvents.OnAmmoChanged -= OnAmmoChanged;
 		}
-
-		private void Initialize()
-		{
-			foreach (var plantType in plantManager.plantTypes)
-			{
-				_seedsCountByPlantTypes.Add(plantType, 0);
-			}
-		}
 		
 		private void OnSeedGained(PlantType plantType, bool _)
 		{
-			_seedsCountByPlantTypes[plantType]++;
-
 			UpdateSeedSlots();
 		}
 		
 		private void OnSeedPlanted(PlantType plantType, Vector3 _)
 		{
-			_seedsCountByPlantTypes[plantType]--;
-
 			UpdateSeedSlots();
 		}
 		
@@ -98,11 +81,11 @@ namespace UI
 
 		private void UpdateSeedSlots()
 		{
-			foreach (var seedsCountByPlantType in _seedsCountByPlantTypes)
-			{
-				var plantType = seedsCountByPlantType.Key;
-				var seedCount = seedsCountByPlantType.Value;
 
+			foreach (var plantType in plantManager.plantTypes)
+			{
+				var seedCount = playerInventory.m_Seeds.GetItem(plantType).Count;
+				
 				elements.SeedSlotLabels[plantType].text = $"x{seedCount}";
 			}
 		}

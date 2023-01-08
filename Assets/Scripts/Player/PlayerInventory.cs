@@ -116,7 +116,7 @@ namespace Player
             }
         }
 
-        private CountedItem GetItem(T _item) => m_Items.Find(item => item.Item == _item);
+        public CountedItem GetItem(T _item) => m_Items.Find(item => item.Item == _item);
 
         public bool ConsumeItem(T _item, int _count, Action<T, bool> _event)
         {
