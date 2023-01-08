@@ -232,3 +232,11 @@
     transition-timing-function: ease, ease-out-circ;
     transition-delay: 0s, 0s;
 }
+
+.hud-menu-button:hover {
+    -unity-background-image-tint-color: rgba(191, 191, 191, 255);
+    transition-property: all, -unity-background-image-tint-color;
+    transition-duration: 0s, 300ms;
+    transition-timing-function: ease, ease-out-cubic;
+    transition-delay: 0s, 0s;
+}

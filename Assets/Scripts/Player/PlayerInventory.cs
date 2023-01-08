@@ -13,7 +13,11 @@ namespace Player
         [SerializeField] private PlayerStats m_Stats;
         
         [SerializeField] private Inventory<PlantType> m_Seeds;
-        [SerializeField] private AWeapon m_Weapon;
+
+        [SerializeField] private Transform m_WeaponHolder;
+        [SerializeField] private AWeapon m_FirstWeapon;
+
+        private List<AWeapon> m_Weapons = new();
 
         private int m_CurrentSeed;
 
@@ -27,6 +31,12 @@ namespace Player
             }
         }
 
+        private void Awake()
+        {
+            m_Weapons.Add(m_FirstWeapon);
+            m_Stats.CurrentWeapon = m_FirstWeapon;
+        }
+
         public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed);
 
         public void AddSeed(PlantType _item, int _count)
@@ -36,9 +46,20 @@ namespace Player
 
         public void ChangeWeapon(AWeapon _newWeapon)
         {
-            // TODO: disable old weapon
-            m_Weapon = _newWeapon;
-            GameEvents.OnWeaponChanged?.Invoke(_newWeapon);
+            if (m_Stats.CurrentWeapon != null)
+            {
+                m_Stats.CurrentWeapon.enabled = false;
+            }
+
+            var foundWeapon = m_Weapons.Find(weapon => weapon.GetType() == _newWeapon.GetType());
+            if (foundWeapon == null)
+            {
+                // Use a transform position
+                foundWeapon = Instantiate(_newWeapon, Vector3.zero, Quaternion.identity, m_WeaponHolder);
+            }
+
+            m_Stats.CurrentWeapon = foundWeapon;
+            GameEvents.OnWeaponChanged?.Invoke(foundWeapon);
         }
     }
 
