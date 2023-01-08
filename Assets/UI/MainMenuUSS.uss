@@ -102,6 +102,8 @@
     padding-top: 0;
     padding-bottom: 0;
     color: rgb(66, 59, 44);
+    -unity-text-outline-width: 0.5px;
+    -unity-text-outline-color: rgba(0, 0, 0, 0.35);
 }
 
 .menu-section-back-button {

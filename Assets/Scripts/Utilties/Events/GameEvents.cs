@@ -29,4 +29,6 @@ public static class GameEvents
     public static Action OnWaveEnd;
     public static Action OnGameWin;
     public static Action OnGameLose;
+    public static Action OnPopupOpened;
+    public static Action OnPopupClosed;
 }
