@@ -204,7 +204,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2275962130874659305, guid: 89825a12c8c7ad54cbd21a1a29aafaa1, type: 3}
       propertyPath: m_Name
-      value: Pisol Variant
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 5256675156097196081, guid: 89825a12c8c7ad54cbd21a1a29aafaa1, type: 3}
       propertyPath: m_RootOrder
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5570d1dac963421fa5dab074253caac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 21300000, guid: 5d49ea293a79d594fb7f32d462bc7d63, type: 3}
   m_Rate: 1.5
   m_Damage: 3
   m_AttackSound: {fileID: 0}
