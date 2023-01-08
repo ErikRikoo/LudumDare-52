@@ -11,6 +11,7 @@ namespace Player
         
         public void OnMovement(InputAction.CallbackContext _context)
         {
+            
             m_PlayerStats.PlayerMovement.WantedMovement = _context.ReadValue<Vector2>();
             if (_context.phase is InputActionPhase.Canceled or InputActionPhase.Disabled)
             {

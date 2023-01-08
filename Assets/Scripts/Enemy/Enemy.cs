@@ -275,8 +275,17 @@ namespace Enemy
             GameEvents.OnEnemyKilled?.Invoke();
             InformAboutDeath?.Invoke(gameObject);
             
-            _audioSource.PlayOneShot(m_DeathSound);
             Destroy(gameObject);
+        }
+
+        IEnumerator DeathVFX()
+        {
+            m_Agent.destination = transform.position;
+            m_Agent.stoppingDistance = 0;
+            _audioSource.pitch = Random.Range(0.6f, 1.1f);
+            _audioSource.PlayOneShot(m_DeathSound);
+            yield return new WaitForSeconds(m_DeathSound.length);
+            Die();
         }
 
         public void TakeDamage(float amount)
@@ -284,12 +293,14 @@ namespace Enemy
             Debug.Log("Enemy taking damage");
             currentHealth -= amount;
             
-            _audioSource.pitch = Random.Range(0.6f, 1.1f);
-            _audioSource.PlayOneShot(m_GetHitSound);
-            
             if (currentHealth <= 0)
             {
-                Die();
+                StartCoroutine(DeathVFX());
+            }
+            else
+            {
+                _audioSource.pitch = Random.Range(0.6f, 1.1f);
+                _audioSource.PlayOneShot(m_GetHitSound);
             }
         }
 
