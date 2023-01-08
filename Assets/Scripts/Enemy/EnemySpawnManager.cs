@@ -19,7 +19,9 @@ namespace Enemy
         [ShowInInspector] private int currentWave = 0;
         [SerializeField] private float timeToTextWave = 5f;
 
-        public bool[] podIsSpawned;
+        private Coroutine countdown = null;
+
+        public List<bool> podIsSpawned = new List<bool>();
 
         private void Start()
         {
@@ -42,6 +44,11 @@ namespace Enemy
             return new Vector3(vector2.x, 0, vector2.y);
         }
 
+        // private void Update()
+        // {
+        //     Debug.Log(podIsSpawned.Count);
+        // }
+
 
         private IEnumerator SpawnEnemyPod(SpawnTypeData pod, int index)
         {
@@ -58,23 +65,22 @@ namespace Enemy
     
         private void SpawnAllEnemiesInWave(Wave wave)
         {
-            gameState.waveIsActive = true;
             for (var i = 0; i < wave.waveData.Length; i++)
             {
                 podIsSpawned[i] = false;
                 StartCoroutine(SpawnEnemyPod(wave.waveData[i], i));
                 
             }
+            gameState.waveIsActive = true;
 
         }
     
-        [ContextMenu("Spawn Wave")]
         public void SpawnWave()
         {
-            podIsSpawned = new bool[enemyWaves.waves[currentWave].waveData.Length];
+            podIsSpawned.Clear();
             for (var i = 0; i < enemyWaves.waves[currentWave].waveData.Length; i++)
             {
-                podIsSpawned[i] = false;
+                podIsSpawned.Add(false);
             }
             var waveToSpawn = enemyWaves.waves[currentWave];
             SpawnAllEnemiesInWave(waveToSpawn);
@@ -94,14 +100,25 @@ namespace Enemy
             }
             
             SpawnWave();
-            
+            countdown = null;
+
         }
 
 
         public void CheckWaveStatus()
         {
+            // Debug.Log($"Have all pods been spawned {podIsSpawned.Any(x => x != true)}");
+            // Debug.Log($"Is the way not active {!gameState.waveIsActive}");
+            // Debug.Log($"Is the number of enemies alive not equal zero {gameState.numberOfEnemiesAlive != 0}");
 
-            if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !podIsSpawned.All(x => x)) return;
+
+            var allHaveBeenSpawned = true;
+            foreach (var isSpawned in podIsSpawned)
+            {
+                if (!isSpawned) allHaveBeenSpawned = false;
+            }
+
+            if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !allHaveBeenSpawned) return;
             gameState.waveIsActive = false;
             if (currentWave == enemyWaves.waves.Count)
             {
@@ -112,7 +129,11 @@ namespace Enemy
             {
                 gameState.timeToNextWave = timeToTextWave;
                 GameEvents.OnWaveEnd?.Invoke();
-                StartCoroutine(CountdownToNextWave(timeToTextWave));
+                if (countdown != null)
+                {
+                    StopCoroutine(countdown);
+                }
+                countdown = StartCoroutine(CountdownToNextWave(timeToTextWave));
             }
         }
 
