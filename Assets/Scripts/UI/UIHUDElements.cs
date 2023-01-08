@@ -36,6 +36,7 @@ namespace UI
 		private VisualElement _popupImage;
 		private Label _popupText;
 		private Button _popupCloseButton;
+		private Button _popupGenericButton;
 		
 		private Label _healthLabel;
 		private Label _enemiesLabel;
@@ -57,6 +58,7 @@ namespace UI
 		public VisualElement PopupImage => _popupImage;
 		public Label PopupText => _popupText;
 		public Button PopupCloseButton => _popupCloseButton;
+		public Button PopupGenericButton => _popupGenericButton;
 
 		public Label HealthLabel => _healthLabel;
 		public Label EnemiesLabel => _enemiesLabel;
@@ -90,6 +92,7 @@ namespace UI
 			_popupImage = root.Q<VisualElement>("HUD-Popup-Image");
 			_popupText = root.Q<Label>("HUD-Popup-Text");
 			_popupCloseButton = root.Q<Button>("HUD-Popup-Close-Button");
+			_popupGenericButton = root.Q<Button>("HUD-Popup-Generic-Button");
 			
 			_healthLabel = root.Q<Label>("HUD-Health-Label");
 			_enemiesLabel = root.Q<Label>("HUD-Enemies-Label");

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlantHandling;
 using PlantHandling.PlantType;
 using Player;
@@ -93,30 +94,76 @@ namespace UI
 			elements.PopupCloseButton.clicked -= HidePopup;
 		}
 
-		public void ShowPopup(string title, Sprite image, string text)
+		public void ShowPopup(string title, Sprite image, string text, bool displayCloseButton = true, Action genericButtonAction = null)
 		{
 			elements.PopupTitle.style.display = DisplayStyle.Flex;
 			elements.PopupImage.style.display = DisplayStyle.Flex;
 			elements.PopupText.style.display = DisplayStyle.Flex;
+			elements.PopupCloseButton.style.display =  displayCloseButton 
+				? DisplayStyle.Flex : DisplayStyle.None;
+			elements.PopupGenericButton.style.display = (genericButtonAction == null) 
+				? DisplayStyle.None 
+				: DisplayStyle.Flex;
 			
 			elements.PopupTitle.text = title;
 			elements.PopupImage.style.backgroundImage = new StyleBackground(image);
 			elements.PopupText.text = text;
-			
+
+			if (genericButtonAction != null)
+			{
+				elements.PopupGenericButton.clickable = null;
+				elements.PopupGenericButton.clicked += genericButtonAction;
+			}
+
 			UIAnimationUtils.FadeIn(elements.PopupContainer);
 
 			GameEvents.OnPopupOpened?.Invoke();
 		}
 		
-		public void ShowPopup(Sprite image, string text)
+		public void ShowPopup(string title, string text, bool displayCloseButton = true, Action genericButtonAction = null)
+		{
+			elements.PopupTitle.style.display = DisplayStyle.Flex;
+			elements.PopupImage.style.display = DisplayStyle.None;
+			elements.PopupText.style.display = DisplayStyle.Flex;
+			elements.PopupCloseButton.style.display =  displayCloseButton 
+				? DisplayStyle.Flex : DisplayStyle.None;
+			elements.PopupGenericButton.style.display = (genericButtonAction == null) 
+				? DisplayStyle.None 
+				: DisplayStyle.Flex;
+			
+			elements.PopupTitle.text = title;
+			elements.PopupText.text = text;
+
+			if (genericButtonAction != null)
+			{
+				elements.PopupGenericButton.clickable = null;
+				elements.PopupGenericButton.clicked += genericButtonAction;
+			}
+
+			UIAnimationUtils.FadeIn(elements.PopupContainer);
+
+			GameEvents.OnPopupOpened?.Invoke();
+		}
+		
+		public void ShowPopup(Sprite image, string text, bool displayCloseButton = true, Action genericButtonAction = null)
 		{
 			elements.PopupTitle.style.display = DisplayStyle.None;
 			elements.PopupImage.style.display = DisplayStyle.Flex;
 			elements.PopupText.style.display = DisplayStyle.Flex;
+			elements.PopupCloseButton.style.display =  displayCloseButton 
+				? DisplayStyle.Flex : DisplayStyle.None;
+			elements.PopupGenericButton.style.display = (genericButtonAction == null) 
+				? DisplayStyle.None 
+				: DisplayStyle.Flex;
 			
-			elements.PopupTitle.text = "";
 			elements.PopupImage.style.backgroundImage = new StyleBackground(image);
 			elements.PopupText.text = text;
+			
+			if (genericButtonAction != null)
+			{
+				elements.PopupGenericButton.clickable = null;
+				elements.PopupGenericButton.clicked += genericButtonAction;
+			}
 			
 			UIAnimationUtils.FadeIn(elements.PopupContainer);
 			

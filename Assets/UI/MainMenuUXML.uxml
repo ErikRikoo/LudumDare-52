@@ -7,10 +7,10 @@
             <ui:VisualElement name="Menu-Background" class="menu-background" />
             <ui:VisualElement name="Menu-Logo" class="menu-logo" />
             <ui:VisualElement name="Menu-Buttons" class="menu-buttons">
-                <ui:Button text="Play" display-tooltip-when-elided="true" name="Menu-Play-Button" class="menu-button" />
-                <ui:Button text="Settings" display-tooltip-when-elided="true" name="Menu-Settings-Button" class="menu-button" />
-                <ui:Button text="About" display-tooltip-when-elided="true" name="Menu-About-Button" class="menu-button" />
-                <ui:Button text="Quit" display-tooltip-when-elided="true" name="Menu-Quit-Button" class="menu-button" />
+                <ui:Button text="Play" display-tooltip-when-elided="true" name="Menu-Play-Button" class="primary-button" />
+                <ui:Button text="Settings" display-tooltip-when-elided="true" name="Menu-Settings-Button" class="primary-button" />
+                <ui:Button text="About" display-tooltip-when-elided="true" name="Menu-About-Button" class="primary-button" />
+                <ui:Button text="Quit" display-tooltip-when-elided="true" name="Menu-Quit-Button" class="primary-button" />
             </ui:VisualElement>
             <ui:VisualElement name="Menu-Section-About" picking-mode="Ignore" class="menu-section">
                 <ui:Button display-tooltip-when-elided="true" name="Menu-Section-Back-Button" class="menu-section-back-button secondary-button">

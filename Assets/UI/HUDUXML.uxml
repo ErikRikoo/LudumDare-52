@@ -27,6 +27,7 @@
                 <ui:Label tabindex="-1" text="Title" display-tooltip-when-elided="true" name="HUD-Popup-Title" class="hud-popup-title" />
                 <ui:VisualElement name="HUD-Popup-Image" class="hud-popup-image" />
                 <ui:Label tabindex="-1" text="Text" display-tooltip-when-elided="true" name="HUD-Popup-Text" class="hud-popup-text" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" name="HUD-Popup-Generic-Button" class="primary-button hud-popup-generic-button" />
                 <ui:Button display-tooltip-when-elided="true" name="HUD-Popup-Close-Button" class="hud-popup-close-button secondary-button">
                     <ui:VisualElement name="HUD-Popup-Close-Button-Icon" class="hud-popup-close-button-icon secondary-button-icon" />
                 </ui:Button>

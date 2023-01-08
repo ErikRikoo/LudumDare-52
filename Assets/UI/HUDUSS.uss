@@ -309,3 +309,8 @@
     top: -20px;
     right: -20px;
 }
+
+.hud-popup-generic-button {
+    width: 376px;
+    height: 94px;
+}
