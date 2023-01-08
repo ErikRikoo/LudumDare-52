@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameState
   m_EditorClassIdentifier: 
   silo: {fileID: 0}
-  numberOfEnemiesAlive: 20
+  numberOfEnemiesAlive: 80
   waveIsActive: 0

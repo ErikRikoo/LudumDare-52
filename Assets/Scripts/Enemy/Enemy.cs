@@ -38,7 +38,7 @@ namespace Enemy
 
         }
         
-        protected void OnDrawGizmos()
+        protected void OnDrawGizmosSelected()
         {
             Gizmos.color = gizmoColor;
             Gizmos.DrawWireSphere(transform.position, sphereCollider.radius);
@@ -195,7 +195,7 @@ namespace Enemy
                 if (target && !(Vector3.Distance(transform.position, checkTarget.transform.position) 
                       < Vector3.Distance(transform.position, target.transform.position))) continue;
                 
-                m_Agent.destination = checkTarget.transform.position;
+                m_Agent.destination = checkTarget.GetComponent<Collider>().ClosestPoint(transform.position);
                 target = checkTarget;
                 targetIDamageaeble = checkTarget.GetComponent<IDamageable>();
                 targetIDamageaeble.InformAboutDeath += DetermineTarget;
@@ -208,12 +208,13 @@ namespace Enemy
 
         public void Spawn()
         {
-            target = gameState.silo;
+            var closestPoint = gameState.silo.GetComponent<Collider>().ClosestPoint(transform.position);
+            
             targetIDamageaeble = gameState.silo.GetComponent<IDamageable>();
 
             potentialTargets.Push(target);
 
-            m_Agent.destination = target.transform.position;
+            m_Agent.destination = closestPoint;
             m_Agent.speed = stats.Speed;
             m_Agent.stoppingDistance = stats.Range;
 
