@@ -1132,10 +1132,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyWaves: {fileID: 11400000, guid: 1b06a3c0facc543e392e1443e0ff0ce5, type: 2}
   gameState: {fileID: 11400000, guid: ed9d27f7c55af4b45a5cda05902ca3b1, type: 2}
-  spawnRadius: 60
-  spawnArea: 20
+  spawnRadius: 20
+  spawnArea: 5
   silo: {fileID: 356126559}
   currentWave: 0
+  timeToTextWave: 5
+  podIsSpawned: 
 --- !u!4 &1571292459
 Transform:
   m_ObjectHideFlags: 0

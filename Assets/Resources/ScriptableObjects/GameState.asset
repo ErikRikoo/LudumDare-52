@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: GameState
   m_EditorClassIdentifier: 
   silo: {fileID: 0}
-  numberOfEnemiesAlive: 80
-  waveIsActive: 0
+  defaultSiloHealth: 100
+  numberOfEnemiesAlive: 0
+  waveIsActive: 1
+  timeToNextWave: -0.02

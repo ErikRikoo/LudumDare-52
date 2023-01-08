@@ -86,6 +86,8 @@ namespace Enemy
         private Rigidbody _rigidbody;
         private BoxCollider _collider;
         private SkinnedMeshRenderer _skinnedMeshRenderer;
+        private GameObject visionRange;
+        private GameObject attackRange;
 
         private Coroutine attackLoop = null;
 
@@ -119,7 +121,7 @@ namespace Enemy
             }
             
 
-            var attackRange = new GameObject("AttackRangeGO")
+            attackRange = new GameObject("AttackRangeGO")
             {
                 transform =
                 {
@@ -136,7 +138,7 @@ namespace Enemy
             attackBubbleComponent.gizmoColor = Color.red;
             
             
-            var visionRange = new GameObject("visionRangeGO")
+            visionRange = new GameObject("visionRangeGO")
             {
                 transform =
                 {
@@ -201,7 +203,7 @@ namespace Enemy
 
         private void OnVisionRangeExit(Collider other)
         {
-            if (other.CompareTag("EnemyAttackableObject")) Debug.Log("I am now out of vision range");
+            // if (other.CompareTag("EnemyAttackableObject")) Debug.Log("I am now out of vision range");
         }
         
         
@@ -249,6 +251,7 @@ namespace Enemy
             currentMoveSpeed = stats.Speed;
             
             GameEvents.OnEnemySpawned?.Invoke();
+            gameState.numberOfEnemiesAlive++;
 
         }
 
@@ -284,14 +287,16 @@ namespace Enemy
             {
                 StopCoroutine(attackLoop);
             }
-            GameEvents.OnEnemyKilled?.Invoke();
-            InformAboutDeath?.Invoke(gameObject);
-            
             Destroy(gameObject);
         }
 
         IEnumerator DeathVFX()
         {
+            if (attackLoop != null)
+            {
+                StopCoroutine(attackLoop);
+            }
+            
             m_Agent.destination = transform.position;
             m_Agent.stoppingDistance = 0;
             _audioSource.pitch = Random.Range(0.6f, 1.1f);
@@ -299,6 +304,11 @@ namespace Enemy
             _rigidbody.isKinematic = true;
             _collider.enabled = false;
             m_Animator.SetTrigger("Death");
+            
+            gameState.numberOfEnemiesAlive--;
+            GameEvents.OnEnemyKilled?.Invoke();
+            InformAboutDeath?.Invoke(gameObject);
+
             
             yield return new WaitForSeconds(4);
             Die();
