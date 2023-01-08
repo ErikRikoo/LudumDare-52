@@ -1,5 +1,8 @@
 ﻿
+using Sirenix.OdinInspector;
 using UnityEngine;
+using Utilities;
+using Utilties;
 
 namespace PlantHandling.PlantType
 {
@@ -7,6 +10,11 @@ namespace PlantHandling.PlantType
     // Would it be abstract for some strategy pattern?
     public class APlantType : ScriptableObject
     {
-        
+        [MinMaxSlider(0, 60)]
+        public Vector2 GrowthTimeRange;
+        [HideInInspector]
+        public Vector2Int ShapeSize;
+        [HideInInspector]
+        public bool[] Shape;
     }
 }

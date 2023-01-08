@@ -44,6 +44,8 @@
 # *.iml
 # *.ipr
 
+.vsconfig
+
 # VS Code
 .vscode/
 .vscode/*
