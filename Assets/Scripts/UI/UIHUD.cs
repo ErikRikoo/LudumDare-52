@@ -5,12 +5,14 @@ using PlantHandling.PlantType;
 using Player.PlayerActions.Weapons;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace UI
 {
 	public class UIHUD : MonoBehaviour
 	{
 		[SerializeField] private UIHUDElements elements;
+		[SerializeField] private GameState gameState;
 		[SerializeField] private PlantManager plantManager;
 
 		private readonly Dictionary<PlantType, int> _seedsCountByPlantTypes = new ();
@@ -24,6 +26,7 @@ namespace UI
 		private void Start()
 		{
 			UpdateEnemiesCount();
+			UpdateHealth(gameState.defaultSiloHealth);
 		}
 
 		private void OnEnable()
@@ -33,6 +36,7 @@ namespace UI
 			GameEvents.OnWeaponChanged += OnWeaponChanged;
 			GameEvents.OnEnemySpawned += OnEnemySpawned;
 			GameEvents.OnEnemyKilled += OnEnemyKilled;
+			GameEvents.OnSiloGotHit += OnSiloGotHit;
 		}
 		
 		private void OnDisable()
@@ -42,6 +46,7 @@ namespace UI
 			GameEvents.OnWeaponChanged -= OnWeaponChanged;
 			GameEvents.OnEnemySpawned -= OnEnemySpawned;
 			GameEvents.OnEnemyKilled -= OnEnemyKilled;
+			GameEvents.OnSiloGotHit -= OnSiloGotHit;
 		}
 
 		private void Initialize()
@@ -85,6 +90,11 @@ namespace UI
 			UpdateEnemiesCount();
 		}
 		
+		private void OnSiloGotHit(float value)
+		{
+			UpdateHealth(value);
+		}
+		
 		private void UpdateSeedSlots()
 		{
 			foreach (var seedsCountByPlantType in _seedsCountByPlantTypes)
@@ -98,13 +108,18 @@ namespace UI
 
 		private void UpdateWeaponSlot(AWeapon weapon)
 		{
-			//elements.WeaponSlotIcon = weapon;
-			//elements.WeaponSlotLabel.text = weapon;
+			elements.WeaponSlotIcon.style.backgroundImage = new StyleBackground(weapon.Icon);
+			elements.WeaponSlotLabel.text = (weapon.HasAmmo) ? $"xTODO": "";
 		}
 
 		private void UpdateEnemiesCount()
 		{
 			elements.EnemiesLabel.text = $"{_enemiesCount}";
+		}
+
+		private void UpdateHealth(float value)
+		{
+			elements.HealthLabel.text = $"{value}";
 		}
 	}
 }
