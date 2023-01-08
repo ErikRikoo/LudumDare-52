@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=93d64be278da73b41b8a0ecdeea5bce7&amp;type=3#GlobalUSS" />
+    <Style src="project://database/Assets/UI/MainMenuUSS.uss?fileID=7433441132597879392&amp;guid=6f5cb7dc94453684287cdc2d1d418433&amp;type=3#MainMenuUSS" />
+    <ui:VisualElement name="Menu-Container" class="menu-container">
+        <ui:VisualElement name="Scene-Overlay" class="scene-overlay" />
+        <ui:VisualElement name="Menu" class="menu" style="justify-content: center;">
+            <ui:VisualElement name="Menu-Background" class="menu-background" />
+            <ui:VisualElement name="Menu-Logo" class="menu-logo" />
+            <ui:VisualElement name="Menu-Buttons" class="menu-buttons">
+                <ui:Button text="Play" display-tooltip-when-elided="true" name="Menu-Play-Button" class="menu-button" />
+                <ui:Button text="Settings" display-tooltip-when-elided="true" name="Menu-Settings-Button" class="menu-button" />
+                <ui:Button text="About" display-tooltip-when-elided="true" name="Menu-About-Button" class="menu-button" />
+                <ui:Button text="Quit" display-tooltip-when-elided="true" name="Menu-Quit-Button" class="menu-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
