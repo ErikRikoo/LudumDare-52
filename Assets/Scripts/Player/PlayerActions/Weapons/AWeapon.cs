@@ -12,7 +12,9 @@ namespace Player.PlayerActions.Weapons
         [SerializeField] private float m_Damage;
         [SerializeField] private AudioClip m_AttackSound;
         [SerializeField] private AudioClip m_HitSound;
-
+        [SerializeField] private bool m_Piercing;
+        public bool Piercing => m_Piercing;
+        
         private AudioSource _audioSource;
         
 

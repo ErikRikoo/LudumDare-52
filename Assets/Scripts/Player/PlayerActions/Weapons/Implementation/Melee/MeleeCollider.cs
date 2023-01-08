@@ -7,8 +7,10 @@ namespace Player.PlayerActions.Weapons.Implementation
     [RequireComponent(typeof(Collider))]
     public class MeleeCollider : MonoBehaviour
     {
+        [SerializeField]
         private AWeapon m_CurrentWeapon;
         private Collider m_Collider;
+        
 
         private void Awake()
         {
@@ -39,6 +41,7 @@ namespace Player.PlayerActions.Weapons.Implementation
             if (other.TryGetComponent<IDamageable>(out var damageable))
             {
                 m_CurrentWeapon?.ApplyDamage(damageable);
+                if (m_CurrentWeapon && !m_CurrentWeapon.Piercing) Disable();
             }
         }
     }
