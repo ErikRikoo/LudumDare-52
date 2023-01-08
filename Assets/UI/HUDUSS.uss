@@ -9,8 +9,8 @@
     position: absolute;
     bottom: 40px;
     flex-direction: row;
-    padding-left: 670px;
     align-items: flex-end;
+    left: 670px;
 }
 
 .hud-weapon-slot {
@@ -193,8 +193,7 @@
 .hud-tooltips {
     position: absolute;
     bottom: 150px;
-    width: 830px;
-    left: 50%;
+    left: 840px;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -208,6 +207,7 @@
     transition-duration: 0s, 300ms;
     transition-timing-function: ease, ease-out-circ;
     transition-delay: 0s, 0s;
+    margin-right: -24px;
 }
 
 .hud-tooltip-label {
@@ -218,14 +218,14 @@
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
-    padding-bottom: 18px;
-    font-size: 25px;
+    padding-bottom: 20px;
+    font-size: 22px;
     color: rgb(255, 255, 255);
     -unity-text-outline-width: 1px;
     -unity-text-outline-color: rgba(0, 0, 0, 0.35);
     -unity-text-align: middle-center;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
     white-space: normal;
     transition-property: all, opacity;
     transition-duration: 0s, 300ms;
@@ -234,7 +234,7 @@
 }
 
 .hud-menu-button:hover {
-    -unity-background-image-tint-color: rgba(191, 191, 191, 255);
+    -unity-background-image-tint-color: rgb(191, 191, 191);
     transition-property: all, -unity-background-image-tint-color;
     transition-duration: 0s, 300ms;
     transition-timing-function: ease, ease-out-cubic;

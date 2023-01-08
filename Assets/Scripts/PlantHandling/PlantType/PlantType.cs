@@ -27,7 +27,7 @@ namespace PlantHandling.PlantType
         public Vector2Int ShapeSize;
         [HideInInspector]
         public bool[] Shape;        
-        public string ToolTip => $"{ItemName} Growth Time: {GrowthTimeRange.x} - {GrowthTimeRange.y} seconds";
+        public string ToolTip => $"{ItemName}\nGrowth:\n{GrowthTimeRange.x}s - {GrowthTimeRange.y}s";
 
         public bool ShapeAt(int x, int y)
         {
