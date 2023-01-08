@@ -8,9 +8,9 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
     public abstract class AShootingWeapon : AWeapon
     {
         [SerializeField] private int m_Ammo;
-        [SerializeField] private int m_AmmoPerShoot;
+        [SerializeField] protected int m_AmmoPerShoot;
         [SerializeField] private ParticleSystem[] m_ShootingEffects;
-        [SerializeField] private Transform m_ShootPosition;
+        [SerializeField] protected Transform m_ShootPosition;
 
         protected Ray RayFromShootPosition => new Ray(m_ShootPosition.position, m_ShootPosition.forward);
         
