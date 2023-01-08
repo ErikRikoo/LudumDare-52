@@ -206,10 +206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728f0f8f04a44c50b442b45b15201882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Stats: {fileID: 0}
+  m_Stats: {fileID: 405276241}
   m_Seeds:
     m_MaxItemCount: 0
-  m_Weapon: {fileID: 0}
+  m_WeaponHolder: {fileID: 1446430921}
+  m_FirstWeapon: {fileID: 6212035694545999813}
 --- !u!114 &2143342367
 MonoBehaviour:
   m_ObjectHideFlags: 0
