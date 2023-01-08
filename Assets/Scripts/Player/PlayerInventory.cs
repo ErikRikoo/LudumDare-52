@@ -37,6 +37,7 @@ namespace Player
             set
             {
                 m_CurrentSeed = value;
+                m_CurrentSeed %= m_Seeds.Count;
                 GameEvents.OnCurrentSeedChanged?.Invoke(m_CurrentSeed);
             }
         }
@@ -53,7 +54,7 @@ namespace Player
             CurrentWeapon = m_Weapons[0];
         }
 
-        public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed);
+        public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed).Item;
 
         public void AddSeed(PlantType _item, int _count)
         {
@@ -82,7 +83,7 @@ namespace Player
     class Inventory<T>
     where T : InventoryItem
     {
-        class CountedItem
+        public class CountedItem
         {
             public T Item;
             public int Count;
@@ -91,6 +92,8 @@ namespace Player
         [SerializeField] private int m_MaxItemCount;
 
         private List<CountedItem> m_Items = new();
+
+        public int Count => m_Items.Count;
         
 
         public void AddItem(T _item, int _count, Action<T, bool> _event)
@@ -129,9 +132,9 @@ namespace Player
             return true;
         }
 
-        public T Get(int currentSeed)
+        public CountedItem Get(int currentSeed)
         {
-            return m_Items[currentSeed].Item;
+            return m_Items[currentSeed];
         }
     }
     

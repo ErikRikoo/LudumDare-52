@@ -61,6 +61,7 @@ namespace Enemy
         [SerializeField] private AudioClip m_AttackSound;
         [SerializeField] private AudioClip m_FootstepSound;
         [SerializeField] private ParticleSystem m_HitVFX;
+        [SerializeField] private GameObject m_DeathVFX;
 
         [Header("Animations")] [SerializeField]
         private Animator m_Animator;
@@ -311,6 +312,7 @@ namespace Enemy
 
             
             yield return new WaitForSeconds(4);
+            Instantiate(m_DeathVFX, transform.position, Quaternion.Euler(-90, 0, 0));
             Die();
         }
 

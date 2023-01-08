@@ -14,7 +14,7 @@ namespace PlantHandling
     {
         public float cellSize;
         public PlantType.PlantType[] plantTypes;
-        public List<LandPlot> LandPlots;
+        public List<LandPlot> landPlots;
 
         private class PlantedSeed
         {
@@ -77,7 +77,7 @@ namespace PlantHandling
             Rect rect;
             public Vector2Int size;
             Dictionary<System.Guid, PlantedSeed> plantedSeeds;
-            LandPlotSlot[] slots;
+            public LandPlotSlot[] slots;
 
             public LandPlot(Vector2Int size, Rect rect)
             {
@@ -97,18 +97,47 @@ namespace PlantHandling
                 return rect.Overlaps(other);
             }
 
-            
+            public bool GetSlotCoordinate(Vector2 position, float cellSize, out Vector2Int coord)
+            {
+                if (!this.rect.Contains(position))
+                {
+                    coord = Vector2Int.zero;
+                    return false;
+                }
+                var localPosition = position - this.rect.position;
+                coord = (localPosition / cellSize).FloorToInt();
+                return true;
+            }
 
-            public bool GetPossiblePlantPlacement(Vector2Int slotPosition, PlantType.PlantType plant, out Vector2Int[] usedSlots)
+            public bool PlantSeed(Vector2Int slotCoord, PlantType.PlantType plant, out Vector2Int[] usedSlots)
+            {
+                if (!GetPossiblePlantPlacement(slotCoord, plant, out usedSlots)) return false;
+                var plantGuid = System.Guid.NewGuid();
+                var usedIndices = new List<int>();
+                foreach (var coord in usedSlots)
+                {
+                    var index = coord.x + coord.y * this.size.x;
+                    usedIndices.Add(index);
+                }
+                var seed = new PlantedSeed(plant, usedIndices.ToArray(), Time.time);
+                this.plantedSeeds.Add(plantGuid, seed);
+                foreach (var index in usedIndices)
+                {
+                    this.slots[index].SetPlanted(plantGuid);
+                }
+                return true;
+            }
+
+            public bool GetPossiblePlantPlacement(Vector2Int slotCoord, PlantType.PlantType plant, out Vector2Int[] usedSlots)
             {
                 //Check if slot position is valid
-                if (slotPosition.x < 0 || slotPosition.y < 0 || slotPosition.x >= size.x || slotPosition.y >= size.y)
+                if (slotCoord.x < 0 || slotCoord.y < 0 || slotCoord.x >= size.x || slotCoord.y >= size.y)
                 {
                     usedSlots = new Vector2Int[0];
                     return false;
                 }
                 //Check if slot position is available
-                var slotIndex = slotPosition.x + slotPosition.y * this.size.x;
+                var slotIndex = slotCoord.x + slotCoord.y * this.size.x;
                 if (!this.slots[slotIndex].IsReady())
                 {
                     usedSlots = new Vector2Int[0];
@@ -119,14 +148,14 @@ namespace PlantHandling
                 {
                     for (int j = 0; j < plant.ShapeSize.y; j++)
                     {
-                        var startPosition = slotPosition - new Vector2Int(i, j);
+                        var startPosition = slotCoord - new Vector2Int(i, j);
                         if (CheckPlantFit(startPosition, plant, false, out var uSlots))
                         {
                             usedSlots = uSlots;
                             return true;
                         }
-                        startPosition = slotPosition - new Vector2Int(j, i);
-                        if (CheckPlantFit(startPosition, plant, false, out var uSlotsRev))
+                        startPosition = slotCoord - new Vector2Int(j, i);
+                        if (CheckPlantFit(startPosition, plant, true, out var uSlotsRev))
                         {
                             usedSlots = uSlotsRev;
                             return true;
@@ -165,15 +194,13 @@ namespace PlantHandling
                 }
                 usedSlots = uSlots.ToArray();
                 return true;
-
-
             }
         }
 
         public Vector2[] TransformSlotCoordinatesToPositions(Vector2Int[] slotCoords, int landPlotIndex)
         {
             var positions = new List<Vector2>();
-            var landPlot = this.LandPlots[landPlotIndex];
+            var landPlot = this.landPlots[landPlotIndex];
             var startPosition = landPlot.Rect.position + new Vector2(this.cellSize, this.cellSize) * 0.5f;
             foreach (var coord in slotCoords)
             {
@@ -229,7 +256,32 @@ namespace PlantHandling
                 }
             }
             //Debug.Log("Iter count : " + iterationCount + " | Size change count : " + sizeChangeCount);
-            this.LandPlots = landPlots;
+            this.landPlots = landPlots;
+        }
+
+        public bool GetLandPlotAtPosition(Vector2 position, out int landPlotIndex)
+        {
+            for (int i = 0; i < this.landPlots.Count; i++)
+            {
+                var plot = this.landPlots[i];
+                if (plot.Rect.Contains(position))
+                {
+                    landPlotIndex = i;
+                    return true;
+                }
+            }
+            landPlotIndex = -1;
+            return false;
+        }
+
+        public bool GetLandPlotAndSlotAt(Vector2 position, out int landPlotIndex, out Vector2Int slotCoord)
+        {
+            if (!GetLandPlotAtPosition(position, out landPlotIndex))
+            {
+                slotCoord = Vector2Int.zero;
+                return false;
+            }
+            return landPlots[landPlotIndex].GetSlotCoordinate(position, this.cellSize, out slotCoord);
         }
 
         public void Initialize(int landPlotCount, Vector2 radiusRange, Vector2Int minSize, Vector2Int maxSize, float landPlotPadding)

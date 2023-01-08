@@ -1,0 +1,16 @@
+﻿{
+    "name": "ld52_player_harvest",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a702007b1447d7d4dbb10e029f1815eb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
