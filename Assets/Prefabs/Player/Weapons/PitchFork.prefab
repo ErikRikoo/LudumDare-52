@@ -90,7 +90,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7658547837206106568, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
       propertyPath: m_Name
-      value: PitchFork Variant
+      value: PitchFork
       objectReference: {fileID: 0}
     - target: {fileID: 7658547837206106569, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
       propertyPath: m_RootOrder
@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7658547837206106572, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 115d8926254ac2449bc266abda0e2440, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7658547837206106569, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}

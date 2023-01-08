@@ -30,6 +30,11 @@
 
 .hud-weapon-slot-icon {
     position: absolute;
+    width: 110%;
+    height: 110%;
+    -unity-background-scale-mode: scale-and-crop;
+    bottom: 18px;
+    left: 20px;
 }
 
 .hud-weapon-slot-label {
@@ -91,6 +96,11 @@
 
 .hud-seed-slot-icon {
     position: absolute;
+    width: 110%;
+    height: 110%;
+    -unity-background-scale-mode: scale-and-crop;
+    bottom: 18px;
+    left: 20px;
 }
 
 .hud-seed-slot-label {
@@ -219,9 +229,9 @@
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 20px;
-    font-size: 22px;
-    color: rgb(255, 255, 255);
-    -unity-text-outline-width: 1px;
+    font-size: 25px;
+    color: rgb(66, 59, 44);
+    -unity-text-outline-width: 0.5px;
     -unity-text-outline-color: rgba(0, 0, 0, 0.35);
     -unity-text-align: middle-center;
     padding-right: 15px;
