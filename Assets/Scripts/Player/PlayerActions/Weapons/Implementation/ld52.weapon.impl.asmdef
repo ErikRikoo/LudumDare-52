@@ -1,0 +1,17 @@
+{
+    "name": "ld52.weapon.impl",
+    "rootNamespace": "",
+    "references": [
+        "GUID:db5bdaeccd77cdc4a8c12ae2726aa1a1",
+        "GUID:0aca079b03b1949b0897dcb91243999b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

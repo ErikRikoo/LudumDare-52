@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b4cfd28f434aa89f1b8b21c1f34489, type: 3}
   m_Name: S_Melee
   m_EditorClassIdentifier: 
-  GrowthTimeRange: {x: 5, y: 15}
+  GrowthTimeRange: {x: 5, y: 10}
   ShapeSize: {x: 1, y: 1}
   Shape: 01

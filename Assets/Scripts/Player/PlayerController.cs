@@ -1,36 +1,31 @@
-﻿using UnityEngine;
+﻿using Player.PlayerActions;
+using Player.PlayerActions.Weapons;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private PlayerMovement m_PlayerMovement;
-
+        [SerializeField] private PlayerStats m_PlayerStats;
+        
         public void OnMovement(InputAction.CallbackContext _context)
         {
-            Debug.Log("On Movemen called");
-            m_PlayerMovement.WantedMovement = _context.ReadValue<Vector2>();
+            m_PlayerStats.PlayerMovement.WantedMovement = _context.ReadValue<Vector2>();
             if (_context.phase is InputActionPhase.Canceled or InputActionPhase.Disabled)
             {
-                m_PlayerMovement.WantedMovement = Vector2.zero;
+                m_PlayerStats.PlayerMovement.WantedMovement = Vector2.zero;
             }
-        }
-
-        // TODO: Do something else for mouse
-        public void OnControllerAimChanged(InputAction.CallbackContext _context)
-        {
-            
         }
 
         public void OnShoot(InputAction.CallbackContext _context)
         {
-            
+            m_PlayerStats.CurrentWeapon.Attack();
         }
 
         public void OnPlanting(InputAction.CallbackContext _context)
         {
-            
+            m_PlayerStats.PlantingBehavior.PlantSeed();
         }
     }
 }
