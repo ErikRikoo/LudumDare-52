@@ -664,7 +664,7 @@ PrefabInstance:
     - target: {fileID: 7200053909593374898, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_AttackSound
       value: 
-      objectReference: {fileID: 8300000, guid: 2871cdbcd81a541df9600130720dad88, type: 3}
+      objectReference: {fileID: 8300000, guid: fad0b40a103b94181bba042bef1f31c5, type: 3}
     - target: {fileID: 7200053909593374898, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: attackDuration
       value: 0.1
@@ -792,6 +792,10 @@ PrefabInstance:
     - target: {fileID: 8379582087709963369, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.130224
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644432149215531258, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8755552124870371517, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
