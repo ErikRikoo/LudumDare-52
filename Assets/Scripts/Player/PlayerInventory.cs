@@ -12,7 +12,7 @@ namespace Player
     {
         [SerializeField] private PlayerStats m_Stats;
         
-        [SerializeField] private Inventory<PlantType> m_Seeds;
+        [SerializeField] public Inventory<PlantType> m_Seeds;
 
         [SerializeField] private Transform m_WeaponHolder;
         [SerializeField] private AWeapon m_FirstWeapon;
@@ -80,7 +80,7 @@ namespace Player
     }
 
     [Serializable]
-    class Inventory<T>
+    public class Inventory<T>
     where T : InventoryItem
     {
         public class CountedItem
