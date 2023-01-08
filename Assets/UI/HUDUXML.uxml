@@ -18,6 +18,9 @@
             <ui:Label tabindex="-1" text="100" display-tooltip-when-elided="true" name="HUD-Health-Label" class="hud-health-label" />
         </ui:VisualElement>
         <ui:VisualElement name="HUD-Tooltips" class="hud-tooltips" />
+        <ui:VisualElement name="HUD-Enemies" class="hud-enemies">
+            <ui:Label tabindex="-1" text="20" display-tooltip-when-elided="true" name="HUD-Enemies-Label" class="hud-enemies-label" />
+        </ui:VisualElement>
     </ui:VisualElement>
     <ui:Instance template="HUDSeedSlotTemplate" name="HUD-Seed-Slot-Template" style="display: none;" />
     <ui:Instance template="HUDTooltipTemplate" name="HUD-Tooltip-Template" style="display: none;" />

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8805150910582437000}
   - component: {fileID: 8137245537293269427}
   - component: {fileID: -3869338009428327354}
+  - component: {fileID: 886660137899050273}
   m_Layer: 5
   m_Name: HUDUIDocument
   m_TagString: Untagged
@@ -62,4 +63,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 8137245537293269427}
+  plantManager: {fileID: 11400000, guid: b6888fbabc180a44a9eda5113635519a, type: 2}
+--- !u!114 &886660137899050273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159934733491436630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1a53620a04e8f947532364dd02f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements: {fileID: -3869338009428327354}
   plantManager: {fileID: 11400000, guid: b6888fbabc180a44a9eda5113635519a, type: 2}
