@@ -66,8 +66,6 @@ namespace UI
 
 		private void InstantiateSeedSlots()
 		{
-			var seedsCount = plantManager.plantTypes.Length;
-
 			foreach (var plantType in plantManager.plantTypes)
 			{
 				var seedSlotInstance = _seedSlotTemplate.templateSource.Instantiate();
