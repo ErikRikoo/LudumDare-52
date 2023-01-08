@@ -328,11 +328,7 @@ namespace Enemy
             {
                 StartCoroutine(DeathVFX());
             }
-            else
-            {
-                // _audioSource.pitch = Random.Range(0.6f, 1.1f);
-                // _audioSource.PlayOneShot(m_GetHitSound);
-            }
+
         }
 
     }

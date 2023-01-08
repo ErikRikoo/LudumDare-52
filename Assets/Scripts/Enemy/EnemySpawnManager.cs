@@ -105,6 +105,7 @@ namespace Enemy
             gameState.waveIsActive = false;
             if (currentWave == enemyWaves.waves.Count)
             {
+                Debug.Log("You win");
                 GameEvents.OnGameWin?.Invoke();
             }
             else
