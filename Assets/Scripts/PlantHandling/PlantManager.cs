@@ -2,7 +2,13 @@
 //just writing this to get the basic functionality working
 using UnityEngine;
 namespace PlantHandling{
-	public class PlantManager: ScriptableObject{
-		
-	}
+    [CreateAssetMenu(fileName = "Plant Manager", menuName = "LD 52/Plants/Manager", order = 0)]
+    public class PlantManager: ScriptableObject{
+        public float cellSize;
+        private class LandPlot
+        {
+            Vector2 position;
+            Vector2Int size;
+        }
+    }
 }

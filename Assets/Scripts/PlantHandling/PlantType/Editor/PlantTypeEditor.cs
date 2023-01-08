@@ -5,14 +5,14 @@ using Sirenix.OdinInspector;
 
 namespace PlantHandling.PlantType.Editor
 {
-	[CustomEditor(typeof(APlantType))]
-	public class PlantType : UnityEditor.Editor
+	[CustomEditor(typeof(PlantType))]
+	public class PlantTypeEditor : UnityEditor.Editor
 	{
 		private GUIStyle _emptyStyle;
 		private GUIStyle _hoverStyle;
 		private GUIStyle _filledStyle;
 		private Vector2Int _shapeSize;
-		private APlantType _plantTarget;
+		private PlantType _plantTarget;
 
 		private void ShapeSizeUI()
 		{
@@ -111,7 +111,7 @@ namespace PlantHandling.PlantType.Editor
 		public override void OnInspectorGUI()
 		{
 			base.OnInspectorGUI();
-			var plant = target as APlantType;
+			var plant = target as PlantType;
 			if (plant == null) return;
 			_plantTarget = plant;
 			if (_plantTarget.Shape == null || _plantTarget.ShapeSize.x < 1 || _plantTarget.ShapeSize.y < 1 || _plantTarget.Shape.Length != _plantTarget.ShapeSize.x * _plantTarget.ShapeSize.y)
