@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b4cfd28f434aa89f1b8b21c1f34489, type: 3}
   m_Name: S_Shotgun
   m_EditorClassIdentifier: 
+  m_Icon: {fileID: 0}
+  m_ItemName: Shotgun
+  m_MaxCount: 1
+  Variety: 2
   GrowthTimeRange: {x: 15, y: 25}
   ShapeSize: {x: 2, y: 2}
   Shape: 01010100

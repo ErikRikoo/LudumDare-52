@@ -384,11 +384,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlantManager: {fileID: 11400000, guid: b6888fbabc180a44a9eda5113635519a, type: 2}
-  landPlotPadding: 1
+  landPlotPadding: 0.5
   landPlotMaxCount: 20
-  landPlotGenerationRange: {x: 3, y: 15}
+  landPlotGenerationRange: {x: 2, y: 15}
   landPlotMinSize: {x: 4, y: 4}
   landPlotMaxSize: {x: 7, y: 7}
+  _debugMaterial: {fileID: 2100000, guid: d8b52dedb70e4724bbc8980b013ae4b0, type: 2}
 --- !u!1001 &1353043678
 PrefabInstance:
   m_ObjectHideFlags: 0
