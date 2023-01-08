@@ -54,7 +54,7 @@ namespace Player
             CurrentWeapon = m_Weapons[0];
         }
 
-        public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed);
+        public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed).Item;
 
         public void AddSeed(PlantType _item, int _count)
         {
@@ -83,7 +83,7 @@ namespace Player
     class Inventory<T>
     where T : InventoryItem
     {
-        class CountedItem
+        public class CountedItem
         {
             public T Item;
             public int Count;
@@ -132,9 +132,9 @@ namespace Player
             return true;
         }
 
-        public T Get(int currentSeed)
+        public CountedItem Get(int currentSeed)
         {
-            return m_Items[currentSeed].Item;
+            return m_Items[currentSeed];
         }
     }
     
