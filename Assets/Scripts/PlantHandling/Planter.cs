@@ -120,7 +120,7 @@ namespace PlantHandling
                 if (plantType >= 0 && plantType < PlantManager.plantTypes.Length)
                 {
                     var plant = PlantManager.plantTypes[this.plantType];
-                    if (Input.GetMouseButtonUp(0))
+                    if (Input.GetMouseButtonUp(1))
                     {
                         Debug.Log("Hey mouse up");
                         if (landPlot.PlantSeed(slotCoord, plant, out var usedSlots))
