@@ -16,7 +16,7 @@ public static class GameEvents
     // TODO use a named tuple
     public static Action<InventoryItem, int> OnPlayerGainedItem;
     public static Action OnPlayerGainedAllItems;
-    public static Action<APlantType, Vector3> OnSeedPlanted;
+    public static Action<PlantType, Vector3> OnSeedPlanted;
     public static Action<InventoryItem, bool> OnSeedGained;
     public static Action<int> OnCurrentSeedChanged;
     public static Action<AWeapon> OnWeaponChanged;
