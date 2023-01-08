@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using General;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -59,6 +60,7 @@ namespace Enemy
         [SerializeField] private AudioClip m_DeathSound;
         [SerializeField] private AudioClip m_AttackSound;
         [SerializeField] private AudioClip m_FootstepSound;
+        [SerializeField] private ParticleSystem m_HitVFX;
 
         [Header("Animations")] [SerializeField]
         private Animator m_Animator;
@@ -83,6 +85,7 @@ namespace Enemy
         private AudioSource _audioSource;
         private Rigidbody _rigidbody;
         private BoxCollider _collider;
+        private SkinnedMeshRenderer _skinnedMeshRenderer;
 
         private Coroutine attackLoop = null;
 
@@ -148,8 +151,8 @@ namespace Enemy
             visionBubbleComponent.onTriggerEnterEvent += OnVisionRangeEnter;
             visionBubbleComponent.onTriggerExitEvent += OnVisionRangeExit;
             visionBubbleComponent.gizmoColor = Color.green;
-            
 
+            _skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         }
 
         private void OnAttackRangeEnter(Collider other)
@@ -304,7 +307,11 @@ namespace Enemy
         public void TakeDamage(float amount)
         {
             currentHealth -= amount;
-            
+
+            _skinnedMeshRenderer.material.DOFloat(0, "_HitEffect", 0.2f).From(1);
+            m_HitVFX.Play();
+            DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1, 0.1f).From(0.1f);
+
             if (currentHealth <= 0)
             {
                 StartCoroutine(DeathVFX());
