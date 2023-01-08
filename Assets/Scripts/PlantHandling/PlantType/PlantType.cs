@@ -16,5 +16,10 @@ namespace PlantHandling.PlantType
         public Vector2Int ShapeSize;
         [HideInInspector]
         public bool[] Shape;
+
+        public bool ShapeAt(int x, int y)
+        {
+            return Shape[x + y * ShapeSize.x];
+        }
     }
 }

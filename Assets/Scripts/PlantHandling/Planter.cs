@@ -28,6 +28,7 @@ namespace PlantHandling
         //Debug
         [SerializeField]
         private Material _debugMaterial;
+        private Rect lastPlotRect;
 
         // Start is called before the first frame update
         void Start()
@@ -81,7 +82,16 @@ namespace PlantHandling
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             _groundPlane.Raycast(ray, out var distance);
             var hitPoint = ray.GetPoint(distance);
+            var planePoint = hitPoint.XZ();
 
+            lastPlotRect = new Rect();
+            foreach (var plot in PlantManager.LandPlots)
+            {
+                if (plot.Rect.Contains(planePoint))
+                {
+                    lastPlotRect = plot.Rect;
+                }
+            }
             //Debuging
             _lastMousePosition = hitPoint + Vector3.up * 0.05f;
         }
@@ -91,13 +101,19 @@ namespace PlantHandling
             Gizmos.DrawWireSphere(_lastMousePosition, 0.5f);
             Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.x);
             Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.y);
+
+            var positionCenter = lastPlotRect.center.X0Y() + new Vector3(0, 0.2f, 0);
+            for(int i = 0; i < 9; i++)
+            {
+                Gizmos.DrawWireCube(positionCenter, lastPlotRect.size.X0Y() * (1.0f - (float)i * 0.1f));
+            }
             /*if (_initialized)
             {
                 foreach (var landPlot in PlantManager.LandPlots)
                 {
                     Gizmos.DrawWireCube(landPlot.Rect.center.X0Y(), landPlot.Rect.size.X0Y());
                 }
-            }*/ 
+            }*/
         }
     }
 }
