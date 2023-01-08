@@ -1,4 +1,5 @@
-﻿using Player.PlayerActions;
+﻿using System.Collections;
+using Player.PlayerActions;
 using Player.PlayerActions.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,9 +20,37 @@ namespace Player
             }
         }
 
+        private Coroutine m_ShootingCoroutine;
         public void OnShoot(InputAction.CallbackContext _context)
         {
-            m_PlayerStats.CurrentWeapon.Attack();
+            if (_context.phase is InputActionPhase.Started or InputActionPhase.Performed)
+            {
+                if (m_ShootingCoroutine == null)
+                {
+                    m_ShootingCoroutine = StartCoroutine(c_Shoot());
+                }
+            }
+            else
+            {
+                if (m_ShootingCoroutine != null)
+                {
+                    StopCoroutine(m_ShootingCoroutine);
+                }
+                m_ShootingCoroutine = null;
+            }
+        }
+
+        private IEnumerator c_Shoot()
+        {
+            while (true)
+            {
+                float remainingTime = m_PlayerStats.CurrentWeapon.RemainingTime;
+                if (remainingTime > 0)
+                {
+                    yield return new WaitForSeconds(remainingTime);
+                }
+                m_PlayerStats.CurrentWeapon.Attack();
+            }
         }
 
         public void OnPlanting(InputAction.CallbackContext _context)
