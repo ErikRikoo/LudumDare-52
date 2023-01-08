@@ -19,6 +19,16 @@ namespace Player
 
         private List<AWeapon> m_Weapons = new();
 
+        private AWeapon CurrentWeapon
+        {
+            get => m_Stats.CurrentWeapon;
+            set
+            {
+                m_Stats.CurrentWeapon = m_FirstWeapon;
+                GameEvents.OnWeaponChanged?.Invoke(value);
+            }
+        }
+
         private int m_CurrentSeed;
 
         public int CurrentSeed
@@ -34,7 +44,13 @@ namespace Player
         private void Awake()
         {
             m_Weapons.Add(m_FirstWeapon);
-            m_Stats.CurrentWeapon = m_FirstWeapon;
+            CurrentWeapon = m_FirstWeapon;
+            GameEvents.OnWeaponAmmoEntirelyConsumed += OnWeaponConsumed;
+        }
+
+        private void OnWeaponConsumed()
+        {
+            CurrentWeapon = m_Weapons[0];
         }
 
         public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed);
@@ -46,9 +62,9 @@ namespace Player
 
         public void ChangeWeapon(AWeapon _newWeapon)
         {
-            if (m_Stats.CurrentWeapon != null)
+            if (CurrentWeapon != null)
             {
-                m_Stats.CurrentWeapon.enabled = false;
+                CurrentWeapon.enabled = false;
             }
 
             var foundWeapon = m_Weapons.Find(weapon => weapon.GetType() == _newWeapon.GetType());
@@ -58,8 +74,7 @@ namespace Player
                 foundWeapon = Instantiate(_newWeapon, Vector3.zero, Quaternion.identity, m_WeaponHolder);
             }
 
-            m_Stats.CurrentWeapon = foundWeapon;
-            GameEvents.OnWeaponChanged?.Invoke(foundWeapon);
+            CurrentWeapon = foundWeapon;
         }
     }
 

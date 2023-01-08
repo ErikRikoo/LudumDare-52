@@ -20,7 +20,6 @@ namespace Player.PlayerActions.Weapons
         public bool Piercing => m_Piercing;
         
         private AudioSource _audioSource;
-        
 
         private float m_LastAttackTime;
 
