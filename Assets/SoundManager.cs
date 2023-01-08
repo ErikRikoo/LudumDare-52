@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class SoundManager : MonoBehaviour
 {
 
@@ -15,6 +18,8 @@ public class SoundManager : MonoBehaviour
     public float HighPitchRange = 1.05f;
     // Singleton instance.
     public static SoundManager Instance = null;
+
+    [Range(0, 1f)] [SerializeField] private float musicVolume = 0.067f;
 	
     // Initialize the singleton instance.
     private void Awake()
@@ -37,6 +42,13 @@ public class SoundManager : MonoBehaviour
         MusicSource = gameObject.AddComponent<AudioSource>();
         
     }
+
+    private void Start()
+    {
+        MusicSource.volume = musicVolume;
+        PlayMusicLooping(m_BackgroundMusic[0]);
+    }
+
     // Play a single clip through the sound effects source.
     public void Play(AudioClip clip)
     {

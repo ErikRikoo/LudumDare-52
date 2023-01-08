@@ -419,11 +419,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1187576988687122269, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000015174368
+      value: 0.000000015174368
       objectReference: {fileID: 0}
     - target: {fileID: 1187576988687122269, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000008111606
+      value: -0.000000008111606
       objectReference: {fileID: 0}
     - target: {fileID: 1994115291378102997, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -695,11 +695,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7200053911029579754, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000015174368
+      value: 0.000000015174368
       objectReference: {fileID: 0}
     - target: {fileID: 7200053911029579754, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000008111606
+      value: -0.000000008111606
       objectReference: {fileID: 0}
     - target: {fileID: 7367841724794462233, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1024,10 +1024,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163b0590efa7a4a27a2f8161b0a24d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BackgroundMusic: []
+  m_BackgroundMusic:
+  - {fileID: 8300000, guid: 30289c5c551474a5c8d26ca7ac34f511, type: 3}
   m_AmbientSounds: []
   LowPitchRange: 0.95
   HighPitchRange: 1.05
+  musicVolume: 0.067
 --- !u!4 &1228821565
 Transform:
   m_ObjectHideFlags: 0
