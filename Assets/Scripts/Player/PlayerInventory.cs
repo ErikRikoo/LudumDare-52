@@ -45,6 +45,12 @@ namespace Player
         {
             m_Weapons.Add(m_FirstWeapon);
             CurrentWeapon = m_FirstWeapon;
+            GameEvents.OnWeaponAmmoEntirelyConsumed += OnWeaponConsumed;
+        }
+
+        private void OnWeaponConsumed()
+        {
+            CurrentWeapon = m_Weapons[0];
         }
 
         public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed);
