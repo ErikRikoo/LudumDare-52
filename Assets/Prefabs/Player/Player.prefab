@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 2143342366}
   - component: {fileID: 2143342365}
   - component: {fileID: 2143342367}
+  - component: {fileID: 9024716361950392805}
   m_Layer: 0
   m_Name: PlayerPawn
   m_TagString: Untagged
@@ -224,6 +225,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d606fa9934d44dc28159a57fd276d264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9024716361950392805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186955123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a28f1e0cee45348cda56ca8abd8231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HarvestingRadius: 2
+  m_HarvestMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1446430920
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +450,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d17f63df-4899-4f1a-9a02-6ea387c2c80d
     m_ActionName: Gameplay/SeedChange[/Keyboard/1,/Keyboard/2,/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 546650148}
+        m_TargetAssemblyTypeName: Player.PlayerController, ld52.player
+        m_MethodName: OnHarvest
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 64f74ebb-7b25-4727-9175-4053e348650d
+    m_ActionName: Gameplay/Harvesting[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -468,6 +501,7 @@ MonoBehaviour:
   m_CurrentWeapon: {fileID: 6212035694545999813}
   m_Inventory: {fileID: 2143342365}
   m_Animator: {fileID: 6709316030963686192}
+  m_HarvestBehavior: {fileID: 9024716361950392805}
 --- !u!1 &7762250832540738465
 GameObject:
   m_ObjectHideFlags: 0

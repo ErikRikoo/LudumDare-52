@@ -70,7 +70,15 @@ namespace Player
         {
             if (_context.phase == InputActionPhase.Started)
             {
-                m_PlayerStats.Inventory.CurrentSeed = int.Parse(_context.control.name);
+                m_PlayerStats.Inventory.CurrentSeed = int.Parse(_context.control.name) - 1;
+            }
+        }
+        
+        public void OnHarvest(InputAction.CallbackContext _context)
+        {
+            if (_context.phase == InputActionPhase.Started)
+            {
+                m_PlayerStats.HarvestBehaviour.TryHarvestPlants();
             }
         }
     }

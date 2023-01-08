@@ -1,4 +1,5 @@
-﻿using Player.PlayerActions.Weapons;
+﻿using Player.PlayerActions.Harvest;
+using Player.PlayerActions.Weapons;
 using UnityEngine;
 
 namespace Player.PlayerActions
@@ -30,7 +31,9 @@ namespace Player.PlayerActions
         [SerializeField] private Animator m_Animator;
         public Animator Animator => m_Animator;
 
-        
+        [SerializeField] private HarvestBehaviour m_HarvestBehavior;
+        public HarvestBehaviour HarvestBehaviour => m_HarvestBehavior;
+
 
     }
 }
