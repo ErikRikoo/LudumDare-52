@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlantHandling;
 using PlantHandling.PlantType;
 using Player.PlayerActions.Weapons;
+using Player.PlayerActions.Weapons.Implementation.Shooting;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -26,7 +27,7 @@ namespace UI
 		private void Start()
 		{
 			UpdateEnemiesCount();
-			UpdateHealth(gameState.defaultSiloHealth);
+			UpdateHealthPoint(gameState.defaultSiloHealth);
 		}
 
 		private void OnEnable()
@@ -37,6 +38,7 @@ namespace UI
 			GameEvents.OnEnemySpawned += OnEnemySpawned;
 			GameEvents.OnEnemyKilled += OnEnemyKilled;
 			GameEvents.OnSiloGotHit += OnSiloGotHit;
+			GameEvents.OnAmmoChanged += OnAmmoChanged;
 		}
 		
 		private void OnDisable()
@@ -47,6 +49,7 @@ namespace UI
 			GameEvents.OnEnemySpawned -= OnEnemySpawned;
 			GameEvents.OnEnemyKilled -= OnEnemyKilled;
 			GameEvents.OnSiloGotHit -= OnSiloGotHit;
+			GameEvents.OnAmmoChanged -= OnAmmoChanged;
 		}
 
 		private void Initialize()
@@ -76,6 +79,11 @@ namespace UI
 			UpdateWeaponSlot(weapon);
 		}
 		
+		private void OnAmmoChanged(int value)
+		{
+			UpdateWeaponAmmoCount(value);
+		}
+		
 		private void OnEnemySpawned()
 		{
 			_enemiesCount++;
@@ -92,9 +100,9 @@ namespace UI
 		
 		private void OnSiloGotHit(float value)
 		{
-			UpdateHealth(value);
+			UpdateHealthPoint(value);
 		}
-		
+
 		private void UpdateSeedSlots()
 		{
 			foreach (var seedsCountByPlantType in _seedsCountByPlantTypes)
@@ -108,16 +116,31 @@ namespace UI
 
 		private void UpdateWeaponSlot(AWeapon weapon)
 		{
+			var ammoCount = "";
+			
 			elements.WeaponSlotIcon.style.backgroundImage = new StyleBackground(weapon.Icon);
-			elements.WeaponSlotLabel.text = (weapon.HasAmmo) ? $"xTODO": "";
+
+			if (weapon.HasAmmo)
+			{
+				var shootingWeapon = (AShootingWeapon)weapon;
+				ammoCount = $"x{shootingWeapon.m_CurrentAmmo}";
+			}
+			
+			elements.WeaponSlotLabel.text = ammoCount;
 		}
+
+		private void UpdateWeaponAmmoCount(int value)
+		{
+			elements.WeaponSlotLabel.text = $"x{value}";
+		}
+		
 
 		private void UpdateEnemiesCount()
 		{
 			elements.EnemiesLabel.text = $"{_enemiesCount}";
 		}
 
-		private void UpdateHealth(float value)
+		private void UpdateHealthPoint(float value)
 		{
 			elements.HealthLabel.text = $"{value}";
 		}

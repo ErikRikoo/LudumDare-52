@@ -58,7 +58,7 @@ namespace UI
 			_inventory = root.Q<VisualElement>("HUD-Inventory");
 			_tooltips = root.Q<VisualElement>("HUD-Tooltips");
 
-			_weaponSlotIcon = root.Q<Button>("HUD-Weapon-Slot-Icon");
+			_weaponSlotIcon = root.Q<VisualElement>("HUD-Weapon-Slot-Icon");
 			_weaponSlotLabel = root.Q<Label>("HUD-Weapon-Slot-Label");
 			
 			InstantiateSeedSlots();
