@@ -102,7 +102,7 @@ namespace PlantHandling
             Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.x);
             Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.y);
 
-            var positionCenter = lastPlotRect.center.X0Y() + new Vector3(0, 0.2f, 0);
+            var positionCenter = lastPlotRect.center.X0Y() + new Vector3(0, 0.15f, 0);
             for(int i = 0; i < 9; i++)
             {
                 Gizmos.DrawWireCube(positionCenter, lastPlotRect.size.X0Y() * (1.0f - (float)i * 0.1f));

@@ -40,5 +40,22 @@
         <ui:VisualElement name="HUD-Health" class="hud-health">
             <ui:Label tabindex="-1" text="100" display-tooltip-when-elided="true" name="HUD-Health-Label" class="hud-health-label" />
         </ui:VisualElement>
+        <ui:VisualElement name="HUD-Tooltips" class="hud-tooltips">
+            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-1" picking-mode="Ignore" class="hud-tooltip">
+                <ui:Label tabindex="-1" text="Pistol Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-2" picking-mode="Ignore" class="hud-tooltip">
+                <ui:Label tabindex="-1" text="Shotgun Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-3" picking-mode="Ignore" class="hud-tooltip">
+                <ui:Label tabindex="-1" text="Auto Rifle Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-4" picking-mode="Ignore" class="hud-tooltip">
+                <ui:Label tabindex="-1" text="Sniper Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-5" picking-mode="Ignore" class="hud-tooltip">
+                <ui:Label tabindex="-1" text="Melee Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -56,6 +56,13 @@ namespace Enemy
         
             currentWave++;
         }
-    
+
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(transform.position, spawnRadius - spawnArea / 2);
+            Gizmos.DrawWireSphere(transform.position, spawnRadius + spawnArea / 2);
+        }
     }
 }

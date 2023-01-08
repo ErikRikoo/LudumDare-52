@@ -97,6 +97,8 @@ namespace PlantHandling
                 return rect.Overlaps(other);
             }
 
+            
+
             public bool GetPossiblePlantPlacement(Vector2Int slotPosition, PlantType.PlantType plant, out Vector2Int[] usedSlots)
             {
                 //Check if slot position is valid
