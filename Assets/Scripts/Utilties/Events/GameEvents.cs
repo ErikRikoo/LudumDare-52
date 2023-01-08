@@ -25,4 +25,8 @@ public static class GameEvents
     public static Action<float> OnSiloGotHit;
     public static Action OnEnemyKilled;
     public static Action OnEnemySpawned;
+    public static Action OnWaveStart;
+    public static Action OnWaveEnd;
+    public static Action OnGameWin;
+    public static Action OnGameLose;
 }

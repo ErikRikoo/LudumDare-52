@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,7 +16,7 @@ namespace Enemy
         [SerializeField] private float spawnArea;
         [SerializeField] private GameObject silo;
     
-        [SerializeField] private int currentWave = 0;
+        [ShowInInspector] private int currentWave = 0;
         [SerializeField] private float timeToTextWave = 5f;
 
         public bool[] podIsSpawned;
@@ -24,8 +25,14 @@ namespace Enemy
         {
             gameState.numberOfEnemiesAlive = 0;
             gameState.timeToNextWave = 0;
+            currentWave = 0;
             SpawnWave();
             GameEvents.OnEnemyKilled += CheckWaveStatus;
+        }
+
+        private void IncrementCurrentWave()
+        {
+            currentWave++;
         }
 
         private Vector3 RandomPointOnCircleEdge(float minRadius, float maxRadius)
@@ -65,11 +72,15 @@ namespace Enemy
         public void SpawnWave()
         {
             podIsSpawned = new bool[enemyWaves.waves[currentWave].waveData.Length];
+            for (var i = 0; i < enemyWaves.waves[currentWave].waveData.Length; i++)
+            {
+                podIsSpawned[i] = false;
+            }
             var waveToSpawn = enemyWaves.waves[currentWave];
             SpawnAllEnemiesInWave(waveToSpawn);
             gameState.waveIsActive = true;
-            
-            currentWave++;
+            IncrementCurrentWave();
+            GameEvents.OnWaveStart?.Invoke();
         }
 
         IEnumerator CountdownToNextWave(float time)
@@ -92,8 +103,16 @@ namespace Enemy
 
             if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !podIsSpawned.All(x => x)) return;
             gameState.waveIsActive = false;
-            if (currentWave == enemyWaves.waves.Count) Debug.Log("You won!");
-            else StartCoroutine(CountdownToNextWave(timeToTextWave));
+            if (currentWave == enemyWaves.waves.Count)
+            {
+                GameEvents.OnGameWin?.Invoke();
+            }
+            else
+            {
+                gameState.timeToNextWave = timeToTextWave;
+                GameEvents.OnWaveEnd?.Invoke();
+                StartCoroutine(CountdownToNextWave(timeToTextWave));
+            }
         }
 
 
