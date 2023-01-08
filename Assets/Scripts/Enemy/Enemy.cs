@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using General;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -47,11 +48,12 @@ namespace Enemy
         
     }
     
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] protected EnemyStatsHolder stats;
         [SerializeField] protected GameState gameState;
-    
+        public event InformAttackersAboutDeath InformAboutDeath;
+
         public GameObject target;
         protected IDamageable targetIDamageaeble;
 
@@ -140,7 +142,7 @@ namespace Enemy
                 }
                 else if (other.gameObject != target)
                 {
-                    DetermineTarget();
+                    DetermineTarget(null);
                     AttackTarget();
                 }
             }
@@ -157,7 +159,7 @@ namespace Enemy
                     StopCoroutine(attackLoop);
                 }
                  
-                DetermineTarget();
+                DetermineTarget(null);
             }
         }
 
@@ -169,7 +171,7 @@ namespace Enemy
                 GameObject go = other.gameObject;
                 if (go == target) return;
                  potentialTargets.Push(go);
-                 DetermineTarget();
+                 DetermineTarget(null);
                      
             }
         }
@@ -180,13 +182,13 @@ namespace Enemy
         }
         
         
-        public void DetermineTarget()
+        public void DetermineTarget([CanBeNull] GameObject obj)
         {
             GameObject checkTarget;
             do
             {
                 checkTarget = potentialTargets.Peek();
-                if (checkTarget.gameObject == null)
+                if (checkTarget.gameObject == null || (obj && checkTarget.gameObject == obj))
                 {
                     if (potentialTargets.Count > 1) potentialTargets.Pop();
                     continue;
@@ -266,8 +268,20 @@ namespace Enemy
                 StopCoroutine(attackLoop);
             }
             GameEvents.OnEnemyKilled?.Invoke();
+            InformAboutDeath?.Invoke(gameObject);
             Destroy(gameObject);
         }
-        
+
+        public void TakeDamage(float amount)
+        {
+            Debug.Log("Enemy taking damage");
+            currentHealth -= amount;
+            
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
     }
 }

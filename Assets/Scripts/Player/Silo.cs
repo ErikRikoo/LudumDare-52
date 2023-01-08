@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using General;
@@ -7,6 +8,12 @@ public class Silo : MonoBehaviour, IDamageable
 {
     public float health = 100;
     public event InformAttackersAboutDeath InformAboutDeath;
+    [SerializeField] private GameState gameState;
+
+    private void Awake()
+    {
+        gameState.silo = gameObject;
+    }
 
     public void TakeDamage(float amount)
     {
@@ -25,8 +32,8 @@ public class Silo : MonoBehaviour, IDamageable
     {
         if (!gameObject) return;
         Debug.Log("I die");
-        DestroyImmediate(gameObject);
-        InformAboutDeath?.Invoke();
+        InformAboutDeath?.Invoke(gameObject);
+        Destroy(gameObject);
 
     }
 }

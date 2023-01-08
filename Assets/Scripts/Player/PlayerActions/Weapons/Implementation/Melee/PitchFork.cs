@@ -8,6 +8,9 @@ namespace Player.PlayerActions.Weapons.Implementation
     {
         [SerializeField] private AnimationCurve m_Curve;
         [SerializeField] private MeleeCollider m_Collider;
+        [SerializeField] private float attackDuration = 0.3f;
+        [SerializeField] private Ease easingAttack = Ease.Linear;  
+        [SerializeField] private Ease easingReturnToDefault = Ease.Linear;  
         
         
         protected override void TriggerAttack()
@@ -16,16 +19,16 @@ namespace Player.PlayerActions.Weapons.Implementation
             m_Collider.Enable(this);
             Vector3 originalPosition = transform.localPosition;
 
-            float duration = 0.3f;
+            float duration = attackDuration;
             Sequence sequence = DOTween.Sequence();
             sequence.Append(
                 transform.DOLocalMove(transform.localPosition + new Vector3(0, 0, 1), duration)
-                    .SetEase(Ease.Linear)
+                    .SetEase(easingAttack)
                     .OnComplete(() => m_Collider.Disable())
                 );
             sequence.Append(
                     transform.DOLocalMove(originalPosition, duration)
-                        .SetEase(Ease.Linear)
+                        .SetEase(easingReturnToDefault)
             );
             sequence.Play();
             // Play animation
