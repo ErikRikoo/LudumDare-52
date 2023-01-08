@@ -11,8 +11,8 @@
                 <ui:Label tabindex="-1" text="x100" display-tooltip-when-elided="true" name="HUD-Weapon-Slot-Label" class="hud-weapon-slot-label" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button display-tooltip-when-elided="true" name="HUD-Menu-Button" class="hud-menu-button">
-            <ui:VisualElement name="HUD-Menu-Button-Icon" class="hud-menu-button-icon" />
+        <ui:Button display-tooltip-when-elided="true" name="HUD-Menu-Button" class="hud-menu-button secondary-button">
+            <ui:VisualElement name="HUD-Menu-Button-Icon" class="hud-menu-button-icon secondary-button-icon" />
         </ui:Button>
         <ui:VisualElement name="HUD-Health" class="hud-health">
             <ui:Label tabindex="-1" text="100" display-tooltip-when-elided="true" name="HUD-Health-Label" class="hud-health-label" />

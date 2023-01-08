@@ -12,6 +12,13 @@
                 <ui:Button text="About" display-tooltip-when-elided="true" name="Menu-About-Button" class="menu-button" />
                 <ui:Button text="Quit" display-tooltip-when-elided="true" name="Menu-Quit-Button" class="menu-button" />
             </ui:VisualElement>
+            <ui:VisualElement name="Menu-Section-About" picking-mode="Ignore" class="menu-section">
+                <ui:Button display-tooltip-when-elided="true" name="Menu-Section-Back-Button" class="menu-section-back-button secondary-button">
+                    <ui:VisualElement name="Menu-Section-Back-Button-Icon" class="menu-section-back-button-icon secondary-button-icon" />
+                </ui:Button>
+                <ui:Label tabindex="-1" text="About" display-tooltip-when-elided="true" name="Menu-Section-Title" class="menu-section-title" />
+                <ui:Label tabindex="-1" text="Team: Blabla&#10;&#10;&#10;Assets: blublueblue" display-tooltip-when-elided="true" name="Menu-Section-Text" class="menu-section-text" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

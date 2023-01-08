@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PlantHandling;
 using PlantHandling.PlantType;
 using Player.PlayerActions.Weapons;
 using Player.PlayerActions.Weapons.Implementation.Shooting;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -17,7 +15,6 @@ namespace UI
 		[SerializeField] private PlantManager plantManager;
 
 		private readonly Dictionary<PlantType, int> _seedsCountByPlantTypes = new ();
-		private int _enemiesCount = 0;
 
 		private void Awake()
 		{
@@ -86,15 +83,11 @@ namespace UI
 		
 		private void OnEnemySpawned()
 		{
-			_enemiesCount++;
-			
 			UpdateEnemiesCount();
 		}
 		
 		private void OnEnemyKilled()
 		{
-			_enemiesCount = math.max(0, _enemiesCount - 1);
-			
 			UpdateEnemiesCount();
 		}
 		
@@ -137,7 +130,7 @@ namespace UI
 
 		private void UpdateEnemiesCount()
 		{
-			elements.EnemiesLabel.text = $"{_enemiesCount}";
+			elements.EnemiesLabel.text = $"{gameState.numberOfEnemiesAlive}";
 		}
 
 		private void UpdateHealthPoint(float value)

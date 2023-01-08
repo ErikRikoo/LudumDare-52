@@ -39,7 +39,7 @@ namespace UI
 		public Label HealthLabel => _healthLabel;
 		public Label EnemiesLabel => _enemiesLabel;
 
-		private void OnEnable()
+		private void Awake()
 		{
 			FindReferences();
 		}
@@ -124,18 +124,12 @@ namespace UI
 			
 			private void OnPointerEntered(PointerEnterEvent evt)
 			{
-				_tooltipElement.experimental.animation.Start(0, 1, 300, (_, opacity) =>
-				{
-					_tooltipElement.style.opacity = opacity;
-				}).Ease(Easing.OutCubic);
+				UIAnimationUtils.FadeIn(_tooltipElement, false); 
 			}
 
 			private void OnPointerLeaved(PointerLeaveEvent evt)
 			{
-				_tooltipElement.experimental.animation.Start(1, 0, 300, (_, opacity) =>
-				{
-					_tooltipElement.style.opacity = opacity;
-				}).Ease(Easing.OutCubic);
+				UIAnimationUtils.FadeOut(_tooltipElement, false); 
 			}
 		}
 	}
