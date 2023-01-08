@@ -19,7 +19,7 @@ namespace PlantHandling.PlantType
             Sniper
         }
         
-        public PlantType type;
+        public PlantType Type;
         
         [MinMaxSlider(0, 60)]
         public Vector2 GrowthTimeRange;
