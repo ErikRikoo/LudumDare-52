@@ -115,7 +115,9 @@ namespace Enemy
             }
 
             if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !allHaveBeenSpawned) return;
+            
             gameState.waveIsActive = false;
+            
             if (currentWave == enemyWaves.waves.Count)
             {
                 Debug.Log("You win");
@@ -125,6 +127,7 @@ namespace Enemy
             {
                 gameState.timeToNextWave = timeToTextWave;
                 GameEvents.OnWaveEnd?.Invoke();
+                
                 if (countdown != null)
                 {
                     StopCoroutine(countdown);
