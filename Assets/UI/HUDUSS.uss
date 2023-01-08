@@ -229,9 +229,9 @@
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 20px;
-    font-size: 22px;
-    color: rgb(255, 255, 255);
-    -unity-text-outline-width: 1px;
+    font-size: 25px;
+    color: rgb(66, 59, 44);
+    -unity-text-outline-width: 0.5px;
     -unity-text-outline-color: rgba(0, 0, 0, 0.35);
     -unity-text-align: middle-center;
     padding-right: 15px;
