@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=93d64be278da73b41b8a0ecdeea5bce7&amp;type=3#GlobalUSS" />
+    <Style src="project://database/Assets/UI/HUDUSS.uss?fileID=7433441132597879392&amp;guid=767f912e79e62b6468ce9fb78502fa04&amp;type=3#HUDUSS" />
+    <ui:VisualElement name="HUD-Tooltip" picking-mode="Ignore" class="hud-tooltip">
+        <ui:Label tabindex="-1" text="Auto Rifle&#10;Growth:&#10;10s - 20s" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" style="font-size: 25px;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,4 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="HUDSeedSlotTemplate" src="project://database/Assets/UI/HUDSeedSlotTemplate.uxml?fileID=9197481963319205126&amp;guid=fce4ca76cf4a90446a3373b0f52c2c71&amp;type=3#HUDSeedSlotTemplate" />
+    <ui:Template name="HUDTooltipTemplate" src="project://database/Assets/UI/HUDTooltipTemplate.uxml?fileID=9197481963319205126&amp;guid=d53b078c38b76d24ab419358406c6a43&amp;type=3#HUDTooltipTemplate" />
     <Style src="project://database/Assets/UI/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=93d64be278da73b41b8a0ecdeea5bce7&amp;type=3#GlobalUSS" />
     <Style src="project://database/Assets/UI/HUDUSS.uss?fileID=7433441132597879392&amp;guid=767f912e79e62b6468ce9fb78502fa04&amp;type=3#HUDUSS" />
     <ui:VisualElement name="HUD-Container" class="hud-container">
@@ -8,31 +10,6 @@
                 <ui:VisualElement name="HUD-Weapon-Slot-Icon" class="hud-weapon-slot-icon" />
                 <ui:Label tabindex="-1" text="x100" display-tooltip-when-elided="true" name="HUD-Weapon-Slot-Label" class="hud-weapon-slot-label" />
             </ui:VisualElement>
-            <ui:Button name="HUD-Seed-Slot-1" class="hud-seed-slot">
-                <ui:VisualElement name="HUD-Seed-Slot-Background" class="hud-seed-slot-background" />
-                <ui:VisualElement name="HUD-Seed-Slot-Icon" class="hud-seed-slot-icon" />
-                <ui:Label tabindex="-1" text="x1" display-tooltip-when-elided="true" name="HUD-Seed-Slot-Label" class="hud-seed-slot-label" />
-            </ui:Button>
-            <ui:Button name="HUD-Seed-Slot-2" class="hud-seed-slot">
-                <ui:VisualElement name="HUD-Seed-Slot-Background" class="hud-seed-slot-background" />
-                <ui:VisualElement name="HUD-Seed-Slot-Icon" class="hud-seed-slot-icon" />
-                <ui:Label tabindex="-1" text="x1" display-tooltip-when-elided="true" name="HUD-Seed-Slot-Label" class="hud-seed-slot-label" />
-            </ui:Button>
-            <ui:Button name="HUD-Seed-Slot-3" class="hud-seed-slot">
-                <ui:VisualElement name="HUD-Seed-Slot-Background" class="hud-seed-slot-background" />
-                <ui:VisualElement name="HUD-Seed-Slot-Icon" class="hud-seed-slot-icon" />
-                <ui:Label tabindex="-1" text="x1" display-tooltip-when-elided="true" name="HUD-Seed-Slot-Label" class="hud-seed-slot-label" />
-            </ui:Button>
-            <ui:Button name="HUD-Seed-Slot-4" class="hud-seed-slot">
-                <ui:VisualElement name="HUD-Seed-Slot-Background" class="hud-seed-slot-background" />
-                <ui:VisualElement name="HUD-Seed-Slot-Icon" class="hud-seed-slot-icon" />
-                <ui:Label tabindex="-1" text="x1" display-tooltip-when-elided="true" name="HUD-Seed-Slot-Label" class="hud-seed-slot-label" />
-            </ui:Button>
-            <ui:Button name="HUD-Seed-Slot-5" class="hud-seed-slot">
-                <ui:VisualElement name="HUD-Seed-Slot-Background" class="hud-seed-slot-background" />
-                <ui:VisualElement name="HUD-Seed-Slot-Icon" class="hud-seed-slot-icon" />
-                <ui:Label tabindex="-1" text="x1" display-tooltip-when-elided="true" name="HUD-Seed-Slot-Label" class="hud-seed-slot-label" />
-            </ui:Button>
         </ui:VisualElement>
         <ui:Button display-tooltip-when-elided="true" name="HUD-Menu-Button" class="hud-menu-button">
             <ui:VisualElement name="HUD-Menu-Button-Icon" class="hud-menu-button-icon" />
@@ -40,22 +17,8 @@
         <ui:VisualElement name="HUD-Health" class="hud-health">
             <ui:Label tabindex="-1" text="100" display-tooltip-when-elided="true" name="HUD-Health-Label" class="hud-health-label" />
         </ui:VisualElement>
-        <ui:VisualElement name="HUD-Tooltips" class="hud-tooltips">
-            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-1" picking-mode="Ignore" class="hud-tooltip">
-                <ui:Label tabindex="-1" text="Pistol Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
-            </ui:VisualElement>
-            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-2" picking-mode="Ignore" class="hud-tooltip">
-                <ui:Label tabindex="-1" text="Shotgun Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
-            </ui:VisualElement>
-            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-3" picking-mode="Ignore" class="hud-tooltip">
-                <ui:Label tabindex="-1" text="Auto Rifle Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
-            </ui:VisualElement>
-            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-4" picking-mode="Ignore" class="hud-tooltip">
-                <ui:Label tabindex="-1" text="Sniper Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
-            </ui:VisualElement>
-            <ui:VisualElement name="HUD-Tooltip-Seed-Slot-5" picking-mode="Ignore" class="hud-tooltip">
-                <ui:Label tabindex="-1" text="Melee Seed" display-tooltip-when-elided="true" name="HUD-Tooltip-Label" class="hud-tooltip-label" />
-            </ui:VisualElement>
-        </ui:VisualElement>
+        <ui:VisualElement name="HUD-Tooltips" class="hud-tooltips" />
     </ui:VisualElement>
+    <ui:Instance template="HUDSeedSlotTemplate" name="HUD-Seed-Slot-Template" style="display: none;" />
+    <ui:Instance template="HUDTooltipTemplate" name="HUD-Tooltip-Template" style="display: none;" />
 </ui:UXML>
