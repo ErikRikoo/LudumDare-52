@@ -9,20 +9,23 @@ namespace UI
 		[SerializeField] private UIDocument uiDocument;
 
 		private VisualElement _mainContainer;
-		
 		private Button _playButton;
 		private Button _settingsButton;
 		private Button _aboutButton;
 		private Button _quitButton;
 
 		public VisualElement MainContainer => _mainContainer;
-		
 		public Button PlayButton => _playButton;
 		public Button SettingsButton => _settingsButton;
 		public Button AboutButton => _aboutButton;
 		public Button QuitButton => _quitButton;
 
 		private void OnEnable()
+		{
+			FindReferences();
+		}
+
+		private void FindReferences()
 		{
 			var root = uiDocument.rootVisualElement;
 
