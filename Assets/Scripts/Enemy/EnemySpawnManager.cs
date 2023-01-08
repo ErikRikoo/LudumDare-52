@@ -62,18 +62,7 @@ namespace Enemy
             podIsSpawned[index] = true;
 
         }
-    
-        private void SpawnAllEnemiesInWave(Wave wave)
-        {
-            for (var i = 0; i < wave.waveData.Length; i++)
-            {
-                podIsSpawned[i] = false;
-                StartCoroutine(SpawnEnemyPod(wave.waveData[i], i));
-                
-            }
-            gameState.waveIsActive = true;
-
-        }
+        
     
         public void SpawnWave()
         {
@@ -82,8 +71,15 @@ namespace Enemy
             {
                 podIsSpawned.Add(false);
             }
-            var waveToSpawn = enemyWaves.waves[currentWave];
-            SpawnAllEnemiesInWave(waveToSpawn);
+            
+            var wave = enemyWaves.waves[currentWave];
+            for (var i = 0; i < wave.waveData.Length; i++)
+            {
+                podIsSpawned[i] = false;
+                StartCoroutine(SpawnEnemyPod(wave.waveData[i], i));
+                
+            }
+            
             gameState.waveIsActive = true;
             IncrementCurrentWave();
             GameEvents.OnWaveStart?.Invoke();
