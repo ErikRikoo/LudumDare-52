@@ -1024,10 +1024,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163b0590efa7a4a27a2f8161b0a24d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BackgroundMusic: []
+  m_BackgroundMusic:
+  - {fileID: 8300000, guid: 30289c5c551474a5c8d26ca7ac34f511, type: 3}
   m_AmbientSounds: []
   LowPitchRange: 0.95
   HighPitchRange: 1.05
+  musicVolume: 0.067
 --- !u!4 &1228821565
 Transform:
   m_ObjectHideFlags: 0

@@ -147,6 +147,7 @@ namespace Enemy
                     localPosition = Vector3.zero
                 }
             };
+            
             var visionRangeCollider  = visionRange.AddComponent<SphereCollider>();
             visionRangeCollider.isTrigger = true;
             visionRangeCollider.radius = stats.VisionRange;
@@ -298,12 +299,12 @@ namespace Enemy
                 StopCoroutine(attackLoop);
             }
             
+            _collider.enabled = false;
             m_Agent.destination = transform.position;
             m_Agent.stoppingDistance = 0;
             _audioSource.pitch = Random.Range(0.6f, 1.1f);
             _audioSource.PlayOneShot(m_DeathSound);
             _rigidbody.isKinematic = true;
-            _collider.enabled = false;
             m_Animator.SetTrigger("Death");
             
             gameState.numberOfEnemiesAlive--;
