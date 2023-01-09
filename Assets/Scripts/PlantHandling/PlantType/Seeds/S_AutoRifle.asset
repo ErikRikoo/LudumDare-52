@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b4cfd28f434aa89f1b8b21c1f34489, type: 3}
   m_Name: S_AutoRifle
   m_EditorClassIdentifier: 
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 21300000, guid: e07486c63ec1dc74886f6b359885381b, type: 3}
   m_ItemName: Auto Rifle
   m_MaxCount: 100
   GrowthTimeRange: {x: 15, y: 30}
