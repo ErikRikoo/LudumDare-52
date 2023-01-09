@@ -218,7 +218,7 @@ MonoBehaviour:
   m_HitSound: {fileID: 0}
   m_Piercing: 1
   m_Collider: {fileID: 6699243452655502449}
-  attackDuration: 0.3
-  m_AttackAngle: 90
-  easingAttack: 1
+  attackDuration: 0.1
+  m_AttackAngle: 167
+  easingAttack: 25
   easingReturnToDefault: 1
