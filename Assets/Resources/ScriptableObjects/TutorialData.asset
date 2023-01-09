@@ -21,7 +21,7 @@ MonoBehaviour:
     EndSequence: 1
   - Event: 1
     Title: First Enemy
-    Text: 
+    Text: Enemies try to attack your silo. Defeat them! Left click to attack!
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
