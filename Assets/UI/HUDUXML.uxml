@@ -24,6 +24,9 @@
             <ui:Label tabindex="-1" text="20" display-tooltip-when-elided="true" name="HUD-Timer-Label" class="hud-timer-label" />
         </ui:VisualElement>
         <ui:VisualElement name="HUD-Tooltips" class="hud-tooltips" />
+        <ui:VisualElement name="HUD-Banner" picking-mode="Ignore" class="hud-banner">
+            <ui:Label tabindex="-1" text="Wave 1" display-tooltip-when-elided="true" name="HUD-Banner-Label" class="hud-label" />
+        </ui:VisualElement>
         <ui:VisualElement name="HUD-Popup-Container" class="hud-popup-container">
             <ui:VisualElement name="Scene-Overlay" class="scene-overlay" />
             <ui:VisualElement name="HUD-Popup" class="hud-popup">
@@ -35,9 +38,6 @@
                     <ui:VisualElement name="HUD-Popup-Close-Button-Icon" class="hud-popup-close-button-icon secondary-button-icon" />
                 </ui:Button>
             </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="HUD-Banner" picking-mode="Ignore" class="hud-banner">
-            <ui:Label tabindex="-1" text="Wave 1" display-tooltip-when-elided="true" name="HUD-Banner-Label" class="hud-label" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:Instance template="HUDSeedSlotTemplate" name="HUD-Seed-Slot-Template" style="display: none;" />
