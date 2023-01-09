@@ -94,7 +94,7 @@ namespace UI
 			elements.PopupCloseButton.clicked -= HidePopup;
 		}
 
-		public void ShowPopup(string title, Sprite image, string text, bool displayCloseButton = true, Action genericButtonAction = null)
+		public void ShowPopup(string title, Sprite image, string text, bool displayCloseButton = true, string genericButtonLabel = "", Action genericButtonAction = null)
 		{
 			elements.PopupTitle.style.display = DisplayStyle.Flex;
 			elements.PopupImage.style.display = DisplayStyle.Flex;
@@ -108,6 +108,7 @@ namespace UI
 			elements.PopupTitle.text = title;
 			elements.PopupImage.style.backgroundImage = new StyleBackground(image);
 			elements.PopupText.text = text;
+			elements.PopupGenericButton.text = genericButtonLabel;
 
 			if (genericButtonAction != null)
 			{
@@ -120,7 +121,7 @@ namespace UI
 			GameEvents.OnPopupOpened?.Invoke();
 		}
 		
-		public void ShowPopup(string title, string text, bool displayCloseButton = true, Action genericButtonAction = null)
+		public void ShowPopup(string title, string text, bool displayCloseButton = true, string genericButtonLabel = "", Action genericButtonAction = null)
 		{
 			elements.PopupTitle.style.display = DisplayStyle.Flex;
 			elements.PopupImage.style.display = DisplayStyle.None;
@@ -133,6 +134,7 @@ namespace UI
 			
 			elements.PopupTitle.text = title;
 			elements.PopupText.text = text;
+			elements.PopupGenericButton.text = genericButtonLabel;
 
 			if (genericButtonAction != null)
 			{
@@ -145,7 +147,7 @@ namespace UI
 			GameEvents.OnPopupOpened?.Invoke();
 		}
 		
-		public void ShowPopup(Sprite image, string text, bool displayCloseButton = true, Action genericButtonAction = null)
+		public void ShowPopup(Sprite image, string text, bool displayCloseButton = true, string genericButtonLabel = "", Action genericButtonAction = null)
 		{
 			elements.PopupTitle.style.display = DisplayStyle.None;
 			elements.PopupImage.style.display = DisplayStyle.Flex;
@@ -158,6 +160,7 @@ namespace UI
 			
 			elements.PopupImage.style.backgroundImage = new StyleBackground(image);
 			elements.PopupText.text = text;
+			elements.PopupGenericButton.text = genericButtonLabel;
 			
 			if (genericButtonAction != null)
 			{
