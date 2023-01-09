@@ -14,7 +14,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PopUpData:
   - Event: 0
-    Title: GOAL
+    Title: 
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  - Event: 1
+    Title: 
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  - Event: 2
+    Title: 
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  - Event: 3
+    Title: 
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  - Event: 4
+    Title: MELEEEEE
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  - Event: 5
+    Title: 
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  - Event: 6
+    Title: 
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  - Event: 7
+    Title: 
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  - Event: 8
+    Title: 
+    Text: 
+    Sprite: {fileID: 0}
+    IsSequence: 0
+    EndSequence: 1
+  OnWeaponHarvestedEvents: 0400000005000000060000000700000008000000
+  OnWeaponHarvestedData:
+    Event: 0
+    Title: You earned a new weapon
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
