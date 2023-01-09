@@ -33,4 +33,6 @@ public static class GameEvents
     [NonSerialized] public static Action OnPopupOpened;
     [NonSerialized] public static Action OnPopupClosed;
     [NonSerialized] public static Action<TutorialEvent> OnTutoAsked;
+    [NonSerialized] public static Action<PlantType> OnSuccessfulPlantedSeed;
+    [NonSerialized] public static Action<PlantType> OnSuccessfulHarvest;
 }
