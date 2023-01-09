@@ -41,6 +41,9 @@ namespace UI
 		private Label _healthLabel;
 		private Label _enemiesLabel;
 		private Label _timerLabel;
+		
+		private VisualElement _bannerContainer;
+		private Label _bannerLabel;
 
 		public VisualElement MainContainer => _mainContainer;
 		
@@ -64,6 +67,9 @@ namespace UI
 		public Label HealthLabel => _healthLabel;
 		public Label EnemiesLabel => _enemiesLabel;
 		public Label TimerLabel => _timerLabel;
+
+		public VisualElement BannerContainer => _bannerContainer;
+		public Label BannerLabel => _bannerLabel;
 
 		private void Awake()
 		{
@@ -99,6 +105,9 @@ namespace UI
 			_healthLabel = root.Q<Label>("HUD-Health-Label");
 			_enemiesLabel = root.Q<Label>("HUD-Enemies-Label");
 			_timerLabel = root.Q<Label>("HUD-Timer-Label");
+			
+			_bannerContainer = root.Q<VisualElement>("HUD-Banner");
+			_bannerLabel = root.Q<Label>("HUD-Banner-Label");
 		}
 
 		private void InstantiateSeedSlots()

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using PlantHandling;
 using PlantHandling.PlantType;
 using Player;
@@ -16,11 +19,13 @@ namespace UI
 		[SerializeField] private GameState gameState;
 		[SerializeField] private PlantManager plantManager;
 		[SerializeField] private PlayerInventory playerInventory;
+		[SerializeField] private float bannerDisplayDuration = 2;
 
 		private void Start()
 		{
 			UpdateEnemiesCount();
 			UpdateHealthPoint(gameState.defaultSiloHealth);
+			SetSeedSlotActive(0);
 		}
 		
 		private void OnEnable()
@@ -32,6 +37,8 @@ namespace UI
 			GameEvents.OnEnemyKilled += OnEnemyKilled;
 			GameEvents.OnSiloGotHit += OnSiloGotHit;
 			GameEvents.OnAmmoChanged += OnAmmoChanged;
+			GameEvents.OnCurrentSeedChanged += OnCurrentSeedChanged;
+			GameEvents.OnWaveStart += OnWaveStart;
 
 			BindButtons();
 		}
@@ -45,6 +52,8 @@ namespace UI
 			GameEvents.OnEnemyKilled -= OnEnemyKilled;
 			GameEvents.OnSiloGotHit -= OnSiloGotHit;
 			GameEvents.OnAmmoChanged -= OnAmmoChanged;
+			GameEvents.OnCurrentSeedChanged -= OnCurrentSeedChanged;
+			GameEvents.OnWaveStart -= OnWaveStart;
 
 			UnbindButtons();
 		}
@@ -87,6 +96,16 @@ namespace UI
 		private void OnSiloGotHit(float value)
 		{
 			UpdateHealthPoint(value);
+		}
+		
+		private void OnCurrentSeedChanged(int value)
+		{
+			SetSeedSlotActive(value);
+		}
+		
+		private void OnWaveStart()
+		{
+			StartCoroutine(StartBannerFadeInOutAnimation());
 		}
 
 		private void BindButtons()
@@ -178,6 +197,17 @@ namespace UI
 			GameEvents.OnPopupOpened?.Invoke();
 		}
 
+		private IEnumerator StartBannerFadeInOutAnimation()
+		{
+			elements.BannerLabel.text = $"Wave {gameState.currentWave}";
+			
+			UIAnimationUtils.FadeIn(elements.BannerContainer);
+
+			yield return new WaitForSeconds(bannerDisplayDuration);
+			
+			UIAnimationUtils.FadeOut(elements.BannerContainer);
+		}
+
 		public void HidePopup()
 		{
 			UIAnimationUtils.FadeOut(elements.PopupContainer);
@@ -238,6 +268,16 @@ namespace UI
 				return;
 			}
 			elements.TimerLabel.text = $"{gameState.timeToNextWave}";
+		}
+
+		private void SetSeedSlotActive(int seedIndex)
+		{
+			for (var index = 0; index < elements.SeedSlotButtons.Values.Count; index++)
+			{
+				var seedSlotButton = elements.SeedSlotButtons.Values.ElementAt(index);
+				
+				seedSlotButton.EnableInClassList("active", index == seedIndex);
+			}
 		}
 	}
 }
