@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7182644901480254098}
   - component: {fileID: 4603386999263055871}
   - component: {fileID: 215611554520902122}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 6784623174208738626}
   - component: {fileID: 3720780181395445046}
   - component: {fileID: 7436083434144611741}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TimerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,4 +263,3 @@ MonoBehaviour:
   meshTransform: {fileID: 2045981827920522338}
   timerRenderer: {fileID: 3720780181395445046}
   State: 0
-  harvestedTime: 0

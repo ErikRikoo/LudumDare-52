@@ -1,7 +1,6 @@
-//To be replaced with a more robust system later
-//just writing this to get the basic functionality working
 using Freya;
 using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
@@ -20,6 +19,11 @@ namespace PlantHandling
         public PlantType.PlantType[] plantTypes;
         public List<LandPlot> landPlots;
         public GameObject LandPlotGO;
+        public Vector2 TimeBetweenLandPlotGeneration;
+
+        public Mesh cursorQuad;
+        public Material cursorMaterial;
+        public Material landPlotTimer;
 
         public Vector2[] TransformSlotCoordinatesToPositions(Vector2Int[] slotCoords, int landPlotIndex)
         {
@@ -43,24 +47,51 @@ namespace PlantHandling
             paddedRect = new Rect(rect.position - Vector2.one * landPlotPadding, rect.size + Vector2.one * landPlotPadding * 2);
         }
 
-        void GenerateLandPlots(int landPlotCount, Vector2 radiusRange, Vector2Int minSize, Vector2Int maxSize, float landPlotPadding)
+        public struct LandPlotInitData
         {
-            var landPlots = new List<LandPlot>();
-            var landPlotSize = new Vector2Int(UnityRandom.Range(minSize.x, maxSize.x), UnityRandom.Range(minSize.y, maxSize.y));
+            public Rect rect;
+            public Vector2Int size;
+            public LandPlotInitData(Rect rect, Vector2Int size)
+            {
+                this.rect = rect;
+                this.size = size;
+            }
+        }
+
+        Vector2Int GetRandomV2Int(Vector2Int minSize, Vector2Int maxSize)
+        {
+            return new Vector2Int(UnityRandom.Range(minSize.x, maxSize.x), UnityRandom.Range(minSize.y, maxSize.y));
+        }
+
+        void CreateLandPlotGO(LandPlotInitData initData)
+        {
+            var landPlotGO = Instantiate(LandPlotGO);
+            var landPlot = landPlotGO.GetComponent<LandPlot>();
+            Assert.IsNotNull(landPlot);
+
+            landPlot.Initialize(initData.rect, initData.size);
+            landPlots.Add(landPlot);
+            landPlotGO.name = $"LandPlot-{landPlots.Count}";
+        }
+
+        List<LandPlotInitData> GenerateLandPlots(int landPlotCount, Vector2 radiusRange, Vector2Int minSize, Vector2Int maxSize, float landPlotPadding)
+        {
+            var landPlotInit = new List<LandPlotInitData>();
+            var landPlotSize = GetRandomV2Int(minSize, maxSize);
 
             const int maxIterationCount = 1000;
             const int maxSizeChangeCount = 10;
 
             int iterationCount = 0;
             int sizeChangeCount = 0;
-            while (landPlots.Count < landPlotCount && sizeChangeCount < maxSizeChangeCount)
+            while (landPlotInit.Count < landPlotCount && sizeChangeCount < maxSizeChangeCount)
             {
                 iterationCount++;
                 GetRandomLandPlotPosition(radiusRange, landPlotSize, landPlotPadding, out var rect, out var paddedRect);
                 bool overlaps = false;
-                foreach (var landPlot in landPlots)
+                foreach (var landPlot in landPlotInit)
                 {
-                    if (landPlot.Overlaps(paddedRect))
+                    if (landPlot.rect.Overlaps(paddedRect))
                     {
                         overlaps = true;
                         break;
@@ -68,17 +99,10 @@ namespace PlantHandling
                 }
                 if (!overlaps)
                 {
-                    var landPlotGO = Instantiate(LandPlotGO);
-                    var landPlot = landPlotGO.GetComponent<LandPlot>();
-                    Assert.IsNotNull(landPlot);
-                    
-                    landPlot.Initialize(rect, landPlotSize);
-                    landPlots.Add(landPlot);
-                    landPlotGO.name = $"LandPlot-{landPlots.Count}";
-
+                    landPlotInit.Add(new LandPlotInitData(rect, landPlotSize));
                     iterationCount = 0;
                     sizeChangeCount = 0;
-                    landPlotSize = new Vector2Int(UnityRandom.Range(minSize.x, maxSize.x), UnityRandom.Range(minSize.y, maxSize.y));
+                    landPlotSize = GetRandomV2Int(minSize, maxSize);
                 }
                 else
                 {
@@ -86,11 +110,11 @@ namespace PlantHandling
                     {
                         iterationCount = 0;
                         sizeChangeCount++;
-                        landPlotSize = new Vector2Int(UnityRandom.Range(minSize.x, maxSize.x), UnityRandom.Range(minSize.y, maxSize.y));
+                        landPlotSize = GetRandomV2Int(minSize, maxSize);
                     }
                 }
             }
-            this.landPlots = landPlots;
+            return landPlotInit;
         }
 
         public bool GetLandPlotAtPosition(Vector2 position, out int landPlotIndex)
@@ -118,9 +142,62 @@ namespace PlantHandling
             return landPlots[landPlotIndex].GetSlotCoordinate(position, this.cellSize, out slotCoord);
         }
 
-        public void Initialize(int landPlotCount, Vector2 radiusRange, Vector2Int minSize, Vector2Int maxSize, float landPlotPadding)
+        public void Initialize(Planter planter, int landPlotCount, Vector2 radiusRange, Vector2Int minSize, Vector2Int maxSize, float landPlotPadding)
         {
-            GenerateLandPlots(landPlotCount, radiusRange, minSize, maxSize, landPlotPadding);
+            this.landPlots = new List<LandPlot>();
+            var landPlotInit = GenerateLandPlots(landPlotCount, radiusRange, minSize, maxSize, landPlotPadding);
+            Debug.Log($"Land count {landPlotInit.Count}");
+            landPlotInit.Sort((plotA, plotB) => plotA.rect.center.magnitude.CompareTo(plotB.rect.center.magnitude));
+            CreateLandPlotGO(landPlotInit[0]);
+            planter.StartLandGenCoroutine(landPlotInit);
+        }
+
+        private readonly int _VerticalFillID = Shader.PropertyToID("_VerticalFill");
+
+        public IEnumerator GeneratePlotsOverTime(List<LandPlotInitData> landPlotInit)
+        {
+            for (int landPLotIndex = 1; landPLotIndex < landPlotInit.Count; landPLotIndex++)
+            {
+                Debug.Log($"Generate plot # {landPLotIndex}");
+                var genTimer = UnityRandom.Range(TimeBetweenLandPlotGeneration.x, TimeBetweenLandPlotGeneration.y);
+                var startTime = Time.time;
+                while (true)
+                {
+                    var elapsedTime = Time.time - startTime;
+                    if (elapsedTime >= genTimer)
+                    {
+                        CreateLandPlotGO(landPlotInit[landPLotIndex]);
+                        break;
+                    }
+                    else
+                    {
+                        var landRect = landPlotInit[landPLotIndex].rect;
+                        Graphics.DrawMesh(cursorQuad,
+                            Matrix4x4.TRS(
+                                landRect.center.X0Y() + new Vector3(0.0f, 0.5f, 0.0f),
+                                Quaternion.AngleAxis(90.0f, Vector3.right),
+                                landRect.size.XYtoXYZ(1.0f)),
+                            landPlotTimer, 0);
+                        landPlotTimer.SetFloat(_VerticalFillID, (elapsedTime / genTimer).Clamp01());
+                    }
+                    yield return null;
+                }
+                yield return null;
+            }
+            yield break;
+        }
+
+        public void RenderCurrentCursor(Vector2[] slotPositions)
+        {
+            foreach (var position in slotPositions)
+            {
+                Graphics.DrawMesh(cursorQuad,
+                Matrix4x4.TRS(
+                    position.X0Y() + new Vector3(0.0f, 0.5f, 0.0f),
+                    Quaternion.AngleAxis(90.0f, Vector3.right),
+                    Vector3.one * cellSize * 0.9f),
+                cursorMaterial, 0);
+            }
         }
     }
 }

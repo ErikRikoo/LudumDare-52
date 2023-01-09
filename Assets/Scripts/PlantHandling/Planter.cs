@@ -51,7 +51,12 @@ namespace PlantHandling
             Assert.IsNotNull(plantManager, "Plant Manager is null");
             Assert.IsNotNull(_debugMaterial, "Debug Material is null");
 
-            plantManager.Initialize(landPlotMaxCount, landPlotGenerationRange, landPlotMinSize, landPlotMaxSize, landPlotPadding);
+            plantManager.Initialize(this, landPlotMaxCount, landPlotGenerationRange, landPlotMinSize, landPlotMaxSize, landPlotPadding);
+        }
+
+        public void StartLandGenCoroutine(List<PlantManager.LandPlotInitData> landPlotInit)
+        {
+            StartCoroutine(plantManager.GeneratePlotsOverTime(landPlotInit));
         }
 
         private void OnEnable()
@@ -81,6 +86,7 @@ namespace PlantHandling
 
             lastPlotRect = new Rect();
             var slots = new List<Vector2Int>();
+            var cursorSlots = new List<Vector2Int>();
             if (plantManager.GetLandPlotAndSlotAt(planePoint, out var landPlotIndex, out var slotCoord))
             {
                 var landPlot = plantManager.landPlots[landPlotIndex];
@@ -95,18 +101,19 @@ namespace PlantHandling
                         Debug.Log("Hey mouse up");
                         if (landPlot.PlantSeed(slotCoord, plant, out var usedSlots))
                         {
-                            slots.AddRange(usedSlots);
+                            cursorSlots.AddRange(usedSlots);
                         }
                     }
                     else
                     {
                         if(landPlot.GetPossiblePlantPlacement(slotCoord, plant, out var usedSlots))
                         {
-                            slots.AddRange(usedSlots);
+                            cursorSlots.AddRange(usedSlots);
                         }
                     }
                 }
-                slotPositions = plantManager.TransformSlotCoordinatesToPositions(slots.ToArray(), landPlotIndex);
+                var cursorSlotPositions = plantManager.TransformSlotCoordinatesToPositions(cursorSlots.ToArray(), landPlotIndex);
+                plantManager.RenderCurrentCursor(cursorSlotPositions);
             }
             else
             {
@@ -115,7 +122,7 @@ namespace PlantHandling
             _lastMousePosition = hitPoint + Vector3.up * 0.05f;
         }
 
-        private void OnDrawGizmos()
+        /*private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(_lastMousePosition, 0.5f);
             Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.x);
@@ -144,6 +151,6 @@ namespace PlantHandling
 
                 Gizmos.color = color;
             }
-        }
+        }*/
     }
 }
