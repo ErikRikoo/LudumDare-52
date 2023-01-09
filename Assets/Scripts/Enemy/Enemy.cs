@@ -216,6 +216,12 @@ namespace Enemy
         
         public void DetermineTarget([CanBeNull] GameObject obj)
         {
+            if (obj)
+            {
+                targetIDamageaeble.InformAboutDeath -= DetermineTarget;
+                Debug.Log("My target died:");
+
+            }
             GameObject checkTarget;
             do
             {
