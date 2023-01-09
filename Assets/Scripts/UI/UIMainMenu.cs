@@ -1,3 +1,4 @@
+using Router;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -55,7 +56,7 @@ namespace UI
         
         private void OnPlayButtonPressed()
         {
-            //TODO switch scene
+            SceneRouter.SwitchScene(SceneRouter.SceneType.Game);
         }
         
         private void OnSettingsButtonPressed()
