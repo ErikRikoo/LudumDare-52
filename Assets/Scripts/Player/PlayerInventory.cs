@@ -54,7 +54,7 @@ namespace Player
             CurrentWeapon = m_Weapons[0];
         }
 
-        public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed).Item;
+        public PlantType CurrentSeedItem => m_Seeds.Get(CurrentSeed)?.Item;
 
         public void AddSeed(PlantType _item, int _count)
         {
