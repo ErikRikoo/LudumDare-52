@@ -43,7 +43,7 @@ namespace General
         
         private void DisplayPopUp(string _title, string _text, Sprite _sprite)
         {
-            m_HUD.ShowPopup(_title, _sprite, _text, true, RestartScene);
+            m_HUD.ShowPopup(_title, _sprite, _text, true, "Restart", RestartScene);
         }
 
         private void RestartScene()
