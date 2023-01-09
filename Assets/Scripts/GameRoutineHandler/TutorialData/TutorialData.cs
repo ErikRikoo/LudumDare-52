@@ -20,6 +20,9 @@ namespace General.TutorialData
     {
         [SerializeField] private TutorialItem[] m_PopUpData;
 
+        [SerializeField] public TutorialEvent[] OnWeaponHarvestedEvents;
+        [SerializeField] public TutorialItem OnWeaponHarvestedData;
+        
         public int Length => m_PopUpData.Length;
         public TutorialItem this[int _index] => m_PopUpData[_index];
     }

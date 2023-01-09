@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using General.TutorialData;
 using Sirenix.OdinInspector;
 using UI;
@@ -13,9 +16,13 @@ namespace General
         [SerializeField] private TutorialData.TutorialData m_PopUpData;
         [SerializeField] private UIHUD m_HUD;
 
+        private bool m_WeaponInfoAlreadyDisplayed;
+        
         private void OnEnable()
         {
             GameEvents.OnTutoAsked += DisplayTutorial;
+            
+            // TODO: Bind events
         }
         
         private void OnDisable()
@@ -41,34 +48,46 @@ namespace General
                 return;
             }
 
-            var data = m_PopUpData[indexOfFirstMatching];
-            if (data.IsSequence)
+            DisplayTutorialItems(GetChainFrom(indexOfFirstMatching));
+        }
+
+        private void DisplayTutorialItems(IEnumerator<TutorialItem> _items)
+        {
+            if (_items.MoveNext())
             {
-                DisplayChain(indexOfFirstMatching);
+                string buttonLabel = _items.Current.EndSequence ? "OK" : "Next";
+                DisplayPopUp(_items.Current, buttonLabel, 
+                    () =>
+                    {
+                        DisplayTutorialItems(_items);
+                    });
             }
             else
             {
-                DisplayPopUp(data);
+               m_HUD.HidePopup(); 
             }
         }
 
-        private void DisplayChain(int _index)
+        private IEnumerator<TutorialItem> GetChainFrom(int _index)
         {
             var data = m_PopUpData[_index];
-
-            if (!data.EndSequence)
+            if (m_PopUpData.OnWeaponHarvestedEvents.Contains(data.Event) && !m_WeaponInfoAlreadyDisplayed)
             {
-                DisplayPopUp(data, "Next", () => {DisplayChain(_index + 1);});
-            } else {
-                DisplayPopUp(data);
+                m_WeaponInfoAlreadyDisplayed = true;
+                yield return m_PopUpData.OnWeaponHarvestedData;
+            }
+            
+            for (; _index < m_PopUpData.Length; ++_index)
+            {
+
+                yield return m_PopUpData[_index];
+                if (m_PopUpData[_index].EndSequence)
+                {
+                    yield break;
+                }
             }
         }
 
-        private void DisplayPopUp(TutorialItem _data)
-        {
-            DisplayPopUp(_data, "OK", () => m_HUD.HidePopup());
-        }
-        
         private void DisplayPopUp(TutorialItem _data, string _closeLabel, Action _onClose)
         {
             m_HUD.ShowPopup(_data.Title, _data.Sprite, _data.Text, false, _closeLabel, _onClose);

@@ -1,7 +1,18 @@
-﻿namespace General.TutorialData
+﻿using System;
+
+namespace General.TutorialData
 {
+    [Serializable]
     public enum TutorialEvent
     {
-        Goal,
+        EnteringGame,
+        FirstEnemy,
+        EnemyDeath,
+        FirstPlantAvailable,
+        HarvestingMelee,
+        HarvestingPistol,
+        HarvestingSniper,
+        HarvestingRifle,
+        HarvestingShotgun,
     }
 }
