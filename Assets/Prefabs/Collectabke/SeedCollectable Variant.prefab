@@ -68,14 +68,10 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1306642227496609345, guid: 64c56be320372bc4386d7e7fcf601596, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 64c56be320372bc4386d7e7fcf601596, type: 3}
---- !u!4 &895871982657116840 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6608797484271356302, guid: 64c56be320372bc4386d7e7fcf601596, type: 3}
-  m_PrefabInstance: {fileID: 6330350915953742630}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5520350862884998270 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1965211295237398360, guid: 64c56be320372bc4386d7e7fcf601596, type: 3}

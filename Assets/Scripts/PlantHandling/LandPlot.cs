@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
+using static LandPlot;
 
 public class LandPlot : MonoBehaviour
 {
@@ -124,9 +125,10 @@ public class LandPlot : MonoBehaviour
         }
         var seed = new PlantedSeed(plant, usedIndices.ToArray(), Time.time);
         this.plantedSeeds.Add(plantGuid, seed);
+        float growTime = UnityEngine.Random.Range(plant.GrowthTimeRange.x, plant.GrowthTimeRange.y);
         foreach (var index in usedIndices)
         {
-            this.slots[index].SetPlanted(plantGuid);
+            this.slots[index].SetPlanted(plantGuid, growTime);
         }
         return true;
     }
