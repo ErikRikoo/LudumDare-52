@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Stats: {fileID: 405276241}
   m_Seeds:
     m_MaxItemCount: 0
+  m_Plants: {fileID: 0}
   m_WeaponHolder: {fileID: 1446430921}
   m_FirstWeapon: {fileID: 6212035694545999813}
 --- !u!114 &2143342367
@@ -238,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a28f1e0cee45348cda56ca8abd8231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Stats: {fileID: 0}
+  m_Stats: {fileID: 405276241}
   m_HarvestingRadius: 2
   m_HarvestMask:
     serializedVersion: 2
@@ -267,7 +268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446430920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.434, y: 0.956, z: -0.135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5471,15 +5472,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087029072062845540, guid: 10a4c00a23568b44d8ad9bd9c1f03b94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.73
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1087029072062845540, guid: 10a4c00a23568b44d8ad9bd9c1f03b94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1087029072062845540, guid: 10a4c00a23568b44d8ad9bd9c1f03b94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1087029072062845540, guid: 10a4c00a23568b44d8ad9bd9c1f03b94, type: 3}
       propertyPath: m_LocalRotation.w

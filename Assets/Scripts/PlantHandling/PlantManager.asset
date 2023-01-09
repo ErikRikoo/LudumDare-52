@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1.5
   blockTimeRange: {x: 4.195001, y: 13.787436}
-  plantTypes:
-  - {fileID: 11400000, guid: 3603a0094ef008a4db5711e8b20b2643, type: 2}
-  - {fileID: 11400000, guid: 5ddf84a9740119d4c942cfa5ea6599d6, type: 2}
-  - {fileID: 11400000, guid: 3bf7e9808d557d94fa133dff86f98d1a, type: 2}
-  - {fileID: 11400000, guid: 6b81b0b5e6b7d6e4d94e7c677671d454, type: 2}
-  - {fileID: 11400000, guid: bdb97c3fde129004aa9305fa0868dd70, type: 2}
+  plants: {fileID: 11400000, guid: 8ac78b3214d97094a9e14449b1b438fa, type: 2}
   landPlots:
   - {fileID: 0}
   - {fileID: 0}

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Inventory;
+using PlantHandling;
+
 using PlantHandling.PlantType;
 using Player.PlayerActions;
 using Player.PlayerActions.Weapons;
@@ -13,9 +15,12 @@ namespace Player
         [SerializeField] private PlayerStats m_Stats;
         
         [SerializeField] public Inventory<PlantType> m_Seeds;
+        [SerializeField] private PlantList m_Plants;
+        
 
         [SerializeField] private Transform m_WeaponHolder;
         [SerializeField] private AWeapon m_FirstWeapon;
+        
 
         [SerializeField] private AudioSource _source;
         [SerializeField] private AudioClip _pickpClip;
@@ -27,7 +32,7 @@ namespace Player
             get => m_Stats.CurrentWeapon;
             set
             {
-                m_Stats.CurrentWeapon = m_FirstWeapon;
+                m_Stats.CurrentWeapon = value;
                 GameEvents.OnWeaponChanged?.Invoke(value);
             }
         }
@@ -43,6 +48,26 @@ namespace Player
                 m_CurrentSeed %= m_Seeds.Count;
                 GameEvents.OnCurrentSeedChanged?.Invoke(m_CurrentSeed);
             }
+        }
+
+        private void OnEnable()
+        {
+            foreach (var plantType in m_Plants.plantTypes)
+            {
+                m_Seeds.AddItem(plantType, 0, (_, _) => {});
+            }
+
+            GameEvents.OnCurrentSeedChanged += OnCurrentSeedChanged;
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnCurrentSeedChanged -= OnCurrentSeedChanged;
+        }
+        
+        private void OnCurrentSeedChanged(int _index)
+        {
+            m_CurrentSeed = _index;
         }
 
         private void Awake()
@@ -72,16 +97,19 @@ namespace Player
                 return;
             }
             
-            if (CurrentWeapon != null)
-            {
-                CurrentWeapon.enabled = false;
-            }
+
 
             var foundWeapon = m_Weapons.Find(weapon => weapon.GetType() == _newWeapon.GetType());
             if (foundWeapon == null)
             {
+                if (CurrentWeapon != null)
+                {
+                    CurrentWeapon.gameObject.SetActive(false);
+                }
                 // Use a transform position
-                foundWeapon = Instantiate(_newWeapon, Vector3.zero, Quaternion.identity, m_WeaponHolder);
+                foundWeapon = Instantiate(_newWeapon, m_WeaponHolder);
+                foundWeapon.transform.localPosition = Vector3.zero;
+                foundWeapon.transform.localRotation = _newWeapon.transform.localRotation;
             }
 
             CurrentWeapon = foundWeapon;
