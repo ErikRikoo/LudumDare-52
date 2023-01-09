@@ -20,50 +20,50 @@ MonoBehaviour:
     IsSequence: 0
     EndSequence: 1
   - Event: 1
-    Title: 
-    Text: 
+    Title: Defeat the enemies!
+    Text: Enemies are attacking your silo. LMB to attack them!
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 2
-    Title: 
-    Text: 
+    Title: Collect Seeds!
+    Text: Enemies can drop seeds. Select a seed (1-5) and plant (RMB) powerful weapons!
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 3
-    Title: 
-    Text: 
+    Title: Time to harvest!
+    Text: Your plant has grown. Press E to harvest!
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 4
     Title: MELEEEEE
-    Text: 
+    Text: Chop Chop!
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 5
-    Title: 
-    Text: 
+    Title: Pew pew!
+    Text: It only has so many shots...
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 6
-    Title: 
-    Text: 
+    Title: Taking aim.... Fire!
+    Text: Powerful, but slow!
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 7
-    Title: 
-    Text: 
+    Title: Ratatatata!
+    Text: Ratatatata - iek!
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 8
-    Title: 
-    Text: 
+    Title: Kablam!
+    Text: You know what this is!
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
