@@ -58,7 +58,7 @@ namespace General
 
             if (!data.EndSequence)
             {
-                DisplayPopUp(data, () => {DisplayChain(_index + 1);});
+                DisplayPopUp(data, "Next", () => {DisplayChain(_index + 1);});
             } else {
                 DisplayPopUp(data);
             }
@@ -66,12 +66,12 @@ namespace General
 
         private void DisplayPopUp(TutorialItem _data)
         {
-            DisplayPopUp(_data, () => m_HUD.HidePopup());
+            DisplayPopUp(_data, "OK", () => m_HUD.HidePopup());
         }
         
-        private void DisplayPopUp(TutorialItem _data, Action _onClose)
+        private void DisplayPopUp(TutorialItem _data, string _closeLabel, Action _onClose)
         {
-            m_HUD.ShowPopup(_data.Title, _data.Sprite, _data.Text, false, _onClose);
+            m_HUD.ShowPopup(_data.Title, _data.Sprite, _data.Text, false, _closeLabel, _onClose);
         }
         
         #if UNITY_EDITOR

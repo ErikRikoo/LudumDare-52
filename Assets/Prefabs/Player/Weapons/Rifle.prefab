@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6acc6bb2e6446f39abbf47d6ae836d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 21300000, guid: c87a4f38eca0fb54e828cb3a622bad8a, type: 3}
   m_Rate: 0.2
   m_Damage: 2
   m_AttackSound: {fileID: 0}
