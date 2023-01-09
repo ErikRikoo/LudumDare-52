@@ -5,6 +5,8 @@ namespace Player.PlayerActions
     public class PlantingBehavior : MonoBehaviour
     {
         [SerializeField] private PlayerStats m_Stats;
+        [SerializeField] private AudioSource _as;
+        [SerializeField] private AudioClip _clip;
         
         public void PlantSeed()
         {
@@ -18,6 +20,8 @@ namespace Player.PlayerActions
                 GameEvents.OnSeedPlanted?.Invoke(plant, transform.position);
                 Debug.Log("Planting");
             });
+            
+            _as.PlayOneShot(_clip);
         }
     }
 }
