@@ -502,7 +502,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -602,8 +602,8 @@ MonoBehaviour:
   m_Icon: {fileID: 21300000, guid: 768a30358b8d62444b8c98bac1050577, type: 3}
   m_Rate: 2
   m_Damage: 1
-  m_AttackSound: {fileID: 0}
-  m_HitSound: {fileID: 0}
+  m_AttackSound: {fileID: 8300000, guid: 26897e67488a549b786d8d678711c5bd, type: 3}
+  m_HitSound: {fileID: 8300000, guid: e5da07eb54f724bc09e49a342147038d, type: 3}
   m_Piercing: 0
   m_Ammo: 25
   m_AmmoPerShoot: 5

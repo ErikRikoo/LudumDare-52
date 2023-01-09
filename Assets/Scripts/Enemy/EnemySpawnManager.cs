@@ -28,6 +28,7 @@ namespace Enemy
             gameState.numberOfEnemiesAlive = 0;
             gameState.timeToNextWave = 0;
             currentWave = 0;
+            gameState.currentWave = currentWave;
             SpawnWave();
         }
 
@@ -81,6 +82,7 @@ namespace Enemy
             
             gameState.waveIsActive = true;
             IncrementCurrentWave();
+            gameState.currentWave = currentWave;
             GameEvents.OnWaveStart?.Invoke();
         }
 

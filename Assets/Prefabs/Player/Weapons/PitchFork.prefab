@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 21300000, guid: 115d8926254ac2449bc266abda0e2440, type: 3}
+    - target: {fileID: 9102948511859409284, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7658547837206106569, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}

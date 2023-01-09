@@ -219,7 +219,7 @@ namespace Enemy
             if (obj)
             {
                 targetIDamageaeble.InformAboutDeath -= DetermineTarget;
-                Debug.Log("My target died:");
+                Debug.Log($"My target {obj} died:");
 
             }
             GameObject checkTarget;
