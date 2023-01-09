@@ -4985,7 +4985,6 @@ GameObject:
   - component: {fileID: 4300567310215141293}
   - component: {fileID: 1269115302831679306}
   - component: {fileID: 1932736049025147770}
-  - component: {fileID: 4123739133502044094}
   - component: {fileID: 3962454888225991700}
   m_Layer: 7
   m_Name: TimeToRipe
@@ -5059,20 +5058,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4123739133502044094
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683668611048510199}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &3962454888225991700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5097,7 +5082,6 @@ GameObject:
   - component: {fileID: 7478714429533324085}
   - component: {fileID: 6784623174208738626}
   - component: {fileID: 3720780181395445046}
-  - component: {fileID: 7436083434144611741}
   - component: {fileID: 6888328061277869147}
   m_Layer: 7
   m_Name: BlockedTime
@@ -5171,20 +5155,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7436083434144611741
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4546008781000660022}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &6888328061277869147
 MonoBehaviour:
   m_ObjectHideFlags: 0

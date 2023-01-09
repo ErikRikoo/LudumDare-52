@@ -21,6 +21,7 @@ namespace Player.PlayerActions.Harvest
                 if (m_ColliderBuffer[i].TryGetComponent<IHarvestable>(out var harvestable))
                 {
                     harvestable.OnHarvested(m_Stats.gameObject);
+                    return;
                 }
             }
         }

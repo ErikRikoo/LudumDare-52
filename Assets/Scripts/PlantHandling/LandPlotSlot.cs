@@ -83,6 +83,7 @@ namespace PlantHandling
                 damageTrigger.id = this.guid;
 
                 plantHarvestable.Seed = plantedSeed.type;
+                plantHarvestable.plantId = this.guid;
                 StartCoroutine(GrowPlant(growTime));
             }
             else
