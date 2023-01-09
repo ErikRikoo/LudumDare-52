@@ -258,8 +258,6 @@ namespace Enemy
             currentMoveSpeed = stats.Speed;
             
             GameEvents.OnEnemySpawned?.Invoke();
-            gameState.numberOfEnemiesAlive++;
-
         }
 
         IEnumerator AttackLoop()
