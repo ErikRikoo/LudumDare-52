@@ -15,6 +15,7 @@ public class PlantDamageTrigger : MonoBehaviour, IDamageable
         Health -= amount;
         if (Health <= 0.1f)
         {
+            InformAboutDeath?.Invoke(gameObject);
             LandPlot.PlantDestroyed(this.id);
         }
     }

@@ -278,6 +278,17 @@
                 },
                 {
                     "name": "",
+                    "id": "517ac8f9-15b7-4f5b-b430-c6f35d9219a1",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SeedChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "be23bda7-b3fb-4fef-a708-0021157a44a5",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",

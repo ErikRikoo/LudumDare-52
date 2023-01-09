@@ -188,7 +188,7 @@ namespace UI
 		private void UpdateSeedSlots()
 		{
 
-			foreach (var plantType in plantManager.plantTypes)
+			foreach (var plantType in plantManager.plants.plantTypes)
 			{
 				var item = playerInventory.m_Seeds.GetItem(plantType);
 				if (item != null)

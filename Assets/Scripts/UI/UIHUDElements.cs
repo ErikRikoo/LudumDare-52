@@ -104,7 +104,7 @@ namespace UI
 		private void InstantiateSeedSlots()
 		{
 			var index = 0;
-			foreach (var plantType in plantManager.plantTypes)
+			foreach (var plantType in plantManager.plants.plantTypes)
 			{
 				var seedSlotInstance = _seedSlotTemplate.templateSource.Instantiate();
 				var tooltipInstance = _tooltipTemplate.templateSource.Instantiate();

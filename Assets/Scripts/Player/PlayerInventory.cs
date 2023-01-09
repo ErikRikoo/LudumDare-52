@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Inventory;
+using PlantHandling;
+
 using PlantHandling.PlantType;
 using Player.PlayerActions;
 using Player.PlayerActions.Weapons;
@@ -13,9 +15,12 @@ namespace Player
         [SerializeField] private PlayerStats m_Stats;
         
         [SerializeField] public Inventory<PlantType> m_Seeds;
+        [SerializeField] private PlantList m_Plants;
+        
 
         [SerializeField] private Transform m_WeaponHolder;
         [SerializeField] private AWeapon m_FirstWeapon;
+        
 
         private List<AWeapon> m_Weapons = new();
 
@@ -40,6 +45,26 @@ namespace Player
                 m_CurrentSeed %= m_Seeds.Count;
                 GameEvents.OnCurrentSeedChanged?.Invoke(m_CurrentSeed);
             }
+        }
+
+        private void OnEnable()
+        {
+            foreach (var plantType in m_Plants.plantTypes)
+            {
+                m_Seeds.AddItem(plantType, 0, (_, _) => {});
+            }
+
+            GameEvents.OnCurrentSeedChanged += OnCurrentSeedChanged;
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnCurrentSeedChanged -= OnCurrentSeedChanged;
+        }
+        
+        private void OnCurrentSeedChanged(int _index)
+        {
+            m_CurrentSeed = _index;
         }
 
         private void Awake()
