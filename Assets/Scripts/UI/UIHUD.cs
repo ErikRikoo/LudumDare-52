@@ -173,7 +173,7 @@ namespace UI
 			GameEvents.OnPopupOpened?.Invoke();
 		}
 
-		private void HidePopup()
+		public void HidePopup()
 		{
 			UIAnimationUtils.FadeOut(elements.PopupContainer);
 			
@@ -185,9 +185,13 @@ namespace UI
 
 			foreach (var plantType in plantManager.plantTypes)
 			{
-				var seedCount = playerInventory.m_Seeds.GetItem(plantType).Count;
+				var item = playerInventory.m_Seeds.GetItem(plantType);
+				if (item != null)
+				{
+					var seedCount = playerInventory.m_Seeds.GetItem(plantType).Count;
 				
-				elements.SeedSlotLabels[plantType].text = $"x{seedCount}";
+					elements.SeedSlotLabels[plantType].text = $"x{seedCount}";
+				}
 			}
 		}
 

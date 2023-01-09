@@ -1,0 +1,19 @@
+{
+    "name": "ld52_collectable_impl",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8b962c8b1898495db4c18981d21eea93",
+        "GUID:a702007b1447d7d4dbb10e029f1815eb",
+        "GUID:ac0910616f0abd8418efcb9680ea05d3",
+        "GUID:91b9059f570ff7546a21a7bb7b0565b6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

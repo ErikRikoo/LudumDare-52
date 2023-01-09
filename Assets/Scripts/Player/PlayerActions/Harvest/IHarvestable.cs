@@ -1,7 +1,9 @@
-﻿namespace Player.PlayerActions.Harvest
+﻿using UnityEngine;
+
+namespace Player.PlayerActions.Harvest
 {
     public interface IHarvestable
     {
-        void OnHarvested(PlayerStats _player);
+        void OnHarvested(GameObject _harvester);
     }
 }

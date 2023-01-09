@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Icon: {fileID: 0}
   m_ItemName: Auto Rifle
-  m_MaxCount: 1
-  Variety: 3
+  m_MaxCount: 100
   GrowthTimeRange: {x: 15, y: 30}
   ShapeSize: {x: 2, y: 2}
   Shape: 01010101

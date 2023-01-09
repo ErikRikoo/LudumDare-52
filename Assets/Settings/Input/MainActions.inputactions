@@ -77,6 +77,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Harvesting",
+                    "type": "Button",
+                    "id": "64f74ebb-7b25-4727-9175-4053e348650d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -203,17 +212,6 @@
                 },
                 {
                     "name": "",
-                    "id": "41a2bf18-ef7a-405d-939b-67d58216e3e9",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Planting",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "74a336c8-6a40-4097-80cb-147d2ff001dc",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -258,12 +256,45 @@
                 },
                 {
                     "name": "",
+                    "id": "39394fb8-e5c9-49cd-aead-447243a4ee0e",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SeedChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "0c635b7c-0a01-4e66-9206-e3cf628eb971",
                     "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SeedChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be23bda7-b3fb-4fef-a708-0021157a44a5",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Planting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc30f27d-a052-4499-abf6-342442187481",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Harvesting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

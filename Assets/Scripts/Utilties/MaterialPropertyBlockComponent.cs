@@ -10,12 +10,12 @@ public class MaterialPropertyBlockComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (_initialized) return;
-        
+        this.Initialize();
     }
 
     public void Initialize()
     {
+        if (_initialized) return;
         _initialized = true;
         MaterialPropertyBlock = new MaterialPropertyBlock();
     }

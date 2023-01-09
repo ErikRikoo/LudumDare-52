@@ -8,8 +8,16 @@ namespace Player.PlayerActions
         
         public void PlantSeed()
         {
-            GameEvents.OnSeedPlanted?.Invoke(m_Stats.Inventory.CurrentSeedItem, transform.position);
-            Debug.Log("Planting");
+            if (m_Stats.Inventory.CurrentSeedItem == null)
+            {
+                return;
+            }
+            
+            m_Stats.Inventory.m_Seeds.ConsumeItem(m_Stats.Inventory.CurrentSeedItem, 1, (plant, _) =>
+            {
+                GameEvents.OnSeedPlanted?.Invoke(plant, transform.position);
+                Debug.Log("Planting");
+            });
         }
     }
 }

@@ -62,6 +62,11 @@ namespace Enemy
         [SerializeField] private AudioClip m_FootstepSound;
         [SerializeField] private ParticleSystem m_HitVFX;
         [SerializeField] private GameObject m_DeathVFX;
+        [SerializeField] private GameObject m_CollectablePrefab;
+        [Range(0, 1)]
+        [SerializeField] private float m_CollectableLuck;
+        
+        
 
         [Header("Animations")] [SerializeField]
         private Animator m_Animator;
@@ -251,10 +256,8 @@ namespace Enemy
             currentHealth = stats.MaxHealth;
             currentAttackSpeed = stats.AttackSpeed;
             currentMoveSpeed = stats.Speed;
-            
-            GameEvents.OnEnemySpawned?.Invoke();
             gameState.numberOfEnemiesAlive++;
-
+            GameEvents.OnEnemySpawned?.Invoke();
         }
 
         IEnumerator AttackLoop()
@@ -311,9 +314,9 @@ namespace Enemy
             GameEvents.OnEnemyKilled?.Invoke();
             InformAboutDeath?.Invoke(gameObject);
 
-            
             yield return new WaitForSeconds(4);
-            Instantiate(m_DeathVFX, transform.position, Quaternion.Euler(-90, 0, 0));
+            var pouf = Instantiate(m_DeathVFX, transform.position, Quaternion.Euler(-90, 0, 0));
+            Destroy(pouf, 5f);
             Die();
         }
 
@@ -328,9 +331,17 @@ namespace Enemy
             if (currentHealth <= 0)
             {
                 StartCoroutine(DeathVFX());
+                SpawnCollectable();
             }
-
         }
 
+        private void SpawnCollectable()
+        {
+            var randomValue = Random.Range(0f, 1f); 
+            if (randomValue < m_CollectableLuck)
+            {
+                Instantiate(m_CollectablePrefab, transform.position, Quaternion.identity);
+            }
+        }
     }
 }
