@@ -8,9 +8,9 @@ namespace Player.PlayerActions.Harvest.Implementation
     {
         public PlantType Seed;
         public int Count;
-        private System.Guid plantId;
+        public System.Guid plantId;
 
-        public Action<System.Guid> WhenHarvested;
+        [NonSerialized] public static Action<System.Guid> WhenHarvested;
 
         public void OnHarvested(GameObject _harvester)
         {

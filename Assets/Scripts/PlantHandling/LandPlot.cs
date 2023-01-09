@@ -69,7 +69,7 @@ public class LandPlot : MonoBehaviour
                 slots[index] = slotGO.GetComponent<LandPlotSlot>();
                 slots[index].landPlot = this;
                 var plantHarvestable = slotGO.GetComponentInChildren<PlantHarvestable>();
-                plantHarvestable.WhenHarvested += PlantHarvested;
+                PlantHarvestable.WhenHarvested += PlantHarvested;
             }
         }
     }
