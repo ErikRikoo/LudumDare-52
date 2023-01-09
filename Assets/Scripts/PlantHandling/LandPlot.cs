@@ -1,6 +1,8 @@
 using Freya;
+using Logic.Scripts.Utilities.Extensions;
 using PlantHandling;
 using PlantHandling.PlantType;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
@@ -21,9 +23,9 @@ public class LandPlot : MonoBehaviour
 
     private class PlantedSeed
     {
-        int[] filledSlots;
-        PlantType type;
-        double plantTime;
+        public int[] filledSlots;
+        public PlantType type;
+        public double plantTime;
         public PlantedSeed(PlantType type, int[] filledSlots, float plantTime)
         {
             this.type = type;
@@ -43,10 +45,11 @@ public class LandPlot : MonoBehaviour
         //generate the thing
         this.transform.position = new Vector3(rect.x, 0.02f, rect.y);
         groundMesh.transform.position = new Vector3(rect.center.x, 0.02f, rect.center.y);
-        groundMesh.transform.localScale = new Vector3(rect.width, rect.height, 1.0f) + new Vector3(2.0f, 2.0f, 0.0f) * plantManager.cellSize;
+        var meshSize = rect.size + new Vector2(1.5f, 1.5f) * plantManager.cellSize;
+        groundMesh.transform.localScale = meshSize.XYtoXYZ(1.0f);
         var groundMPB = groundMesh.GetComponent<MaterialPropertyBlockComponent>();
 		groundMPB.Initialize();
-		groundMPB.MaterialPropertyBlock.SetVector(_sizeID, new Vector4(rect.width * 0.5f, rect.height * 0.5f, 0.0f, 0.0f));
+		groundMPB.MaterialPropertyBlock.SetVector(_sizeID, new Vector4(meshSize.x * 0.5f, meshSize.y * 0.5f, 0.0f, 0.0f));
 		groundMPB.MaterialPropertyBlock.SetFloat(_radiusID, Mathf.Min(rect.width, rect.height) * 0.25f);
 		groundMesh.GetComponent<MeshRenderer>().SetPropertyBlock(groundMPB.MaterialPropertyBlock);
 
@@ -100,7 +103,22 @@ public class LandPlot : MonoBehaviour
         {
             this.slots[index].SetOccupied(plantGuid);
         }
+        StartCoroutine(PlantStateChangeTest(plantGuid));
         return true;
+    }
+
+    IEnumerator PlantStateChangeTest(System.Guid plantGuid)
+    {
+        var guid = plantGuid;
+        yield return new WaitForSeconds(5.0f);
+        if (this.plantedSeeds.Remove(guid, out var plant))
+        {
+            foreach(var slot in plant.filledSlots)
+            {
+                this.slots[slot].SetBlocked();
+            }
+        }
+        yield break;
     }
 
     public bool GetPossiblePlantPlacement(Vector2Int slotCoord, PlantType plant, out Vector2Int[] usedSlots)
