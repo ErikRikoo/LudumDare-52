@@ -693,6 +693,7 @@ MonoBehaviour:
   m_Layer:
     serializedVersion: 2
     m_Bits: 1024
+  m_BulletPrefab: {fileID: 8911618174870111865, guid: 9b7e14234baa0ca4896bc22cc6fed46f, type: 3}
   m_CurrentAmmo: 0
 --- !u!198 &6868723290531664983 stripped
 ParticleSystem:

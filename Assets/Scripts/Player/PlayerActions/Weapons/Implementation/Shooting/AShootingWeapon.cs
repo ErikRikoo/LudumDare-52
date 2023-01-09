@@ -12,6 +12,8 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
         [SerializeField] private ParticleSystem[] m_ShootingEffects;
         [SerializeField] protected Transform m_ShootPosition;
         [SerializeField] private LayerMask m_Layer;
+        [SerializeField] private Bullet m_BulletPrefab;
+        
         
 
         protected Ray RayFromShootPosition => new Ray(m_ShootPosition.position, m_ShootPosition.forward);
@@ -42,6 +44,11 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
         
         public void Shoot(Ray _ray)
         {
+            var bullet = Instantiate(m_BulletPrefab, m_ShootPosition.position, m_ShootPosition.rotation);
+            bullet.Damage = (int) m_Damage;
+            bullet.ShouldDestroyOnTrigger = true;
+            return;
+            
             int count = Physics.RaycastNonAlloc(_ray, m_RaycastBuffer, 1000, m_Layer);
 
             for (int i = 0; i < count; ++i)
@@ -56,6 +63,10 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
 
         public void ShootPiercing(Ray _ray)
         {
+            var bullet = Instantiate(m_BulletPrefab, m_ShootPosition.position, m_ShootPosition.rotation);
+            bullet.Damage = (int) m_Damage;
+            bullet.ShouldDestroyOnTrigger = false;
+            return;
             int count = Physics.RaycastNonAlloc(_ray, m_RaycastBuffer);
 
             for (int i = 0; i < count; ++i)

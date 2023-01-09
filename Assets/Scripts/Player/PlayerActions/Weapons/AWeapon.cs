@@ -10,7 +10,7 @@ namespace Player.PlayerActions.Weapons
     {
         [SerializeField] private Sprite m_Icon;
         [SerializeField] private float m_Rate;
-        [SerializeField] private float m_Damage;
+        [SerializeField] protected float m_Damage;
         [SerializeField] private AudioClip m_AttackSound;
         [SerializeField] private AudioClip m_HitSound;
         [SerializeField] private bool m_Piercing;

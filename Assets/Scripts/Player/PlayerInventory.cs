@@ -64,11 +64,19 @@ namespace Player
             }
 
             GameEvents.OnCurrentSeedChanged += OnCurrentSeedChanged;
+            GameEvents.OnWeaponAmmoEntirelyConsumed += AmmoConsumed;
+        }
+
+        private void AmmoConsumed()
+        {
+            ChangeWeapon(m_FirstWeapon);
         }
 
         private void OnDisable()
         {
             GameEvents.OnCurrentSeedChanged -= OnCurrentSeedChanged;
+            GameEvents.OnWeaponAmmoEntirelyConsumed -= AmmoConsumed;
+
         }
         
         private void OnCurrentSeedChanged(int _index)
