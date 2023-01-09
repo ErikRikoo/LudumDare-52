@@ -20,7 +20,7 @@ namespace Enemy
 
         private Coroutine countdown;
 
-        public List<bool> podIsSpawned = new();
+        public bool[] podIsSpawned;
 
         private void Start()
         {
@@ -68,12 +68,12 @@ namespace Enemy
     
         public void SpawnWave()
         {
-            podIsSpawned.Clear();
 
             var wave = enemyWaves.waves[currentWave];
+            podIsSpawned = new bool[wave.waveData.Length];
             for (var i = 0; i < wave.waveData.Length; i++)
             {
-                podIsSpawned.Add(false);
+                podIsSpawned[i] = false;
                 StartCoroutine(SpawnEnemyPod(wave.waveData[i], i));
                 
             }
@@ -101,18 +101,7 @@ namespace Enemy
 
         public void CheckWaveStatus()
         {
-            // Debug.Log($"Have all pods been spawned {podIsSpawned.Any(x => x != true)}");
-            // Debug.Log($"Is the way not active {!gameState.waveIsActive}");
-            // Debug.Log($"Is the number of enemies alive not equal zero {gameState.numberOfEnemiesAlive != 0}");
-
-
-            var allHaveBeenSpawned = true;
-            foreach (var isSpawned in podIsSpawned)
-            {
-                if (!isSpawned) allHaveBeenSpawned = false;
-            }
-
-            if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !allHaveBeenSpawned) return;
+            if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !podIsSpawned.All(x => x)) return;
             
             gameState.waveIsActive = false;
             

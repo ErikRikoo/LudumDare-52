@@ -256,7 +256,7 @@ namespace Enemy
             currentHealth = stats.MaxHealth;
             currentAttackSpeed = stats.AttackSpeed;
             currentMoveSpeed = stats.Speed;
-            
+            gameState.numberOfEnemiesAlive++;
             GameEvents.OnEnemySpawned?.Invoke();
         }
 
@@ -313,11 +313,10 @@ namespace Enemy
             gameState.numberOfEnemiesAlive--;
             GameEvents.OnEnemyKilled?.Invoke();
             InformAboutDeath?.Invoke(gameObject);
-            Debug.Log("Death! Death! Death!");
 
-            
             yield return new WaitForSeconds(4);
-            Instantiate(m_DeathVFX, transform.position, Quaternion.Euler(-90, 0, 0));
+            var pouf = Instantiate(m_DeathVFX, transform.position, Quaternion.Euler(-90, 0, 0));
+            Destroy(pouf, 5f);
             Die();
         }
 

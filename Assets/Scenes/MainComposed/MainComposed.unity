@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366753, g: 0.48427093, b: 0.5645238, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -332,11 +332,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3459803938602635834, guid: 7be2fee2ec1f84c29b74bcbb1de4cedc, type: 3}
   m_PrefabInstance: {fileID: 356126557}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &356126559 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3459803938602635782, guid: 7be2fee2ec1f84c29b74bcbb1de4cedc, type: 3}
-  m_PrefabInstance: {fileID: 356126557}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &410192542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3881592083679240707, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
@@ -439,11 +434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1187576988687122269, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000021459796
+      value: 0.000000015174368
       objectReference: {fileID: 0}
     - target: {fileID: 1187576988687122269, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000011471542
+      value: -0.000000008111606
       objectReference: {fileID: 0}
     - target: {fileID: 1994115291378102997, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -747,11 +742,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7357489623102779832, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000021459796
+      value: 0.000000015174368
       objectReference: {fileID: 0}
     - target: {fileID: 7357489623102779832, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000011471542
+      value: -0.000000008111606
       objectReference: {fileID: 0}
     - target: {fileID: 7367841724794462233, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1245,8 +1240,8 @@ MonoBehaviour:
   gameState: {fileID: 11400000, guid: ed9d27f7c55af4b45a5cda05902ca3b1, type: 2}
   spawnRadius: 20
   spawnArea: 5
-  silo: {fileID: 356126559}
-  timeToNextWave: 5
+  timeToTextWave: 5
+  podIsSpawned: 
 --- !u!4 &1571292459
 Transform:
   m_ObjectHideFlags: 0
