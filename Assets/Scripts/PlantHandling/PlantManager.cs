@@ -17,6 +17,7 @@ namespace PlantHandling
         [MinMaxSlider(0.0f, 30.0f)]
         public Vector2 blockTimeRange;
         public PlantType.PlantType[] plantTypes;
+        [ReadOnly]
         public List<LandPlot> landPlots;
         public GameObject LandPlotGO;
         public Vector2 TimeBetweenLandPlotGeneration;
