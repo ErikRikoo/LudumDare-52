@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b4cfd28f434aa89f1b8b21c1f34489, type: 3}
   m_Name: S_Pistol
   m_EditorClassIdentifier: 
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 21300000, guid: c185d174e716a2648976f6ae359b220f, type: 3}
   m_ItemName: Pistol
   m_MaxCount: 100
   GrowthTimeRange: {x: 10, y: 20}

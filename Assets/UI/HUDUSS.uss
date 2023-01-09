@@ -98,9 +98,8 @@
     position: absolute;
     width: 110%;
     height: 110%;
-    -unity-background-scale-mode: scale-and-crop;
+    -unity-background-scale-mode: scale-to-fit;
     bottom: 18px;
-    left: 20px;
 }
 
 .hud-seed-slot-label {
