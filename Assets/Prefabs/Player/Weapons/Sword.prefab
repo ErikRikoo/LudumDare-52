@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.6263586
       objectReference: {fileID: 0}
+    - target: {fileID: 9102948511859409284, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7658547837206106572, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
     m_AddedGameObjects:
@@ -210,7 +214,7 @@ MonoBehaviour:
   m_Icon: {fileID: 0}
   m_Rate: 1
   m_Damage: 1
-  m_AttackSound: {fileID: 0}
+  m_AttackSound: {fileID: 8300000, guid: 5ae913f63a19d478d97343c8b42b0124, type: 3}
   m_HitSound: {fileID: 0}
   m_Piercing: 1
   m_Collider: {fileID: 6699243452655502449}
