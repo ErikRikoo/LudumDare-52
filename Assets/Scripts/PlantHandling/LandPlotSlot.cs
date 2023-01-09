@@ -64,7 +64,7 @@ namespace PlantHandling
             return this.State == SlotState.Available;
         }
         
-        public void SetPlanted(System.Guid guid)
+        public void SetPlanted(System.Guid guid, float growTime)
         {
             this.State = SlotState.Growing;
             this.guid = guid;
@@ -83,7 +83,6 @@ namespace PlantHandling
                 damageTrigger.id = this.guid;
 
                 plantHarvestable.Seed = plantedSeed.type;
-                float growTime = Random.Range(plantedSeed.type.GrowthTimeRange.x, plantedSeed.type.GrowthTimeRange.y);
                 StartCoroutine(GrowPlant(growTime));
             }
             else
