@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Stats: {fileID: 405276241}
   m_Seeds:
     m_MaxItemCount: 0
-  m_Plants: {fileID: 0}
+  m_Plants: {fileID: 11400000, guid: 8ac78b3214d97094a9e14449b1b438fa, type: 2}
   m_WeaponHolder: {fileID: 1446430921}
   m_FirstWeapon: {fileID: 6212035694545999813}
 --- !u!114 &2143342367
