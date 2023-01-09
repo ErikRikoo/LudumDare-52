@@ -1193,8 +1193,7 @@ MonoBehaviour:
   spawnRadius: 20
   spawnArea: 5
   silo: {fileID: 356126559}
-  timeToTextWave: 5
-  podIsSpawned: 
+  timeToNextWave: 5
 --- !u!4 &1571292459
 Transform:
   m_ObjectHideFlags: 0
