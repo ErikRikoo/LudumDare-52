@@ -434,11 +434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1187576988687122269, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015174368
+      value: -0.000000015174368
       objectReference: {fileID: 0}
     - target: {fileID: 1187576988687122269, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000008111606
+      value: 0.000000008111606
       objectReference: {fileID: 0}
     - target: {fileID: 1994115291378102997, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -492,6 +492,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.00002644822
       objectReference: {fileID: 0}
+    - target: {fileID: 3881592083874519146, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
+      propertyPath: _source
+      value: 
+      objectReference: {fileID: 1385877375}
+    - target: {fileID: 3881592083874519146, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
+      propertyPath: _pickpClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a97d58ab0bf2a4ee4822f46cb87a67d4, type: 3}
     - target: {fileID: 4258159433492117445, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -87.69895
@@ -742,11 +750,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7357489623102779832, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015174368
+      value: -0.000000015174368
       objectReference: {fileID: 0}
     - target: {fileID: 7357489623102779832, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000008111606
+      value: 0.000000008111606
       objectReference: {fileID: 0}
     - target: {fileID: 7367841724794462233, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1030,7 +1038,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
