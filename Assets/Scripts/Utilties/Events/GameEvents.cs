@@ -1,4 +1,5 @@
 ﻿using System;
+using General.TutorialData;
 using Inventory;
 using PlantHandling.PlantType;
 using Player.PlayerActions.Weapons;
@@ -31,4 +32,5 @@ public static class GameEvents
     [NonSerialized] public static Action OnGameLose;
     [NonSerialized] public static Action OnPopupOpened;
     [NonSerialized] public static Action OnPopupClosed;
+    [NonSerialized] public static Action<TutorialEvent> OnTutoAsked;
 }

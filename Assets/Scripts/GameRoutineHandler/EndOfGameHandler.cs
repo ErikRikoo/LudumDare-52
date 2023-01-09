@@ -32,6 +32,7 @@ namespace General
 
         private void OnGameLose()
         {
+            // TODO: Have an event instead of referencing the UI MB
             DisplayPopUp(m_LooseTitle, m_LooseText, m_LooseIcon);
         }
 
