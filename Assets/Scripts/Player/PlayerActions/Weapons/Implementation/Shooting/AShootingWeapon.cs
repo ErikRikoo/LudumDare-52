@@ -11,6 +11,8 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
         [SerializeField] protected int m_AmmoPerShoot;
         [SerializeField] private ParticleSystem[] m_ShootingEffects;
         [SerializeField] protected Transform m_ShootPosition;
+        [SerializeField] private LayerMask m_Layer;
+        
 
         protected Ray RayFromShootPosition => new Ray(m_ShootPosition.position, m_ShootPosition.forward);
         
@@ -22,9 +24,9 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
         public override bool HasAmmo => true;
         protected override void TriggerAttack()
         {
-            m_Ammo -= m_AmmoPerShoot;
-            GameEvents.OnAmmoChanged?.Invoke(m_Ammo);
-            if (m_Ammo <= 0)
+            m_CurrentAmmo -= m_AmmoPerShoot;
+            GameEvents.OnAmmoChanged?.Invoke(m_CurrentAmmo);
+            if (m_CurrentAmmo <= 0)
             {
                 GameEvents.OnWeaponAmmoEntirelyConsumed?.Invoke();
             }
@@ -40,7 +42,7 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
         
         public void Shoot(Ray _ray)
         {
-            int count = Physics.RaycastNonAlloc(_ray, m_RaycastBuffer);
+            int count = Physics.RaycastNonAlloc(_ray, m_RaycastBuffer, 1000, m_Layer);
 
             for (int i = 0; i < count; ++i)
             {

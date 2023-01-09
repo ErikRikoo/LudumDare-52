@@ -611,6 +611,9 @@ MonoBehaviour:
   - {fileID: 6868723290531664983}
   - {fileID: 9102692709158839981}
   m_ShootPosition: {fileID: 1779964150302318126}
+  m_Layer:
+    serializedVersion: 2
+    m_Bits: 1024
   m_CurrentAmmo: 0
   m_HalfShootingAngle: 49.4
 --- !u!198 &6868723290531664983 stripped

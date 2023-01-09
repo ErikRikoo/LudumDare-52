@@ -32,7 +32,13 @@ namespace Player
             get => m_Stats.CurrentWeapon;
             set
             {
+                if (CurrentWeapon != null)
+                {
+                    CurrentWeapon.gameObject.SetActive(false);
+                }
+                
                 m_Stats.CurrentWeapon = value;
+                CurrentWeapon.gameObject.SetActive(true);
                 GameEvents.OnWeaponChanged?.Invoke(value);
             }
         }
@@ -70,7 +76,7 @@ namespace Player
             m_CurrentSeed = _index;
         }
 
-        private void Awake()
+        private void Start()
         {
             m_Weapons.Add(m_FirstWeapon);
             CurrentWeapon = m_FirstWeapon;

@@ -690,6 +690,9 @@ MonoBehaviour:
   - {fileID: 9102692709158839981}
   - {fileID: 6868723290531664983}
   m_ShootPosition: {fileID: 1779964150302318126}
+  m_Layer:
+    serializedVersion: 2
+    m_Bits: 1024
   m_CurrentAmmo: 0
 --- !u!198 &6868723290531664983 stripped
 ParticleSystem:
