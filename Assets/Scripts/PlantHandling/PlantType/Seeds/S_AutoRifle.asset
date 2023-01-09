@@ -18,4 +18,5 @@ MonoBehaviour:
   GrowthTimeRange: {x: 15, y: 30}
   ShapeSize: {x: 2, y: 2}
   Shape: 01010101
+  plantedHealth: 10
   Weapon: {fileID: 2134575286684115429, guid: 1ef50c88c56101c41ac32023022f2fa8, type: 3}
