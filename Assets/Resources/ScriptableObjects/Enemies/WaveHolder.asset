@@ -15,12 +15,19 @@ MonoBehaviour:
   waves:
   - waveData:
     - enemyPrefab: {fileID: 2692221244290817224, guid: 7614ef16c50014940a7672c4c8189fb6, type: 3}
-      numberOfSpaws: 1
+      numberOfSpaws: 5
       delay: 0
-    - enemyPrefab: {fileID: 2692221244290817224, guid: 7614ef16c50014940a7672c4c8189fb6, type: 3}
-      numberOfSpaws: 1
-      delay: 5
   - waveData:
     - enemyPrefab: {fileID: 2692221244290817224, guid: 7614ef16c50014940a7672c4c8189fb6, type: 3}
-      numberOfSpaws: 1
+      numberOfSpaws: 7
       delay: 0
+    - enemyPrefab: {fileID: 2692221244290817224, guid: 7614ef16c50014940a7672c4c8189fb6, type: 3}
+      numberOfSpaws: 4
+      delay: 10
+  - waveData:
+    - enemyPrefab: {fileID: 2692221244290817224, guid: 7614ef16c50014940a7672c4c8189fb6, type: 3}
+      numberOfSpaws: 10
+      delay: 0
+    - enemyPrefab: {fileID: 2692221244290817224, guid: 7614ef16c50014940a7672c4c8189fb6, type: 3}
+      numberOfSpaws: 5
+      delay: 10
