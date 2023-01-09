@@ -53,6 +53,7 @@ namespace PlantHandling
         {
             GameEvents.OnCurrentSeedChanged -= OnCurrentSeedChanged;
             GameEvents.OnSeedPlanted -= OnSeedPlanted;
+            StopAllCoroutines();
 
         }
         
@@ -72,7 +73,7 @@ namespace PlantHandling
 
                 if (landPlot.PlantSeed(slotCoord, choosen, out var usedSlots))
                 {
-                    GameEvents.OnSuccessfulPlantedSeed.Invoke(choosen);
+                    //GameEvents.OnSuccessfulPlantedSeed.Invoke(choosen);
                 }
             }
         }
