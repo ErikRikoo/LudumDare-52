@@ -28,6 +28,9 @@ namespace Player
                 GameEvents.OnWeaponChanged?.Invoke(value);
             }
         }
+        
+        public bool CanPlantCurrentSeed => m_Seeds.Get(CurrentSeed).Count > 0;
+
 
         private int m_CurrentSeed;
 
