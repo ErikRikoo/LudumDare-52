@@ -51,7 +51,7 @@ namespace PlantHandling
         {
             this.State = SlotState.Available;
             this.guid = System.Guid.Empty;
-
+            StopAllCoroutines();
             meshFilter.sharedMesh = availableMesh;
             blockTimerEditor.gameObject.SetActive(false);
             growthTimeEditor.gameObject.SetActive(false);
@@ -84,6 +84,7 @@ namespace PlantHandling
 
                 plantHarvestable.Seed = plantedSeed.type;
                 plantHarvestable.plantId = this.guid;
+                StopAllCoroutines();
                 StartCoroutine(GrowPlant(growTime));
             }
             else
@@ -98,6 +99,7 @@ namespace PlantHandling
 
         public void SetReady()
         {
+            StopAllCoroutines();
             blockTimerEditor.gameObject.SetActive(false);
             growthTimeEditor.gameObject.SetActive(false);
             readyParticlesGO.gameObject.SetActive(true);
@@ -118,6 +120,7 @@ namespace PlantHandling
             plantHarvestable.gameObject.SetActive(false);
             damageTrigger.gameObject.SetActive(false);
 
+            StopAllCoroutines();
             StartCoroutine(ResetToAvailable());
         }
         public bool IsBlocked()
@@ -129,7 +132,7 @@ namespace PlantHandling
         {
             var blockTime = Random.Range(plantManager.blockTimeRange.x, plantManager.blockTimeRange.y);
             var initialTime = Time.time;
-
+            yield return null;
             while (true)
             {
                 if (State != SlotState.Blocked) yield break;
@@ -150,7 +153,7 @@ namespace PlantHandling
         IEnumerator GrowPlant(float growTime)
         {
             var initialTime = Time.time;
-
+            yield return null;
             while (true)
             {
                 if (State != SlotState.Growing) yield break;

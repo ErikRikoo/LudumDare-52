@@ -78,7 +78,7 @@ public class LandPlot : MonoBehaviour
     {
         if (this.plantedSeeds.Remove(id, out var plant))
         {
-            GameEvents.OnSuccessfulHarvest.Invoke(plant.type);
+            GameEvents.OnSuccessfulHarvest?.Invoke(plant.type);
             foreach (var slot in plant.filledSlots)
             {
                 this.slots[slot].SetBlocked();

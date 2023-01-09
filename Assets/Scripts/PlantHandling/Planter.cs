@@ -73,7 +73,7 @@ namespace PlantHandling
 
                 if (landPlot.PlantSeed(slotCoord, choosen, out var usedSlots))
                 {
-                    //GameEvents.OnSuccessfulPlantedSeed.Invoke(choosen);
+                    GameEvents.OnSuccessfulPlantedSeed?.Invoke(choosen);
                 }
             }
         }
