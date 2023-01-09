@@ -170,7 +170,7 @@ namespace UI
 			GameEvents.OnPopupOpened?.Invoke();
 		}
 
-		private void HidePopup()
+		public void HidePopup()
 		{
 			UIAnimationUtils.FadeOut(elements.PopupContainer);
 			
