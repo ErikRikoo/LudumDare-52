@@ -309,8 +309,9 @@ namespace Enemy
             }
             
             _collider.enabled = false;
-            m_Agent.destination = transform.position;
-            m_Agent.stoppingDistance = 0;
+            m_Agent.enabled = false;
+            // m_Agent.destination = transform.position;
+            // m_Agent.stoppingDistance = 0;
             _audioSource.pitch = Random.Range(0.6f, 1.1f);
             _audioSource.PlayOneShot(m_DeathSound);
             _rigidbody.isKinematic = true;
