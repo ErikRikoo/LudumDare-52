@@ -298,6 +298,7 @@
     padding-bottom: 0;
     color: rgb(66, 59, 44);
     width: 100%;
+    white-space: normal;
 }
 
 .hud-popup-close-button-icon {
@@ -383,7 +384,7 @@
     height: 100%;
     -unity-text-align: middle-center;
     font-size: 45px;
-    color: rgba(66, 59, 44, 255);
+    color: rgb(66, 59, 44);
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
