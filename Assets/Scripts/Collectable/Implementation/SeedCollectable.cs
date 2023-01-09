@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using PlantHandling.PlantType;
 using Player.PlayerActions;
@@ -22,6 +23,9 @@ namespace Collectable.Implementation
         [SerializeField] private PlantItem[] m_items;
         [SerializeField] private FloatRange m_CountRange;
 
+        private Rigidbody _rgbd;
+        private SphereCollider _sphereCollider;
+
         public override void OnCollected(GameObject collector)
         {
             if (collector.TryGetComponent<PlayerStats>(out var stats))
@@ -30,6 +34,29 @@ namespace Collectable.Implementation
                 int count = (int) m_CountRange.RandomValue;
                 stats.Inventory.AddSeed(randomSeed, count);
             }
+        }
+
+        private void Awake()
+        {
+            _rgbd = GetComponent<Rigidbody>();
+            _sphereCollider = GetComponent<SphereCollider>();
+        }
+
+        private void Start()
+        {
+            // _rgbd.isKinematic = false;
+            // _rgbd.AddForce(transform.forward * 10);     
+            _sphereCollider.isTrigger = true;
+            StartCoroutine(EnableCollider());
+
+
+        }
+
+        IEnumerator EnableCollider()
+        {
+            yield return new WaitForSeconds(0.5f);
+            _sphereCollider.enabled = true;
+            _rgbd.isKinematic = true;
         }
 
         private PlantType GetRandomPlant()

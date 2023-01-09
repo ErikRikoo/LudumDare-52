@@ -249,7 +249,7 @@ namespace Enemy
             potentialTargets.Push(target);
 
             m_Agent.destination = closestPoint;
-            m_Agent.speed = stats.Speed;
+            m_Agent.speed = stats.Speed + Random.Range(-1, 0.5f);
             m_Agent.stoppingDistance = stats.Range;
 
             currentDamage = stats.Damage;
