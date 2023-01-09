@@ -70,18 +70,10 @@ namespace PlantHandling
                 var landPlot = plantManager.landPlots[landPlotIndex];
                 lastPlotRect = landPlot.Rect;
 
-                slots.Add(slotCoord);
                 if (landPlot.PlantSeed(slotCoord, choosen, out var usedSlots))
                 {
-                    slots.AddRange(usedSlots);
+                    GameEvents.OnSuccessfulPlantedSeed.Invoke(choosen);
                 }
-                
-
-                slotPositions = plantManager.TransformSlotCoordinatesToPositions(slots.ToArray(), landPlotIndex);
-            }
-            else
-            {
-                slotPositions = new Vector2[0];
             }
         }
 
@@ -122,10 +114,6 @@ namespace PlantHandling
                 var cursorSlotPositions = plantManager.TransformSlotCoordinatesToPositions(cursorSlots.ToArray(), landPlotIndex);
                 plantManager.RenderCurrentCursor(cursorSlotPositions);
             }
-            else
-            {
-                slotPositions = new Vector2[0];
-            }
 
             _lastMousePosition = hitPoint + Vector3.up * 0.05f;
         }
@@ -137,29 +125,5 @@ namespace PlantHandling
             Gizmos.DrawWireSphere(Vector3.zero, plantManager.LandPlotGenerationRange.x);
             Gizmos.DrawWireSphere(Vector3.zero, plantManager.LandPlotGenerationRange.y);
         }
-            /*if (Application.isPlaying)
-            {
-                var positionCenter = lastPlotRect.center.X0Y() + new Vector3(0, 0.15f, 0);
-                for (int i = 0; i < 9; i++)
-                {
-                    Gizmos.DrawWireCube(positionCenter, lastPlotRect.size.X0Y() * (1.0f - (float)i * 0.1f));
-                }
-                if (slotPositions == null || slotPositions.Length == 0) return;
-                var color = Gizmos.color;
-                for (int i = 1; i < slotPositions.Length; i++)
-                {
-                    var slotPos = slotPositions[i];
-                    Gizmos.color = Color.grey;
-                    Gizmos.DrawCube(slotPos.X0Y() + new Vector3(0, 0.25f, 0), new Vector3(1.0f, 0.2f, 1.0f) * plantManager.cellSize * 0.8f);
-                }
-                {
-                    var slotPos = slotPositions[0];
-                    Gizmos.color = Color.cyan;
-                    Gizmos.DrawCube(slotPos.X0Y() + new Vector3(0, 0.35f, 0), new Vector3(1.0f, 0.3f, 1.0f) * plantManager.cellSize * 0.6f);
-                }
-
-                Gizmos.color = color;
-            }
-        }*/
     }
 }
