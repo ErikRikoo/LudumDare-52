@@ -6,9 +6,10 @@ namespace Collectable
     {
         [SerializeField] private ACollectableMB m_CollectableToDrop;
 
-        public void DropItem()
+        public T DropItem<T>()
+            where T : ACollectableMB
         {
-            Instantiate(m_CollectableToDrop, transform.position, Quaternion.identity);
+            return Instantiate(m_CollectableToDrop, transform.position, Quaternion.identity) as T;
         }
     }
 }

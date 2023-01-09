@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a28f1e0cee45348cda56ca8abd8231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Stats: {fileID: 0}
   m_HarvestingRadius: 2
   m_HarvestMask:
     serializedVersion: 2
@@ -365,7 +366,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0336e0f62222427ea6922c4b02952a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Stats: {fileID: 405276241}
   m_DetectionRadius: 2
+  m_TweenAnimationDuration: 0.1
+  m_EaseType: 5
 --- !u!1 &7478815620569426876
 GameObject:
   m_ObjectHideFlags: 0

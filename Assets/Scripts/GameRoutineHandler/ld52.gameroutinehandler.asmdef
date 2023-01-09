@@ -1,0 +1,17 @@
+{
+    "name": "ld52_gameroutinehandler",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a4c68a3522b4a5c4d9b132d5d52b7395",
+        "GUID:b6a17ae10a8177a45a8518597f94a96e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

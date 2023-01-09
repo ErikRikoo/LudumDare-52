@@ -62,11 +62,43 @@ namespace PlantHandling
         private void OnEnable()
         {
             GameEvents.OnCurrentSeedChanged += OnCurrentSeedChanged;
+            GameEvents.OnSeedPlanted += OnSeedPlanted;
         }
 
         private void OnDisable()
         {
             GameEvents.OnCurrentSeedChanged -= OnCurrentSeedChanged;
+            GameEvents.OnSeedPlanted -= OnSeedPlanted;
+
+        }
+        
+        private void OnSeedPlanted(PlantType.PlantType choosen, Vector3 _)
+        {
+            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            _groundPlane.Raycast(ray, out var distance);
+            var hitPoint = ray.GetPoint(distance);
+            var planePoint = hitPoint.XZ();
+
+            lastPlotRect = new Rect();
+            var slots = new List<Vector2Int>();
+            if (plantManager.GetLandPlotAndSlotAt(planePoint, out var landPlotIndex, out var slotCoord))
+            {
+                var landPlot = plantManager.landPlots[landPlotIndex];
+                lastPlotRect = landPlot.Rect;
+
+                slots.Add(slotCoord);
+                if (landPlot.PlantSeed(slotCoord, choosen, out var usedSlots))
+                {
+                    slots.AddRange(usedSlots);
+                }
+                
+
+                slotPositions = plantManager.TransformSlotCoordinatesToPositions(slots.ToArray(), landPlotIndex);
+            }
+            else
+            {
+                slotPositions = new Vector2[0];
+            }
         }
 
         void OnCurrentSeedChanged(int plantType)
@@ -96,21 +128,12 @@ namespace PlantHandling
                 if (plantType >= 0 && plantType < plantManager.plantTypes.Length)
                 {
                     var plant = plantManager.plantTypes[this.plantType];
-                    if (Input.GetMouseButtonUp(1))
+                    
+                    if(landPlot.GetPossiblePlantPlacement(slotCoord, plant, out var usedSlots))
                     {
-                        Debug.Log("Hey mouse up");
-                        if (landPlot.PlantSeed(slotCoord, plant, out var usedSlots))
-                        {
-                            cursorSlots.AddRange(usedSlots);
-                        }
+                        cursorSlots.AddRange(usedSlots);
                     }
-                    else
-                    {
-                        if(landPlot.GetPossiblePlantPlacement(slotCoord, plant, out var usedSlots))
-                        {
-                            cursorSlots.AddRange(usedSlots);
-                        }
-                    }
+                    
                 }
                 var cursorSlotPositions = plantManager.TransformSlotCoordinatesToPositions(cursorSlots.ToArray(), landPlotIndex);
                 plantManager.RenderCurrentCursor(cursorSlotPositions);
@@ -119,6 +142,7 @@ namespace PlantHandling
             {
                 slotPositions = new Vector2[0];
             }
+
             _lastMousePosition = hitPoint + Vector3.up * 0.05f;
         }
 

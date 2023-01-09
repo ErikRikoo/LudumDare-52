@@ -1,5 +1,6 @@
 ﻿
 using Inventory;
+using Player.PlayerActions.Weapons;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -17,6 +18,9 @@ namespace PlantHandling.PlantType
         [HideInInspector]
         public bool[] Shape;        
         public string ToolTip => $"{ItemName}\nGrowth:\n{GrowthTimeRange.x}s - {GrowthTimeRange.y}s";
+
+        [SerializeField] public AWeapon Weapon;
+        
 
         public bool ShapeAt(int x, int y)
         {

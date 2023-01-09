@@ -14,14 +14,13 @@ namespace Enemy
         [SerializeField] private GameState gameState;
         [SerializeField] private float spawnRadius;
         [SerializeField] private float spawnArea;
-        [SerializeField] private GameObject silo;
-    
-        [ShowInInspector] private int currentWave = 0;
+
+        [ShowInInspector] private int currentWave;
         [SerializeField] private float timeToTextWave = 5f;
 
-        private Coroutine countdown = null;
+        private Coroutine countdown;
 
-        public List<bool> podIsSpawned = new List<bool>();
+        public bool[] podIsSpawned;
 
         private void Start()
         {
@@ -29,7 +28,16 @@ namespace Enemy
             gameState.timeToNextWave = 0;
             currentWave = 0;
             SpawnWave();
+        }
+
+        private void OnEnable()
+        {
             GameEvents.OnEnemyKilled += CheckWaveStatus;
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnEnemyKilled -= CheckWaveStatus;
         }
 
         private void IncrementCurrentWave()
@@ -43,13 +51,7 @@ namespace Enemy
             var vector2 = Random.insideUnitCircle.normalized * radius;
             return new Vector3(vector2.x, 0, vector2.y);
         }
-
-        // private void Update()
-        // {
-        //     Debug.Log(podIsSpawned.Count);
-        // }
-
-
+        
         private IEnumerator SpawnEnemyPod(SpawnTypeData pod, int index)
         {
             yield return new WaitForSeconds(pod.delay);
@@ -66,13 +68,9 @@ namespace Enemy
     
         public void SpawnWave()
         {
-            podIsSpawned.Clear();
-            for (var i = 0; i < enemyWaves.waves[currentWave].waveData.Length; i++)
-            {
-                podIsSpawned.Add(false);
-            }
-            
+
             var wave = enemyWaves.waves[currentWave];
+            podIsSpawned = new bool[wave.waveData.Length];
             for (var i = 0; i < wave.waveData.Length; i++)
             {
                 podIsSpawned[i] = false;
@@ -103,18 +101,7 @@ namespace Enemy
 
         public void CheckWaveStatus()
         {
-            // Debug.Log($"Have all pods been spawned {podIsSpawned.Any(x => x != true)}");
-            // Debug.Log($"Is the way not active {!gameState.waveIsActive}");
-            // Debug.Log($"Is the number of enemies alive not equal zero {gameState.numberOfEnemiesAlive != 0}");
-
-
-            var allHaveBeenSpawned = true;
-            foreach (var isSpawned in podIsSpawned)
-            {
-                if (!isSpawned) allHaveBeenSpawned = false;
-            }
-
-            if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !allHaveBeenSpawned) return;
+            if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !podIsSpawned.All(x => x)) return;
             
             gameState.waveIsActive = false;
             
@@ -135,8 +122,7 @@ namespace Enemy
                 countdown = StartCoroutine(CountdownToNextWave(timeToTextWave));
             }
         }
-
-
+        
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.white;

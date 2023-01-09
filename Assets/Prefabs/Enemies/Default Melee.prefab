@@ -501,6 +501,8 @@ MonoBehaviour:
   m_FootstepSound: {fileID: 0}
   m_HitVFX: {fileID: 5072739621812081592}
   m_DeathVFX: {fileID: 1719011652297332488, guid: 0a82574993b9cd2479805ddbd0789965, type: 3}
+  m_CollectablePrefab: {fileID: 5520350862884998270, guid: 9383f2e8415e7364c8ab825e42843bb6, type: 3}
+  m_CollectableLuck: 1
   m_Animator: {fileID: 7127322945669023816}
   target: {fileID: 0}
   m_RefreshRate: 0
