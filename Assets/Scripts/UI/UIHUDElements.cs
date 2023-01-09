@@ -69,6 +69,7 @@ namespace UI
 
 		private void InstantiateSeedSlots()
 		{
+			var index = 0;
 			foreach (var plantType in plantManager.plantTypes)
 			{
 				var seedSlotInstance = _seedSlotTemplate.templateSource.Instantiate();
@@ -89,11 +90,18 @@ namespace UI
 				_inventory.Add(seedButton);
 				_tooltips.Add(tooltip);
 
-				_seedSlotButtons.Add(plantType, seedButton);
+                var b_index = index;
+                seedButton.clicked += () =>
+				{
+                    GameEvents.OnCurrentSeedChanged.Invoke(b_index);
+                };
+
+                _seedSlotButtons.Add(plantType, seedButton);
 				_seedSlotIcons.Add(plantType, seedIcon);
 				_seedSlotLabels.Add(plantType, seedLabel);
 				_seedSlotTooltips.Add(plantType, tooltip);
-			}
+				index++;
+            }
 		}
 		
 		private void Reset()

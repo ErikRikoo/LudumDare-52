@@ -14,15 +14,15 @@ public static class GameEvents
     }
 
     // TODO use a named tuple
-    public static Action<InventoryItem, int> OnPlayerGainedItem;
-    public static Action OnPlayerGainedAllItems;
-    public static Action<PlantType, Vector3> OnSeedPlanted;
-    public static Action<PlantType, bool> OnSeedGained;
-    public static Action<int> OnCurrentSeedChanged;
-    public static Action<AWeapon> OnWeaponChanged;
-    public static Action OnWeaponAmmoEntirelyConsumed;
-    public static Action<int> OnAmmoChanged;
-    public static Action<float> OnSiloGotHit;
-    public static Action OnEnemyKilled;
-    public static Action OnEnemySpawned;
+    [NonSerialized] public static Action<InventoryItem, int> OnPlayerGainedItem;
+    [NonSerialized] public static Action OnPlayerGainedAllItems;
+    [NonSerialized] public static Action<PlantType, Vector3> OnSeedPlanted;
+    [NonSerialized] public static Action<PlantType, bool> OnSeedGained;
+    [NonSerialized] public static Action<int> OnCurrentSeedChanged;
+    [NonSerialized] public static Action<AWeapon> OnWeaponChanged;
+    [NonSerialized] public static Action OnWeaponAmmoEntirelyConsumed;
+    [NonSerialized] public static Action<int> OnAmmoChanged;
+    [NonSerialized] public static Action<float> OnSiloGotHit;
+    [NonSerialized] public static Action OnEnemyKilled;
+    [NonSerialized] public static Action OnEnemySpawned;
 }
