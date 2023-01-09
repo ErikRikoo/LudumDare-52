@@ -2,7 +2,9 @@
     "name": "ld52.player.harvest.impl",
     "rootNamespace": "",
     "references": [
-        "GUID:2605cf804a5f4569a7412a6aa904839d"
+        "GUID:2605cf804a5f4569a7412a6aa904839d",
+        "GUID:a702007b1447d7d4dbb10e029f1815eb",
+        "GUID:ac0910616f0abd8418efcb9680ea05d3"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
