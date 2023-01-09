@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting.YamlDotNet.Serialization.ObjectGraphTraversalStrategies;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -89,7 +90,7 @@ namespace Enemy
             while (countdownTime > 0)
             {
                 countdownTime -= Time.deltaTime;
-                gameState.timeToNextWave = countdownTime;
+                gameState.timeToNextWave = Mathf.RoundToInt(countdownTime);
                 yield return null;
             }
             
