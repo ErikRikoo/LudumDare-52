@@ -5,8 +5,9 @@ using PlantHandling.PlantType;
 using Player.PlayerActions.Weapons;
 using UnityEditor;
 using UnityEngine;
-
+#if UNITY_EDITOR
 [InitializeOnLoad]
+#endif
 public static class GameEvents
 {
     static GameEvents()

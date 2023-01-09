@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Sirenix.OdinInspector.Editor.StateUpdaters;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player.PlayerActions.Weapons.Implementation.Shooting
@@ -10,6 +7,8 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
     {
         [Range(0, 180)]
         [SerializeField] private float m_HalfShootingAngle;
+
+#if UNITY_EDITOR
 
         private void OnDrawGizmos()
         {
@@ -26,6 +25,7 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
 
             Gizmos.color = Color.green;
         }
+        #endif
 
         protected override void ShootRoutine()
         {
