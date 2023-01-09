@@ -20,6 +20,9 @@
         <ui:VisualElement name="HUD-Enemies" class="hud-enemies">
             <ui:Label tabindex="-1" text="20" display-tooltip-when-elided="true" name="HUD-Enemies-Label" class="hud-enemies-label" />
         </ui:VisualElement>
+        <ui:VisualElement name="HUD-Timer" class="hud-timer">
+            <ui:Label tabindex="-1" text="20" display-tooltip-when-elided="true" name="HUD-Timer-Label" class="hud-timer-label" />
+        </ui:VisualElement>
         <ui:VisualElement name="HUD-Tooltips" class="hud-tooltips" />
         <ui:VisualElement name="HUD-Popup-Container" class="hud-popup-container">
             <ui:VisualElement name="Scene-Overlay" class="scene-overlay" />
