@@ -2,6 +2,7 @@ using Freya;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using PlantHandling.PlantType;
 using TreeEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -16,7 +17,9 @@ namespace PlantHandling
         public float cellSize;
         [MinMaxSlider(0.0f, 30.0f)]
         public Vector2 blockTimeRange;
-        public PlantType.PlantType[] plantTypes;
+
+        [SerializeField] public PlantList plants;
+        
         [ReadOnly]
         public List<LandPlot> landPlots;
         public GameObject LandPlotGO;

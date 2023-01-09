@@ -109,9 +109,9 @@ namespace PlantHandling
                 lastPlotRect = landPlot.Rect;
 
                 slots.Add(slotCoord);
-                if (plantType >= 0 && plantType < plantManager.plantTypes.Length)
+                if (plantType >= 0 && plantType < plantManager.plants.Length)
                 {
-                    var plant = plantManager.plantTypes[this.plantType];
+                    var plant = plantManager.plants[this.plantType];
                     
                     if(landPlot.GetPossiblePlantPlacement(slotCoord, plant, out var usedSlots))
                     {
