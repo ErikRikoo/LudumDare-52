@@ -1,6 +1,7 @@
 using Freya;
 using PlantHandling;
 using PlantHandling.PlantType;
+using Player.PlayerActions.Harvest.Implementation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class LandPlot : MonoBehaviour
     public Rect Rect => rect;
     Rect rect;
     public Vector2Int size;
-    Dictionary<System.Guid, PlantedSeed> plantedSeeds;
+    public Dictionary<System.Guid, PlantedSeed> plantedSeeds;
     public LandPlotSlot[] slots;
     public GameObject groundMesh;
     public GameObject landPlotSlotGO;
@@ -20,7 +21,7 @@ public class LandPlot : MonoBehaviour
     private readonly int _sizeID = Shader.PropertyToID("_Size");
     private readonly int _radiusID = Shader.PropertyToID("_Radius");
 
-    private class PlantedSeed
+    public class PlantedSeed
     {
         public int[] filledSlots;
         public PlantType type;
@@ -37,7 +38,7 @@ public class LandPlot : MonoBehaviour
     {
         this.size = size;
         this.rect = rect;
-    }
+    }//PlantHarvestable
 
     public void Start()
     {
@@ -65,6 +66,20 @@ public class LandPlot : MonoBehaviour
                 var slotGO = GameObject.Instantiate(landPlotSlotGO, this.transform);
                 slotGO.transform.localPosition = startPosition.X0Y() + new Vector3(i, 0, j) * cellSize;
                 slots[index] = slotGO.GetComponent<LandPlotSlot>();
+                slots[index].landPlot = this;
+                var plantHarvestable = slotGO.GetComponentInChildren<PlantHarvestable>();
+                plantHarvestable.WhenHarvested += PlantHarvested;
+            }
+        }
+    }
+
+    public void PlantHarvested(System.Guid id)
+    {
+        if (this.plantedSeeds.Remove(id, out var plant))
+        {
+            foreach (var slot in plant.filledSlots)
+            {
+                this.slots[slot].SetBlocked();
             }
         }
     }
@@ -100,24 +115,9 @@ public class LandPlot : MonoBehaviour
         this.plantedSeeds.Add(plantGuid, seed);
         foreach (var index in usedIndices)
         {
-            this.slots[index].SetOccupied(plantGuid);
+            this.slots[index].SetPlanted(plantGuid);
         }
-        StartCoroutine(PlantStateChangeTest(plantGuid));
         return true;
-    }
-
-    IEnumerator PlantStateChangeTest(System.Guid plantGuid)
-    {
-        var guid = plantGuid;
-        yield return new WaitForSeconds(5.0f);
-        if (this.plantedSeeds.Remove(guid, out var plant))
-        {
-            foreach(var slot in plant.filledSlots)
-            {
-                this.slots[slot].SetBlocked();
-            }
-        }
-        yield break;
     }
 
     public bool GetPossiblePlantPlacement(Vector2Int slotCoord, PlantType plant, out Vector2Int[] usedSlots)
