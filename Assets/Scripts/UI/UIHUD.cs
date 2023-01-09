@@ -48,7 +48,12 @@ namespace UI
 
 			UnbindButtons();
 		}
-		
+
+		private void LateUpdate()
+		{
+			UpdateTimerValue();
+		}
+
 		private void OnSeedGained(PlantType plantType, bool _)
 		{
 			UpdateSeedSlots();
@@ -224,6 +229,11 @@ namespace UI
 		private void UpdateHealthPoint(float value)
 		{
 			elements.HealthLabel.text = $"{value}";
+		}
+
+		private void UpdateTimerValue()
+		{
+			elements.TimerLabel.text = $"{gameState.timeToNextWave}";
 		}
 	}
 }
