@@ -6,6 +6,7 @@ using General.TutorialData;
 using Sirenix.OdinInspector;
 using UI;
 using UnityEngine;
+using Utilties.Events;
 
 namespace General
 {
@@ -17,7 +18,25 @@ namespace General
         [SerializeField] private UIHUD m_HUD;
 
         private bool m_WeaponInfoAlreadyDisplayed;
-        
+
+        private void Awake()
+        {
+            if (!GameVariables.DisplayTutorial)
+            {
+                enabled = false;
+            }
+
+            if (GameVariables.TutorialPartsHasBeenDisplayed == null)
+            {
+                GameVariables.TutorialPartsHasBeenDisplayed = new List<bool>();
+                int count = Enum.GetNames(typeof(TutorialEvent)).Length;
+                for (int i = 0; i < count; ++i)
+                {
+                    GameVariables.TutorialPartsHasBeenDisplayed.Add(false);   
+                }    
+            }
+        }
+
         private void OnEnable()
         {
             GameEvents.OnTutoAsked += DisplayTutorial;
@@ -30,8 +49,30 @@ namespace General
             GameEvents.OnTutoAsked -= DisplayTutorial;
         }
 
+        private bool ShouldDisplayTutorialFor(TutorialEvent _event)
+        {
+            int index = (int)_event;
+            if (index < 0 || index >= GameVariables.TutorialPartsHasBeenDisplayed.Count)
+            {
+
+                // TODO: assert
+                Debug.LogError("Weird there");
+                return false;
+            }
+
+            return !GameVariables.TutorialPartsHasBeenDisplayed[index];
+
+        }
+        
         public void DisplayTutorial(TutorialEvent _event)
         {
+            if (!ShouldDisplayTutorialFor(_event))
+            {
+                return;
+            }
+
+            GameVariables.TutorialPartsHasBeenDisplayed[(int) _event] = true;
+            
             int indexOfFirstMatching = -1;
             for (int i = 0; i < m_PopUpData.Length; ++i)
             {
