@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7658547837206106568, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
       propertyPath: m_Name
-      value: Sword Variant
+      value: Sword
       objectReference: {fileID: 0}
     - target: {fileID: 7658547837206106569, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
       propertyPath: m_RootOrder
@@ -105,15 +105,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7658547837206106569, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.369
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7658547837206106569, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7658547837206106569, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.407
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7658547837206106569, guid: 024593d876b80b94fa0675ed32f1ac10, type: 3}
       propertyPath: m_LocalRotation.w

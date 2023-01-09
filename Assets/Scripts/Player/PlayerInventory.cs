@@ -29,7 +29,7 @@ namespace Player
             get => m_Stats.CurrentWeapon;
             set
             {
-                m_Stats.CurrentWeapon = m_FirstWeapon;
+                m_Stats.CurrentWeapon = value;
                 GameEvents.OnWeaponChanged?.Invoke(value);
             }
         }
@@ -93,16 +93,19 @@ namespace Player
                 return;
             }
             
-            if (CurrentWeapon != null)
-            {
-                CurrentWeapon.enabled = false;
-            }
+
 
             var foundWeapon = m_Weapons.Find(weapon => weapon.GetType() == _newWeapon.GetType());
             if (foundWeapon == null)
             {
+                if (CurrentWeapon != null)
+                {
+                    CurrentWeapon.gameObject.SetActive(false);
+                }
                 // Use a transform position
-                foundWeapon = Instantiate(_newWeapon, Vector3.zero, Quaternion.identity, m_WeaponHolder);
+                foundWeapon = Instantiate(_newWeapon, m_WeaponHolder);
+                foundWeapon.transform.localPosition = Vector3.zero;
+                foundWeapon.transform.localRotation = _newWeapon.transform.localRotation;
             }
 
             CurrentWeapon = foundWeapon;
