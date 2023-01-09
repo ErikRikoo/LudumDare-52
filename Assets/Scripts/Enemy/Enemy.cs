@@ -315,6 +315,7 @@ namespace Enemy
             gameState.numberOfEnemiesAlive--;
             GameEvents.OnEnemyKilled?.Invoke();
             InformAboutDeath?.Invoke(gameObject);
+            Debug.Log("Death! Death! Death!");
 
             
             yield return new WaitForSeconds(4);

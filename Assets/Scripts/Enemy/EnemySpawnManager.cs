@@ -67,8 +67,10 @@ namespace Enemy
     
         public void SpawnWave()
         {
+            Debug.Log($"Current wave: {currentWave}");
             numberOfPodsToSpawnInCurrentWave = enemyWaves.waves[currentWave].waveData.Length;
             numberOfCurrentlySpawnedPods = 0;
+            Debug.Log($"I have to spawn {numberOfPodsToSpawnInCurrentWave} pods");
 
             var wave = enemyWaves.waves[currentWave];
             for (var i = 0; i < wave.waveData.Length; i++)
@@ -104,7 +106,7 @@ namespace Enemy
             // Debug.Log($"Is the way not active {!gameState.waveIsActive}");
             // Debug.Log($"Is the number of enemies alive not equal zero {gameState.numberOfEnemiesAlive != 0}");
 
-            
+            Debug.Log($"Check for spawned pods: {numberOfCurrentlySpawnedPods}/{numberOfPodsToSpawnInCurrentWave}");
             if (gameState.numberOfEnemiesAlive != 0 || numberOfCurrentlySpawnedPods != numberOfPodsToSpawnInCurrentWave) return;
             
             gameState.waveIsActive = false;
