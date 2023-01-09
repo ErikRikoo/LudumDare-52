@@ -9,7 +9,7 @@ namespace General.TutorialData
         FirstEnemy,
         EnemyDeath,
         FirstPlantAvailable,
-        HarvestingMelee,
+        HarvestingSword,
         HarvestingPistol,
         HarvestingSniper,
         HarvestingRifle,

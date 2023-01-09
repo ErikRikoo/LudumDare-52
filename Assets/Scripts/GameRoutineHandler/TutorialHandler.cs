@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using General.TutorialData;
+using Player.PlayerActions.Weapons;
 using Sirenix.OdinInspector;
 using UI;
 using UnityEngine;
@@ -40,13 +41,53 @@ namespace General
         private void OnEnable()
         {
             GameEvents.OnTutoAsked += DisplayTutorial;
-            
-            // TODO: Bind events
+            //DisplayTutorial(TutorialEvent.EnteringGame);
+
+            GameEvents.OnEnemySpawned += OnEnemySpawn;
+            GameEvents.OnEnemyKilled += OnEnemyKilled;
+            //HarvestablePlant
+            GameEvents.OnWeaponChanged += OnWeaponChanged;
+
         }
         
         private void OnDisable()
         {
             GameEvents.OnTutoAsked -= DisplayTutorial;
+            
+            GameEvents.OnEnemySpawned -= OnEnemySpawn;
+            GameEvents.OnEnemyKilled -= OnEnemyKilled;
+            //HarvestablePlant
+            GameEvents.OnWeaponChanged -= OnWeaponChanged;
+        }
+
+        private void OnWeaponChanged(AWeapon weapon)
+        {
+
+            var names= Enum.GetNames(typeof(TutorialEvent));
+            Debug.Log("Got weapon: " + weapon.gameObject.name);
+            var weaponName = weapon.gameObject.name;
+            int spacePosition = weaponName.IndexOf(' ');
+            if (spacePosition != -1)
+            {
+                weaponName = weaponName.Substring(0, spacePosition);
+            }
+            for (int i = 0; i < names.Length; ++i)
+            {
+                if (names[i].Contains(weaponName) || weaponName.Contains(names[i]))
+                {
+                    DisplayTutorial((TutorialEvent)i);
+                }
+            }
+        }
+
+        private void OnEnemyKilled()
+        {
+            DisplayTutorial(TutorialEvent.EnemyDeath);
+        }
+
+        private void OnEnemySpawn()
+        {
+            DisplayTutorial(TutorialEvent.FirstEnemy);
         }
 
         private bool ShouldDisplayTutorialFor(TutorialEvent _event)
@@ -54,7 +95,6 @@ namespace General
             int index = (int)_event;
             if (index < 0 || index >= GameVariables.TutorialPartsHasBeenDisplayed.Count)
             {
-
                 // TODO: assert
                 Debug.LogError("Weird there");
                 return false;

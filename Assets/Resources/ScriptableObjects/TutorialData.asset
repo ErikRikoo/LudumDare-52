@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PopUpData:
   - Event: 0
-    Title: 
+    Title: Goal
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 1
-    Title: 
+    Title: First Enemy
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 2
-    Title: 
+    Title: Collecting Seeds
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 3
-    Title: 
+    Title: Harvesting Plants
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
@@ -44,25 +44,25 @@ MonoBehaviour:
     IsSequence: 0
     EndSequence: 1
   - Event: 5
-    Title: 
+    Title: Pistol
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 6
-    Title: 
+    Title: Sniper
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 7
-    Title: 
+    Title: Rifle
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 8
-    Title: 
+    Title: Shotgun
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
