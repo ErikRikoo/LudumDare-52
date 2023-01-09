@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlantHandling;
 using PlantHandling.PlantType;
 using Player;
@@ -15,13 +16,13 @@ namespace UI
 		[SerializeField] private GameState gameState;
 		[SerializeField] private PlantManager plantManager;
 		[SerializeField] private PlayerInventory playerInventory;
-		
+
 		private void Start()
 		{
 			UpdateEnemiesCount();
 			UpdateHealthPoint(gameState.defaultSiloHealth);
 		}
-
+		
 		private void OnEnable()
 		{
 			GameEvents.OnSeedGained += OnSeedGained;
@@ -31,6 +32,8 @@ namespace UI
 			GameEvents.OnEnemyKilled += OnEnemyKilled;
 			GameEvents.OnSiloGotHit += OnSiloGotHit;
 			GameEvents.OnAmmoChanged += OnAmmoChanged;
+
+			BindButtons();
 		}
 		
 		private void OnDisable()
@@ -42,6 +45,8 @@ namespace UI
 			GameEvents.OnEnemyKilled -= OnEnemyKilled;
 			GameEvents.OnSiloGotHit -= OnSiloGotHit;
 			GameEvents.OnAmmoChanged -= OnAmmoChanged;
+
+			UnbindButtons();
 		}
 		
 		private void OnSeedGained(PlantType plantType, bool _)
@@ -77,6 +82,99 @@ namespace UI
 		private void OnSiloGotHit(float value)
 		{
 			UpdateHealthPoint(value);
+		}
+
+		private void BindButtons()
+		{
+			elements.PopupCloseButton.clicked += HidePopup;
+		}
+
+		private void UnbindButtons()
+		{
+			elements.PopupCloseButton.clicked -= HidePopup;
+		}
+
+		public void ShowPopup(string title, Sprite image, string text, bool displayCloseButton = true, Action genericButtonAction = null)
+		{
+			elements.PopupTitle.style.display = DisplayStyle.Flex;
+			elements.PopupImage.style.display = DisplayStyle.Flex;
+			elements.PopupText.style.display = DisplayStyle.Flex;
+			elements.PopupCloseButton.style.display =  displayCloseButton 
+				? DisplayStyle.Flex : DisplayStyle.None;
+			elements.PopupGenericButton.style.display = (genericButtonAction == null) 
+				? DisplayStyle.None 
+				: DisplayStyle.Flex;
+			
+			elements.PopupTitle.text = title;
+			elements.PopupImage.style.backgroundImage = new StyleBackground(image);
+			elements.PopupText.text = text;
+
+			if (genericButtonAction != null)
+			{
+				elements.PopupGenericButton.clickable = null;
+				elements.PopupGenericButton.clicked += genericButtonAction;
+			}
+
+			UIAnimationUtils.FadeIn(elements.PopupContainer);
+
+			GameEvents.OnPopupOpened?.Invoke();
+		}
+		
+		public void ShowPopup(string title, string text, bool displayCloseButton = true, Action genericButtonAction = null)
+		{
+			elements.PopupTitle.style.display = DisplayStyle.Flex;
+			elements.PopupImage.style.display = DisplayStyle.None;
+			elements.PopupText.style.display = DisplayStyle.Flex;
+			elements.PopupCloseButton.style.display =  displayCloseButton 
+				? DisplayStyle.Flex : DisplayStyle.None;
+			elements.PopupGenericButton.style.display = (genericButtonAction == null) 
+				? DisplayStyle.None 
+				: DisplayStyle.Flex;
+			
+			elements.PopupTitle.text = title;
+			elements.PopupText.text = text;
+
+			if (genericButtonAction != null)
+			{
+				elements.PopupGenericButton.clickable = null;
+				elements.PopupGenericButton.clicked += genericButtonAction;
+			}
+
+			UIAnimationUtils.FadeIn(elements.PopupContainer);
+
+			GameEvents.OnPopupOpened?.Invoke();
+		}
+		
+		public void ShowPopup(Sprite image, string text, bool displayCloseButton = true, Action genericButtonAction = null)
+		{
+			elements.PopupTitle.style.display = DisplayStyle.None;
+			elements.PopupImage.style.display = DisplayStyle.Flex;
+			elements.PopupText.style.display = DisplayStyle.Flex;
+			elements.PopupCloseButton.style.display =  displayCloseButton 
+				? DisplayStyle.Flex : DisplayStyle.None;
+			elements.PopupGenericButton.style.display = (genericButtonAction == null) 
+				? DisplayStyle.None 
+				: DisplayStyle.Flex;
+			
+			elements.PopupImage.style.backgroundImage = new StyleBackground(image);
+			elements.PopupText.text = text;
+			
+			if (genericButtonAction != null)
+			{
+				elements.PopupGenericButton.clickable = null;
+				elements.PopupGenericButton.clicked += genericButtonAction;
+			}
+			
+			UIAnimationUtils.FadeIn(elements.PopupContainer);
+			
+			GameEvents.OnPopupOpened?.Invoke();
+		}
+
+		private void HidePopup()
+		{
+			UIAnimationUtils.FadeOut(elements.PopupContainer);
+			
+			GameEvents.OnPopupClosed?.Invoke();
 		}
 
 		private void UpdateSeedSlots()
