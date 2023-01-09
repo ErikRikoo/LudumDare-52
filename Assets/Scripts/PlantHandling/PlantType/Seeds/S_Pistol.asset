@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Icon: {fileID: 0}
   m_ItemName: Pistol
-  m_MaxCount: 1
-  Variety: 1
+  m_MaxCount: 100
   GrowthTimeRange: {x: 10, y: 20}
   ShapeSize: {x: 2, y: 1}
   Shape: 0101

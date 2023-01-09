@@ -335,12 +335,12 @@ namespace Enemy
                 StartCoroutine(DeathVFX());
                 SpawnCollectable();
             }
-
         }
 
         private void SpawnCollectable()
         {
-            if (Random.Range(0, 1) < m_CollectableLuck)
+            var randomValue = Random.Range(0f, 1f); 
+            if (randomValue < m_CollectableLuck)
             {
                 Instantiate(m_CollectablePrefab, transform.position, Quaternion.identity);
             }

@@ -21,14 +21,14 @@ namespace Collectable.Implementation
         // Add editor for the luck?
         [SerializeField] private PlantItem[] m_items;
         [SerializeField] private FloatRange m_CountRange;
-        
 
         public override void OnCollected(GameObject collector)
         {
             if (collector.TryGetComponent<PlayerStats>(out var stats))
             {
                 PlantType randomSeed = GetRandomPlant();
-                stats.Inventory.AddSeed(randomSeed, (int)m_CountRange.RandomValue);
+                int count = (int) m_CountRange.RandomValue;
+                stats.Inventory.AddSeed(randomSeed, count);
             }
         }
 

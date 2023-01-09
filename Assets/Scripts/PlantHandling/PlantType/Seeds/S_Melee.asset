@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Icon: {fileID: 0}
   m_ItemName: Melee
-  m_MaxCount: 1
-  Variety: 0
+  m_MaxCount: 100
   GrowthTimeRange: {x: 5, y: 10}
   ShapeSize: {x: 1, y: 1}
   Shape: 01
