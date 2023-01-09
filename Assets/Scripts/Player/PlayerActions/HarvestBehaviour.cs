@@ -4,6 +4,8 @@ namespace Player.PlayerActions.Harvest
 {
     public class HarvestBehaviour : MonoBehaviour
     {
+        [SerializeField] private PlayerStats m_Stats;
+
         [Min(0)]
         [SerializeField] private float m_HarvestingRadius;
 
@@ -18,7 +20,7 @@ namespace Player.PlayerActions.Harvest
             {
                 if (m_ColliderBuffer[count].TryGetComponent<IHarvestable>(out var harvestable))
                 {
-                    harvestable.OnHarvested(gameObject);
+                    harvestable.OnHarvested(m_Stats.gameObject);
                 }
             }
         }
