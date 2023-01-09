@@ -25,6 +25,19 @@ namespace PlantHandling
         public Material cursorMaterial;
         public Material landPlotTimer;
 
+        [Header("Land Plot Generation Properties")]
+        [SerializeField]
+        private float landPlotPadding;
+        [SerializeField]
+        private int landPlotMaxCount;
+        [SerializeField]
+        private Vector2 landPlotGenerationRange;
+        public Vector2 LandPlotGenerationRange => landPlotGenerationRange;
+        [SerializeField]
+        private Vector2Int landPlotMinSize;
+        [SerializeField]
+        private Vector2Int landPlotMaxSize;
+
         public Vector2[] TransformSlotCoordinatesToPositions(Vector2Int[] slotCoords, int landPlotIndex)
         {
             var positions = new List<Vector2>();
@@ -142,10 +155,11 @@ namespace PlantHandling
             return landPlots[landPlotIndex].GetSlotCoordinate(position, this.cellSize, out slotCoord);
         }
 
-        public void Initialize(Planter planter, int landPlotCount, Vector2 radiusRange, Vector2Int minSize, Vector2Int maxSize, float landPlotPadding)
+        // int landPlotCount, Vector2 radiusRange, Vector2Int minSize, Vector2Int maxSize, float landPlotPadding
+        public void Initialize(Planter planter)
         {
             this.landPlots = new List<LandPlot>();
-            var landPlotInit = GenerateLandPlots(landPlotCount, radiusRange, minSize, maxSize, landPlotPadding);
+            var landPlotInit = GenerateLandPlots(landPlotMaxCount, landPlotGenerationRange, landPlotMinSize, landPlotMaxSize, landPlotPadding);
             Debug.Log($"Land count {landPlotInit.Count}");
             landPlotInit.Sort((plotA, plotB) => plotA.rect.center.magnitude.CompareTo(plotB.rect.center.magnitude));
             CreateLandPlotGO(landPlotInit[0]);

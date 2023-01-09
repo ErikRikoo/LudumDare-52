@@ -19,23 +19,8 @@ namespace PlantHandling
         private Plane _groundPlane;
         private Vector3 _lastMousePosition;
         private bool _initialized;
-        [SerializeField]
-        private float landPlotPadding;
-        [SerializeField]
-        private int landPlotMaxCount;
-        [SerializeField]
-        private Vector2 landPlotGenerationRange;
-        [SerializeField]
-        private Vector2Int landPlotMinSize;
-        [SerializeField]
-        private Vector2Int landPlotMaxSize;
-
-        //Debug
-        [Header("Debug -----")]
-        [SerializeField]
         private int plantType;
-        [SerializeField]
-        private Material _debugMaterial;
+
         private Rect lastPlotRect;
         private Vector2[] slotPositions;
 
@@ -49,9 +34,8 @@ namespace PlantHandling
             _initialized = true;
 
             Assert.IsNotNull(plantManager, "Plant Manager is null");
-            Assert.IsNotNull(_debugMaterial, "Debug Material is null");
 
-            plantManager.Initialize(this, landPlotMaxCount, landPlotGenerationRange, landPlotMinSize, landPlotMaxSize, landPlotPadding);
+            plantManager.Initialize(this);
         }
 
         public void StartLandGenCoroutine(List<PlantManager.LandPlotInitData> landPlotInit)
@@ -149,8 +133,9 @@ namespace PlantHandling
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(_lastMousePosition, 0.5f);
-            Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.x);
-            Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.y);
+            if (plantManager == null) return;
+            Gizmos.DrawWireSphere(Vector3.zero, plantManager.LandPlotGenerationRange.x);
+            Gizmos.DrawWireSphere(Vector3.zero, plantManager.LandPlotGenerationRange.y);
         }
             /*if (Application.isPlaying)
             {

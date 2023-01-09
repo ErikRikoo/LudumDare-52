@@ -41,3 +41,8 @@ MonoBehaviour:
   cursorQuad: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   cursorMaterial: {fileID: 2100000, guid: d85c77c89641d3c4dacd610e4035a68b, type: 2}
   landPlotTimer: {fileID: 2100000, guid: 7d3a6e22f1f824749a9345dd679895e3, type: 2}
+  landPlotPadding: 1
+  landPlotMaxCount: 14
+  landPlotGenerationRange: {x: 7.5, y: 35.98}
+  landPlotMinSize: {x: 4, y: 4}
+  landPlotMaxSize: {x: 8, y: 8}
