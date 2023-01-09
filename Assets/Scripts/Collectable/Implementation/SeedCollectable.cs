@@ -45,7 +45,8 @@ namespace Collectable.Implementation
         private void Start()
         {
             // _rgbd.isKinematic = false;
-            // _rgbd.AddForce(transform.forward * 10);            
+            // _rgbd.AddForce(transform.forward * 10);     
+            _sphereCollider.isTrigger = true;
             StartCoroutine(EnableCollider());
 
 
@@ -53,7 +54,7 @@ namespace Collectable.Implementation
 
         IEnumerator EnableCollider()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             _sphereCollider.enabled = true;
             _rgbd.isKinematic = true;
         }
