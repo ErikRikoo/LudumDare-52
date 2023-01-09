@@ -63,6 +63,11 @@ namespace Player
 
         public void ChangeWeapon(AWeapon _newWeapon)
         {
+            if (_newWeapon == null)
+            {
+                return;
+            }
+            
             if (CurrentWeapon != null)
             {
                 CurrentWeapon.enabled = false;
