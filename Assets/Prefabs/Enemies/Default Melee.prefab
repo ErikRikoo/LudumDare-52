@@ -168,6 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6189489088962152147}
   - component: {fileID: 540951566230403493}
+  - component: {fileID: 1985841399779757944}
   m_Layer: 0
   m_Name: Cube.001
   m_TagString: Untagged
@@ -265,6 +266,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0046639293, y: 0.17779529, z: 0.10069178}
     m_Extent: {x: 0.4866122, y: 0.9993583, z: 0.5152647}
   m_DirtyAABB: 0
+--- !u!114 &1985841399779757944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556146125376970606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bdb7eafead14bc89c0f4545321c66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1637609473030021249
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +500,7 @@ MonoBehaviour:
   m_AttackSound: {fileID: 0}
   m_FootstepSound: {fileID: 0}
   m_HitVFX: {fileID: 5072739621812081592}
+  m_DeathVFX: {fileID: 1719011652297332488, guid: 0a82574993b9cd2479805ddbd0789965, type: 3}
   m_Animator: {fileID: 7127322945669023816}
   target: {fileID: 0}
   m_RefreshRate: 0

@@ -22,6 +22,9 @@ namespace Player.PlayerActions.Weapons
         private AudioSource _audioSource;
 
         private float m_LastAttackTime;
+        
+        public float RemainingTime => m_Rate - (Time.time - m_LastAttackTime);
+
 
         private void Awake()
         {

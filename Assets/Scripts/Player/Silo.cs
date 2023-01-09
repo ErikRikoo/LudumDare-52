@@ -34,6 +34,7 @@ public class Silo : MonoBehaviour, IDamageable
     {
         if (!gameObject) return;
         Debug.Log("I die");
+        GameEvents.OnGameLose?.Invoke();
         InformAboutDeath?.Invoke(gameObject);
         Destroy(gameObject);
 

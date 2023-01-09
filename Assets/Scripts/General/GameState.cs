@@ -11,6 +11,7 @@ public class GameState : ScriptableObject
     
     public int numberOfEnemiesAlive = 0;
     public bool waveIsActive = false;
+    public float timeToNextWave = 0;
 
 
 

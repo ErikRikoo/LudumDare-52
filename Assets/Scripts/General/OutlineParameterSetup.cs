@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class OutlineParameterSetup : MonoBehaviour
 {
-    private MeshRenderer _meshRenderer;
+    private SkinnedMeshRenderer _meshRenderer;
     private int _variableId;
 
     private void Awake()
     {
-        _meshRenderer = GetComponent<MeshRenderer>();
+        _meshRenderer = GetComponent<SkinnedMeshRenderer>();
         _variableId = Shader.PropertyToID("_ObjectId");
     }
 

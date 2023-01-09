@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366753, g: 0.48427093, b: 0.5645238, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1900765875}
     m_Modifications:
+    - target: {fileID: 886660137899050273, guid: 0f974c92d9ffaf048bce8f00537f0077, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 1932898233}
     - target: {fileID: 8805150910582437000, guid: 0f974c92d9ffaf048bce8f00537f0077, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -668,7 +672,7 @@ PrefabInstance:
     - target: {fileID: 7200053909593374898, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: m_AttackSound
       value: 
-      objectReference: {fileID: 8300000, guid: 2871cdbcd81a541df9600130720dad88, type: 3}
+      objectReference: {fileID: 8300000, guid: fad0b40a103b94181bba042bef1f31c5, type: 3}
     - target: {fileID: 7200053909593374898, guid: bc15cab9cd271a041968fba3e5e867c9, type: 3}
       propertyPath: attackDuration
       value: 0.1
@@ -1025,10 +1029,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163b0590efa7a4a27a2f8161b0a24d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BackgroundMusic: []
+  m_BackgroundMusic:
+  - {fileID: 8300000, guid: 30289c5c551474a5c8d26ca7ac34f511, type: 3}
   m_AmbientSounds: []
   LowPitchRange: 0.95
   HighPitchRange: 1.05
+  musicVolume: 0.067
 --- !u!4 &1228821565
 Transform:
   m_ObjectHideFlags: 0
@@ -1189,10 +1195,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyWaves: {fileID: 11400000, guid: 1b06a3c0facc543e392e1443e0ff0ce5, type: 2}
   gameState: {fileID: 11400000, guid: ed9d27f7c55af4b45a5cda05902ca3b1, type: 2}
-  spawnRadius: 60
-  spawnArea: 20
+  spawnRadius: 20
+  spawnArea: 5
   silo: {fileID: 356126559}
-  currentWave: 0
+  timeToTextWave: 5
+  podIsSpawned: 
 --- !u!4 &1571292459
 Transform:
   m_ObjectHideFlags: 0

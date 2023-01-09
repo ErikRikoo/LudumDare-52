@@ -25,4 +25,10 @@ public static class GameEvents
     [NonSerialized] public static Action<float> OnSiloGotHit;
     [NonSerialized] public static Action OnEnemyKilled;
     [NonSerialized] public static Action OnEnemySpawned;
+    [NonSerialized] public static Action OnWaveStart;
+    [NonSerialized] public static Action OnWaveEnd;
+    [NonSerialized] public static Action OnGameWin;
+    [NonSerialized] public static Action OnGameLose;
+    [NonSerialized] public static Action OnPopupOpened;
+    [NonSerialized] public static Action OnPopupClosed;
 }

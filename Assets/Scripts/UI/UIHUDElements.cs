@@ -14,28 +14,52 @@ namespace UI
 		[SerializeField] private PlantManager plantManager;
 		
 		private VisualElement _mainContainer;
+		
 		private TemplateContainer _seedSlotTemplate;
 		private TemplateContainer _tooltipTemplate;
+		
 		private Button _menuButton;
+		
 		private VisualElement _inventory;
 		private VisualElement _tooltips;
+		
 		private VisualElement _weaponSlotIcon;
 		private Label _weaponSlotLabel;
+		
 		private Dictionary<PlantType, Button> _seedSlotButtons = new();
 		private Dictionary<PlantType, VisualElement> _seedSlotIcons = new();
 		private Dictionary<PlantType, Label> _seedSlotLabels = new();
 		private Dictionary<PlantType, VisualElement> _seedSlotTooltips = new();
+
+		private VisualElement _popupContainer;
+		private Label _popupTitle;
+		private VisualElement _popupImage;
+		private Label _popupText;
+		private Button _popupCloseButton;
+		private Button _popupGenericButton;
+		
 		private Label _healthLabel;
 		private Label _enemiesLabel;
 
 		public VisualElement MainContainer => _mainContainer;
+		
 		public Button MenuButton => _menuButton;
+		
 		public VisualElement WeaponSlotIcon => _weaponSlotIcon;
 		public Label WeaponSlotLabel => _weaponSlotLabel;
+		
 		public Dictionary<PlantType, Button> SeedSlotButtons => _seedSlotButtons;
 		public Dictionary<PlantType, VisualElement> SeedSlotIcons => _seedSlotIcons;
 		public Dictionary<PlantType, Label> SeedSlotLabels => _seedSlotLabels;
 		public Dictionary<PlantType, VisualElement> SeedSlotTooltips => _seedSlotTooltips;
+
+		public VisualElement PopupContainer => _popupContainer;
+		public Label PopupTitle => _popupTitle;
+		public VisualElement PopupImage => _popupImage;
+		public Label PopupText => _popupText;
+		public Button PopupCloseButton => _popupCloseButton;
+		public Button PopupGenericButton => _popupGenericButton;
+
 		public Label HealthLabel => _healthLabel;
 		public Label EnemiesLabel => _enemiesLabel;
 
@@ -62,6 +86,13 @@ namespace UI
 			_weaponSlotLabel = root.Q<Label>("HUD-Weapon-Slot-Label");
 			
 			InstantiateSeedSlots();
+			
+			_popupContainer = root.Q<VisualElement>("HUD-Popup-Container");
+			_popupTitle = root.Q<Label>("HUD-Popup-Title");
+			_popupImage = root.Q<VisualElement>("HUD-Popup-Image");
+			_popupText = root.Q<Label>("HUD-Popup-Text");
+			_popupCloseButton = root.Q<Button>("HUD-Popup-Close-Button");
+			_popupGenericButton = root.Q<Button>("HUD-Popup-Generic-Button");
 			
 			_healthLabel = root.Q<Label>("HUD-Health-Label");
 			_enemiesLabel = root.Q<Label>("HUD-Enemies-Label");
