@@ -233,6 +233,10 @@ namespace UI
 
 		private void UpdateTimerValue()
 		{
+			if (elements.TimerLabel == null)
+			{
+				return;
+			}
 			elements.TimerLabel.text = $"{gameState.timeToNextWave}";
 		}
 	}
