@@ -17,6 +17,9 @@ namespace Player
         [SerializeField] private Transform m_WeaponHolder;
         [SerializeField] private AWeapon m_FirstWeapon;
 
+        [SerializeField] private AudioSource _source;
+        [SerializeField] private AudioClip _pickpClip;
+
         private List<AWeapon> m_Weapons = new();
 
         private AWeapon CurrentWeapon
@@ -58,6 +61,7 @@ namespace Player
 
         public void AddSeed(PlantType _item, int _count)
         {
+            _source.PlayOneShot(_pickpClip);
             m_Seeds.AddItem(_item, _count, GameEvents.OnSeedGained);
         }
 
