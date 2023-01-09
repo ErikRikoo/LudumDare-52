@@ -146,13 +146,13 @@ namespace PlantHandling
             _lastMousePosition = hitPoint + Vector3.up * 0.05f;
         }
 
-        /*private void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(_lastMousePosition, 0.5f);
             Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.x);
             Gizmos.DrawWireSphere(Vector3.zero, landPlotGenerationRange.y);
-
-            if (Application.isPlaying)
+        }
+            /*if (Application.isPlaying)
             {
                 var positionCenter = lastPlotRect.center.X0Y() + new Vector3(0, 0.15f, 0);
                 for (int i = 0; i < 9; i++)
