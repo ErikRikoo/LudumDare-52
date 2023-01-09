@@ -14,23 +14,30 @@ namespace Enemy
         [SerializeField] private GameState gameState;
         [SerializeField] private float spawnRadius;
         [SerializeField] private float spawnArea;
-        [SerializeField] private GameObject silo;
-    
-        [ShowInInspector] private int currentWave = 0;
-        [SerializeField] private float timeToNextWave = 5f;
 
-        private Coroutine countdown = null;
+        [ShowInInspector] private int currentWave;
+        [SerializeField] private float timeToTextWave = 5f;
 
-        private int numberOfPodsToSpawnInCurrentWave;
-        private int numberOfCurrentlySpawnedPods;
-        
+        private Coroutine countdown;
+
+        public List<bool> podIsSpawned = new();
+
         private void Start()
         {
             gameState.numberOfEnemiesAlive = 0;
             gameState.timeToNextWave = 0;
             currentWave = 0;
             SpawnWave();
+        }
+
+        private void OnEnable()
+        {
             GameEvents.OnEnemyKilled += CheckWaveStatus;
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnEnemyKilled -= CheckWaveStatus;
         }
 
         private void IncrementCurrentWave()
@@ -44,13 +51,7 @@ namespace Enemy
             var vector2 = Random.insideUnitCircle.normalized * radius;
             return new Vector3(vector2.x, 0, vector2.y);
         }
-
-        // private void Update()
-        // {
-        //     Debug.Log(podIsSpawned.Count);
-        // }
-
-
+        
         private IEnumerator SpawnEnemyPod(SpawnTypeData pod, int index)
         {
             yield return new WaitForSeconds(pod.delay);
@@ -60,21 +61,19 @@ namespace Enemy
                 Instantiate(pod.enemyPrefab, spawnPoint, Quaternion.identity);
             }
 
-            numberOfCurrentlySpawnedPods++;
+            podIsSpawned[index] = true;
 
         }
         
     
         public void SpawnWave()
         {
-            Debug.Log($"Current wave: {currentWave}");
-            numberOfPodsToSpawnInCurrentWave = enemyWaves.waves[currentWave].waveData.Length;
-            numberOfCurrentlySpawnedPods = 0;
-            Debug.Log($"I have to spawn {numberOfPodsToSpawnInCurrentWave} pods");
+            podIsSpawned.Clear();
 
             var wave = enemyWaves.waves[currentWave];
             for (var i = 0; i < wave.waveData.Length; i++)
             {
+                podIsSpawned.Add(false);
                 StartCoroutine(SpawnEnemyPod(wave.waveData[i], i));
                 
             }
@@ -106,8 +105,14 @@ namespace Enemy
             // Debug.Log($"Is the way not active {!gameState.waveIsActive}");
             // Debug.Log($"Is the number of enemies alive not equal zero {gameState.numberOfEnemiesAlive != 0}");
 
-            Debug.Log($"Check for spawned pods: {numberOfCurrentlySpawnedPods}/{numberOfPodsToSpawnInCurrentWave}");
-            if (gameState.numberOfEnemiesAlive != 0 || numberOfCurrentlySpawnedPods != numberOfPodsToSpawnInCurrentWave) return;
+
+            var allHaveBeenSpawned = true;
+            foreach (var isSpawned in podIsSpawned)
+            {
+                if (!isSpawned) allHaveBeenSpawned = false;
+            }
+
+            if (!gameState.waveIsActive || gameState.numberOfEnemiesAlive != 0 || !allHaveBeenSpawned) return;
             
             gameState.waveIsActive = false;
             
@@ -118,18 +123,17 @@ namespace Enemy
             }
             else
             {
-                gameState.timeToNextWave = timeToNextWave;
+                gameState.timeToNextWave = timeToTextWave;
                 GameEvents.OnWaveEnd?.Invoke();
                 
                 if (countdown != null)
                 {
                     StopCoroutine(countdown);
                 }
-                countdown = StartCoroutine(CountdownToNextWave(timeToNextWave));
+                countdown = StartCoroutine(CountdownToNextWave(timeToTextWave));
             }
         }
-
-
+        
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.white;
