@@ -28,7 +28,7 @@ namespace Player
                 GameEvents.OnWeaponChanged?.Invoke(value);
             }
         }
-
+        
         private int m_CurrentSeed;
 
         public int CurrentSeed
@@ -126,7 +126,7 @@ namespace Player
                 return false;
             }
             
-            int newValue = value.Count + _count;
+            int newValue = value.Count - _count;
             value.Count = newValue;
             _event?.Invoke(_item, false);
             return true;
@@ -134,6 +134,11 @@ namespace Player
 
         public CountedItem Get(int currentSeed)
         {
+            if (currentSeed < 0 || currentSeed >= m_Items.Count)
+            {
+                return null;
+            }
+            
             return m_Items[currentSeed];
         }
     }

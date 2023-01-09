@@ -62,6 +62,11 @@ namespace Enemy
         [SerializeField] private AudioClip m_FootstepSound;
         [SerializeField] private ParticleSystem m_HitVFX;
         [SerializeField] private GameObject m_DeathVFX;
+        [SerializeField] private GameObject m_CollectablePrefab;
+        [Range(0, 1)]
+        [SerializeField] private float m_CollectableLuck;
+        
+        
 
         [Header("Animations")] [SerializeField]
         private Animator m_Animator;
@@ -328,9 +333,17 @@ namespace Enemy
             if (currentHealth <= 0)
             {
                 StartCoroutine(DeathVFX());
+                SpawnCollectable();
             }
-
         }
 
+        private void SpawnCollectable()
+        {
+            var randomValue = Random.Range(0f, 1f); 
+            if (randomValue < m_CollectableLuck)
+            {
+                Instantiate(m_CollectablePrefab, transform.position, Quaternion.identity);
+            }
+        }
     }
 }

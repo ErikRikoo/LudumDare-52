@@ -1,9 +1,7 @@
-﻿{
+{
     "name": "ld52_player_harvest",
     "rootNamespace": "",
-    "references": [
-        "GUID:a702007b1447d7d4dbb10e029f1815eb"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

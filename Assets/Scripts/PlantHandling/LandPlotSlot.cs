@@ -25,8 +25,6 @@ public class LandPlotSlot: MonoBehaviour
     public SlotState State;
     [HideInInspector]
     public System.Guid guid;
-    [HideInInspector]
-    public double harvestedTime;
 
     public void Start()
     {
@@ -39,7 +37,6 @@ public class LandPlotSlot: MonoBehaviour
 	{
 		this.State = SlotState.Available;
 		this.guid = System.Guid.Empty;
-		this.harvestedTime = -1.0f;
 
 		meshFilter.sharedMesh = availableMesh;
         timerRenderer.gameObject.SetActive(false);
@@ -53,7 +50,6 @@ public class LandPlotSlot: MonoBehaviour
 	{
 		this.State = SlotState.Occupied;
 		this.guid = guid;
-		this.harvestedTime = -1.0f;
 
         meshFilter.sharedMesh = occupiedMesh;
     }
@@ -62,11 +58,10 @@ public class LandPlotSlot: MonoBehaviour
 		return this.State == SlotState.Occupied;
 	}
 	//-----------------------
-	public void SetBlocked(double harvestedTime)
+	public void SetBlocked()
 	{
 		this.State = SlotState.Blocked;
 		this.guid = System.Guid.Empty;
-		this.harvestedTime = harvestedTime;
 
         meshFilter.sharedMesh = blockedMesh;
 		timerRenderer.gameObject.SetActive(true);
