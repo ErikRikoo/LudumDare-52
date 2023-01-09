@@ -5,11 +5,11 @@ namespace UI
 {
 	public static class UIAnimationUtils
 	{
-		public static void FadeIn(VisualElement visualElement, bool disabledWhenInvisible = true)
+		public static ValueAnimation<float> FadeIn(VisualElement visualElement, bool disabledWhenInvisible = true)
 		{
 			var fromOpacity = visualElement.style.opacity.value;
 			
-			visualElement.experimental.animation.Start(fromOpacity, 1, 300, (_, opacity) =>
+			return visualElement.experimental.animation.Start(fromOpacity, 1, 300, (_, opacity) =>
 			{
 				visualElement.style.opacity = opacity;
 				
@@ -18,11 +18,11 @@ namespace UI
 			}).Ease(Easing.OutCubic);
 		}
 		
-		public static void FadeOut(VisualElement visualElement, bool disabledWhenInvisible = true)
+		public static ValueAnimation<float> FadeOut(VisualElement visualElement, bool disabledWhenInvisible = true)
 		{
 			var fromOpacity = visualElement.style.opacity.value;
 			
-			visualElement.experimental.animation.Start(fromOpacity, 0, 300, (_, opacity) =>
+			return visualElement.experimental.animation.Start(fromOpacity, 0, 300, (_, opacity) =>
 			{
 				visualElement.style.opacity = opacity;
 				

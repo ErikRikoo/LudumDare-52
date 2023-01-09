@@ -3,6 +3,7 @@
     <Style src="project://database/Assets/UI/HUDUSS.uss?fileID=7433441132597879392&amp;guid=767f912e79e62b6468ce9fb78502fa04&amp;type=3#HUDUSS" />
     <ui:Button name="HUD-Seed-Slot" class="hud-seed-slot">
         <ui:VisualElement name="HUD-Seed-Slot-Background" class="hud-seed-slot-background" />
+        <ui:VisualElement name="HUD-Seed-Slot-Active" class="hud-seed-slot-active" />
         <ui:VisualElement name="HUD-Seed-Slot-Icon" class="hud-seed-slot-icon" />
         <ui:Label tabindex="-1" text="x1" display-tooltip-when-elided="true" name="HUD-Seed-Slot-Label" class="hud-seed-slot-label" />
     </ui:Button>
