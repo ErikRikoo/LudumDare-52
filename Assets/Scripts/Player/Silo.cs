@@ -8,6 +8,7 @@ public class Silo : MonoBehaviour, IDamageable
 {
     public event InformAttackersAboutDeath InformAboutDeath;
     [SerializeField] private GameState gameState;
+    [SerializeField] private ParticleSystem destructionVFX;
 
     private float health;
     
@@ -36,7 +37,7 @@ public class Silo : MonoBehaviour, IDamageable
         Debug.Log("I die");
         GameEvents.OnGameLose?.Invoke();
         InformAboutDeath?.Invoke(gameObject);
+        destructionVFX.Play();
         Destroy(gameObject);
-
     }
 }
