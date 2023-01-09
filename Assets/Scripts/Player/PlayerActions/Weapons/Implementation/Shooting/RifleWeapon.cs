@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Player.PlayerActions.Weapons.Implementation.Shooting
@@ -20,7 +18,7 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
             );
             Shoot(ray);
         }
-
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             Vector3 forward = m_ShootPosition.forward;
@@ -29,5 +27,7 @@ namespace Player.PlayerActions.Weapons.Implementation.Shooting
             Gizmos.DrawLine(m_ShootPosition.position, m_ShootPosition.position + left);
             Gizmos.DrawLine(m_ShootPosition.position, m_ShootPosition.position + right);
         }
+        #endif
     }
+    
 }

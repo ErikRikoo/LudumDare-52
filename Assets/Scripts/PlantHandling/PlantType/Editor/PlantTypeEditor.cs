@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using PlantHandling.PlantType;
@@ -5,6 +6,7 @@ using Sirenix.OdinInspector;
 
 namespace PlantHandling.PlantType.Editor
 {
+	
 	[CustomEditor(typeof(PlantType))]
 	public class PlantTypeEditor : UnityEditor.Editor
 	{
@@ -182,3 +184,4 @@ namespace PlantHandling.PlantType.Editor
 		}
 	}
 }
+#endif

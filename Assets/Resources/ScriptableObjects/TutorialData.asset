@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PopUpData:
   - Event: 0
-    Title: Goal
+    Title: 
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 1
-    Title: First Enemy
-    Text: Enemies try to attack your silo. Defeat them! Left click to attack!
+    Title: 
+    Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 2
-    Title: Collecting Seeds
+    Title: 
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 3
-    Title: Harvesting Plants
+    Title: 
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
@@ -44,25 +44,25 @@ MonoBehaviour:
     IsSequence: 0
     EndSequence: 1
   - Event: 5
-    Title: Pistol
+    Title: 
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 6
-    Title: Sniper
+    Title: 
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 7
-    Title: Rifle
+    Title: 
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0
     EndSequence: 1
   - Event: 8
-    Title: Shotgun
+    Title: 
     Text: 
     Sprite: {fileID: 0}
     IsSequence: 0

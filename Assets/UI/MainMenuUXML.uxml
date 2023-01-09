@@ -17,7 +17,7 @@
                     <ui:VisualElement name="Menu-Section-Back-Button-Icon" class="menu-section-back-button-icon secondary-button-icon" />
                 </ui:Button>
                 <ui:Label tabindex="-1" text="About" display-tooltip-when-elided="true" name="Menu-Section-Title" class="menu-section-title" />
-                <ui:Label tabindex="-1" text="Team:&#10;- Harry Alisavakis, Art/VFX&#10;- Anthelme Dumont, UI(Design &amp; Programming)&#10;- Sami Ede, &#10;- Euri Gilberto, Programming(Plant System) &amp; Environment Art&#10;- Erik Kubiak, Programming(3C and touched a lot of things) &amp; Integration&#10;- Jean-Baptiste Leonelli, Weapon Artist&#10;&#10;Assets:" display-tooltip-when-elided="true" name="Menu-Section-Text" class="menu-section-text" />
+                <ui:Label tabindex="-1" text="Team:&#10;- Harry Alisavakis, Art/VFX&#10;- Anthelme Dumont, UI(Design &amp; Programming)&#10;- Sami Ede, Programming(Enemies, Animations, Sound &amp; stuff)&#10;- Euri Herasme, Programming(Plant System) &amp; Environment Art&#10;- Erik Kubiak, Programming(3C and touched a lot of things) &amp; Integration&#10;- Jean-Baptiste Leonelli, Weapon Artist&#10;&#10;Assets: " display-tooltip-when-elided="true" name="Menu-Section-Text" class="menu-section-text" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
