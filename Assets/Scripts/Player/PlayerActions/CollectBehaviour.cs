@@ -28,6 +28,8 @@ namespace Player.PlayerActions
         {
             if (other.TryGetComponent<ICollectable>(out var collectable))
             {
+                collectable.OnCollected(m_Stats.gameObject);
+
                 other.transform.DOMove(transform.position, m_TweenAnimationDuration)
                     .SetEase(m_EaseType)
                     .OnComplete(() =>
