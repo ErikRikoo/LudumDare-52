@@ -71,3 +71,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 64c56be320372bc4386d7e7fcf601596, type: 3}
+--- !u!4 &895871982657116840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6608797484271356302, guid: 64c56be320372bc4386d7e7fcf601596, type: 3}
+  m_PrefabInstance: {fileID: 6330350915953742630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5520350862884998270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1965211295237398360, guid: 64c56be320372bc4386d7e7fcf601596, type: 3}
+  m_PrefabInstance: {fileID: 6330350915953742630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1306642227496609345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5520350862884998270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c2bf8abd03785439195d8c8e2bc856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_items:
+  - Type: {fileID: 11400000, guid: 3603a0094ef008a4db5711e8b20b2643, type: 2}
+    Luck: 1
+  - Type: {fileID: 11400000, guid: 5ddf84a9740119d4c942cfa5ea6599d6, type: 2}
+    Luck: 0.664
+  - Type: {fileID: 11400000, guid: 3bf7e9808d557d94fa133dff86f98d1a, type: 2}
+    Luck: 0.404
+  - Type: {fileID: 11400000, guid: 6b81b0b5e6b7d6e4d94e7c677671d454, type: 2}
+    Luck: 0.277
+  - Type: {fileID: 11400000, guid: bdb97c3fde129004aa9305fa0868dd70, type: 2}
+    Luck: 0.175
+  m_CountRange:
+    Min: 4
+    Max: 16

@@ -10,15 +10,15 @@ namespace Player.PlayerActions.Harvest
         [SerializeField] private float m_HarvestingRadius;
 
         [SerializeField] private LayerMask m_HarvestMask;
-        
-        private Collider[] m_ColliderBuffer;
+
+        private Collider[] m_ColliderBuffer = new Collider[16];
         
         public void TryHarvestPlants()
         {
             int count = Physics.OverlapSphereNonAlloc(transform.position, m_HarvestingRadius, m_ColliderBuffer, m_HarvestMask);
             for (int i = 0; i < count; ++i)
             {
-                if (m_ColliderBuffer[count].TryGetComponent<IHarvestable>(out var harvestable))
+                if (m_ColliderBuffer[i].TryGetComponent<IHarvestable>(out var harvestable))
                 {
                     harvestable.OnHarvested(m_Stats.gameObject);
                 }

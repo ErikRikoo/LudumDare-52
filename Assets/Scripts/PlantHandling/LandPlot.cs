@@ -84,6 +84,17 @@ public class LandPlot : MonoBehaviour
         }
     }
 
+    public void PlantDestroyed(System.Guid id)
+    {
+        if (this.plantedSeeds.Remove(id, out var plant))
+        {
+            foreach (var slot in plant.filledSlots)
+            {
+                this.slots[slot].SetBlocked();
+            }
+        }
+    }
+
     public bool Overlaps(Rect other)
     {
         return rect.Overlaps(other);

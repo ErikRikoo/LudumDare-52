@@ -16,7 +16,8 @@ namespace PlantHandling.PlantType
         [HideInInspector]
         public Vector2Int ShapeSize;
         [HideInInspector]
-        public bool[] Shape;        
+        public bool[] Shape;
+        public float plantedHealth;
         public string ToolTip => $"{ItemName}\nGrowth:\n{GrowthTimeRange.x}s - {GrowthTimeRange.y}s";
 
         [SerializeField] public AWeapon Weapon;

@@ -24,6 +24,7 @@ namespace PlantHandling
 
         [Header("System References")]
         public LandPlot landPlot;
+        public PlantDamageTrigger damageTrigger;
         [SerializeField]
         private PlantHarvestable plantHarvestable;
 
@@ -56,6 +57,7 @@ namespace PlantHandling
             growthTimeEditor.gameObject.SetActive(false);
             readyParticlesGO.gameObject.SetActive(false); 
             plantHarvestable.gameObject.SetActive(false);
+            damageTrigger.gameObject.SetActive(false);
         }
         public bool IsAvailable()
         {
@@ -74,6 +76,11 @@ namespace PlantHandling
                 growthTimeEditor.gameObject.SetActive(true);
                 readyParticlesGO.gameObject.SetActive(false);
                 plantHarvestable.gameObject.SetActive(false);
+                damageTrigger.gameObject.SetActive(true);
+                
+                damageTrigger.LandPlot = landPlot;
+                damageTrigger.Health = plantedSeed.type.plantedHealth;
+                damageTrigger.id = this.guid;
 
                 plantHarvestable.Seed = plantedSeed.type;
                 float growTime = Random.Range(plantedSeed.type.GrowthTimeRange.x, plantedSeed.type.GrowthTimeRange.y);
@@ -95,6 +102,7 @@ namespace PlantHandling
             growthTimeEditor.gameObject.SetActive(false);
             readyParticlesGO.gameObject.SetActive(true);
             plantHarvestable.gameObject.SetActive(true);
+            damageTrigger.gameObject.SetActive(true);
         }
 
         public void SetBlocked()
@@ -108,6 +116,8 @@ namespace PlantHandling
             growthTimeEditor.gameObject.SetActive(false);
             readyParticlesGO.gameObject.SetActive(false);
             plantHarvestable.gameObject.SetActive(false);
+            damageTrigger.gameObject.SetActive(false);
+
             StartCoroutine(ResetToAvailable());
         }
         public bool IsBlocked()
@@ -122,6 +132,8 @@ namespace PlantHandling
 
             while (true)
             {
+                if (State != SlotState.Blocked) yield break;
+
                 var elapsedTime = Time.time - initialTime;
                 if (elapsedTime >= blockTime) break;
                 var elapsedNormTime = Mathf.Clamp01(elapsedTime / blockTime);
@@ -141,6 +153,8 @@ namespace PlantHandling
 
             while (true)
             {
+                if (State != SlotState.Growing) yield break;
+
                 var elapsedTime = Time.time - initialTime;
                 if (elapsedTime >= growTime) break;
                 var elapsedNormTime = Mathf.Clamp01(elapsedTime / growTime);
