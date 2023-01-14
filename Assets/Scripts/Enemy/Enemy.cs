@@ -72,8 +72,12 @@ namespace Enemy
         private Animator m_Animator;
         public event InformAttackersAboutDeath InformAboutDeath;
 
-        public GameObject target;
-        protected IDamageable targetIDamageaeble;
+        public GameObject finalTargetTarget;
+        private IDamageable finalTargetIDamageaeble;
+
+        private GameObject currentTarget;
+        private IDamageable currentTargetIDamageaeble;
+
 
         private Stack<GameObject> potentialTargets = new Stack<GameObject>();
 
@@ -93,7 +97,9 @@ namespace Enemy
         private BoxCollider _collider;
         private SkinnedMeshRenderer _skinnedMeshRenderer;
         private GameObject visionRange;
+        private SphereCollider visionRangeCollider;
         private GameObject attackRange;
+        private SphereCollider attackRangeCollider;
 
         private Coroutine attackLoop = null;
 
@@ -105,7 +111,7 @@ namespace Enemy
         private void FixedUpdate()
         {
             m_Animator.SetFloat("Speed", m_Agent.velocity.magnitude);
-           
+
         }
     
     
@@ -135,7 +141,7 @@ namespace Enemy
                     localPosition = Vector3.zero
                 }
             };
-            var attackRangeCollider  = attackRange.AddComponent<SphereCollider>();
+            attackRangeCollider  = attackRange.AddComponent<SphereCollider>();
             attackRangeCollider.isTrigger = true;
             attackRangeCollider.radius = stats.Range;
             var attackBubbleComponent = attackRange.AddComponent<EventBubbleComponent>();
@@ -153,7 +159,7 @@ namespace Enemy
                 }
             };
             
-            var visionRangeCollider  = visionRange.AddComponent<SphereCollider>();
+            visionRangeCollider  = visionRange.AddComponent<SphereCollider>();
             visionRangeCollider.isTrigger = true;
             visionRangeCollider.radius = stats.VisionRange;
             var visionBubbleComponent = visionRange.AddComponent<EventBubbleComponent>();
@@ -164,48 +170,60 @@ namespace Enemy
             _skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         }
 
+
+        void SetNewTarget(GameObject newTarget)
+        {
+            currentTargetIDamageaeble.InformAboutDeath -= DetermineTarget;
+            currentTarget = newTarget;
+            m_Agent.destination = newTarget.GetComponent<Collider>().ClosestPoint(transform.position);
+            currentTarget = newTarget;
+            currentTargetIDamageaeble = newTarget.GetComponent<IDamageable>();
+            currentTargetIDamageaeble.InformAboutDeath += DetermineTarget;
+        }
+
         private void OnAttackRangeEnter(Collider other)
         {
-            if (other.CompareTag("EnemyAttackableObject"))
+            if (!other.CompareTag("EnemyAttackableObject")) return;
+            
+            if (attackLoop == null)
             {
-                if (attackLoop == null)
-                {
-                    AttackTarget();
-                }
-                else if (other.gameObject != target)
-                {
-                    DetermineTarget(null);
-                    AttackTarget();
-                }
+                Debug.Log($"Attacking new target: {other.gameObject.name}");
+                AttackTarget();
             }
+            else if (other.gameObject != currentTarget)
+            {
+                if (attackLoop != null)
+                {
+                    StopCoroutine(attackLoop);
+                }
+                SetNewTarget(other.gameObject);
+            }
+            AttackTarget();
 
         }
 
         private void OnAttackRangeExit(Collider other)
         {
-            if (other.CompareTag("EnemyAttackableObject"))
+            if (!other.CompareTag("EnemyAttackableObject")) return;
+            
+            if (attackLoop != null && other.gameObject != currentTarget)
             {
-                if (attackLoop != null && other.gameObject != target)
-                {
-                    Debug.Log("Stopping attack");
-                    StopCoroutine(attackLoop);
-                }
-                 
-                DetermineTarget(null);
+                Debug.Log("Stopping attack");
+                StopCoroutine(attackLoop);
             }
+                 
+            DetermineTarget(null);
         }
 
 
         private void OnVisionRangeEnter(Collider other)
         {
-            if (other.CompareTag("EnemyAttackableObject"))
-            {
-                GameObject go = other.gameObject;
-                if (go == target) return;
-                 potentialTargets.Push(go);
-                 DetermineTarget(null);
-                     
-            }
+            if (!other.CompareTag("EnemyAttackableObject")) return;
+            
+            GameObject go = other.gameObject;
+            if (go == currentTarget) return;
+            // potentialTargets.Push(go);
+            DetermineTarget(null);
         }
 
         private void OnVisionRangeExit(Collider other)
@@ -214,46 +232,53 @@ namespace Enemy
         }
         
         
-        public void DetermineTarget([CanBeNull] GameObject obj)
+        private void DetermineTarget([CanBeNull] GameObject obj)
         {
-            if (obj)
+            if (attackLoop != null)
             {
-                targetIDamageaeble.InformAboutDeath -= DetermineTarget;
-                Debug.Log($"My target {obj} died:");
+                StopCoroutine(attackLoop);
+            }
+            // Spherecast melee range
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRangeCollider.radius, transform.forward, 0);
+            foreach (var hit in hits)
+            {
+                if (obj && hit.collider.gameObject == obj || !hit.collider.gameObject.CompareTag("EnemyAttackableObject")) continue;
+                SetNewTarget(hit.collider.gameObject);
+                AttackTarget();
+                return;
 
             }
-            GameObject checkTarget;
-            do
+            
+
+            // Spherecast vision range
+            hits = Physics.SphereCastAll(transform.position, visionRangeCollider.radius, transform.forward, 0);
+            foreach (var hit in hits)
             {
-                checkTarget = potentialTargets.Peek();
-                if (checkTarget.gameObject == null || (obj && checkTarget.gameObject == obj))
-                {
-                    if (potentialTargets.Count > 1) potentialTargets.Pop();
-                    continue;
-                }
+                if (obj && hit.collider.gameObject == obj || !hit.collider.gameObject.CompareTag("EnemyAttackableObject")) continue;
+                SetNewTarget(hit.collider.gameObject);
+                return;
 
-                if (target && !(Vector3.Distance(transform.position, checkTarget.transform.position) 
-                      < Vector3.Distance(transform.position, target.transform.position))) continue;
-                
-                m_Agent.destination = checkTarget.GetComponent<Collider>().ClosestPoint(transform.position);
-                target = checkTarget;
-                targetIDamageaeble = checkTarget.GetComponent<IDamageable>();
-                targetIDamageaeble.InformAboutDeath += DetermineTarget;
-
-            } while (checkTarget == null);
-
+            }
+            // Final target
+            if (finalTargetTarget)
+            {
+                SetNewTarget(finalTargetTarget);
+            }
         }
 
 
-
-        public void Spawn()
+        private void Spawn()
         {
             var closestPoint = gameState.silo.GetComponent<Collider>().ClosestPoint(transform.position);
             
-            targetIDamageaeble = gameState.silo.GetComponent<IDamageable>();
-
-            potentialTargets.Push(target);
-
+            finalTargetIDamageaeble = gameState.silo.GetComponent<IDamageable>();
+            finalTargetTarget = gameState.silo;
+            
+            
+            currentTarget = finalTargetTarget;
+            currentTargetIDamageaeble = finalTargetIDamageaeble;
+            currentTargetIDamageaeble.InformAboutDeath += DetermineTarget;
+            
             m_Agent.destination = closestPoint;
             m_Agent.speed = stats.Speed + Random.Range(-1, 0.5f);
             m_Agent.stoppingDistance = stats.Range;
@@ -271,10 +296,10 @@ namespace Enemy
             while (true)
             {
 
-                if (target != null)
+                if (currentTarget != null)
                 {
                     m_Animator.SetTrigger("Punch");
-                    targetIDamageaeble?.TakeDamage(stats.Damage);
+                    currentTargetIDamageaeble?.TakeDamage(stats.Damage);
                     yield return new WaitForSeconds(1/currentAttackSpeed);
                 }
                 else
@@ -309,9 +334,9 @@ namespace Enemy
             }
             
             _collider.enabled = false;
+            attackRangeCollider.enabled = false;
+            visionRangeCollider.enabled = false;
             m_Agent.enabled = false;
-            // m_Agent.destination = transform.position;
-            // m_Agent.stoppingDistance = 0;
             _audioSource.pitch = Random.Range(0.6f, 1.1f);
             _audioSource.PlayOneShot(m_DeathSound);
             _rigidbody.isKinematic = true;
